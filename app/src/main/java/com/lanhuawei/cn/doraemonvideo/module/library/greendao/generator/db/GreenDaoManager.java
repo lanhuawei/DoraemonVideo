@@ -1,4 +1,4 @@
-package com.lanhuawei.cn.doraemonvideo.library.greendao.generator.db;
+package com.lanhuawei.cn.doraemonvideo.module.library.greendao.generator.db;
 
 
 import com.lanhuawei.cn.doraemonvideo.MyApplication;

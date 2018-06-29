@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lanhuawei.cn.doraemonvideo.base.MainTabActivity">
+    tools:context=".module.base.MainTabActivity">
 
     <TextView
         android:layout_width="wrap_content"

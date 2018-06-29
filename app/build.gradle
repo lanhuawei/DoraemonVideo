@@ -5,8 +5,8 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.lanhuawei.cn.doraemonvideo"
-        minSdkVersion 15
-        targetSdkVersion 26
+        minSdkVersion 16
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -19,16 +19,16 @@ android {
     }
     greendao{
         schemaVersion 1 //数据库版本号
-        daoPackage 'com.lanhuawei.cn.doraemonvideo.library.greendao.generator.db'// 设置DaoMaster、DaoSession、Dao 包名
+        daoPackage 'com.lanhuawei.cn.doraemonvideo.module.library.greendao.generator.db'// 设置DaoMaster、DaoSession、Dao 包名
         targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
     }
-    buildToolsVersion '27.0.3'
+//    buildToolsVersion '27.0.3'
 }
 
 dependencies {
     /*防止出现重新开启app出现  Error:Execution failed for task ‘:app:preDebugAndroidTestBuild’.
-            Conflict with dependency ‘com.android.support:support-annotations’ in project ‘:app’.
-            Resolved versions for app (26.1.0) and test app (27.1.1) differ. */
+                Conflict with dependency ‘com.android.support:support-annotations’ in project ‘:app’.
+                Resolved versions for app (26.1.0) and test app (27.1.1) differ. */
     androidTestImplementation('com.android.support:support-annotations:26.1.0') {
         force = true
     }
@@ -43,6 +43,19 @@ dependencies {
     /*Android之数据库框架greenDAO*/
     implementation 'org.greenrobot:greendao:3.2.0'
     // This is only needed if you want to use encrypted databases Android之数据库框架greenDAO加密库依赖（可选项）
-//    compile 'net.zetetic:android-database-sqlcipher:3.5.6'//加密库依赖（可选项）
+    //    compile 'net.zetetic:android-database-sqlcipher:3.5.6'//加密库依赖（可选项）
+    //网络请求 retrofit+okhttp+gson
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation('com.squareup.retrofit2:converter-gson:2.3.0') {
+        exclude group: 'com.google.code.gson', module: 'gson'
+    }
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+    implementation "com.android.support:design:$gradle.ext.supportLibraryVersion"
+
+    //ButterKnife 黄油刀
+    compile('com.jakewharton:butterknife:8.4.0') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-compat'
+    }
 
 }

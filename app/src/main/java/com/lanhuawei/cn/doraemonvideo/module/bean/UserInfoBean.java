@@ -1,4 +1,4 @@
-package com.lanhuawei.cn.doraemonvideo.bean;
+package com.lanhuawei.cn.doraemonvideo.module.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

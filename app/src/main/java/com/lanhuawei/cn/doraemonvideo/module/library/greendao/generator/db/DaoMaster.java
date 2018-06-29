@@ -1,4 +1,4 @@
-package com.lanhuawei.cn.doraemonvideo.library.greendao.generator.db;
+package com.lanhuawei.cn.doraemonvideo.module.library.greendao.generator.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -1,4 +1,4 @@
-package com.lanhuawei.cn.doraemonvideo.base;
+package com.lanhuawei.cn.doraemonvideo.module.base;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

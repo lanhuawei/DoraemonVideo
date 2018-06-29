@@ -1,6 +1,4 @@
-package com.lanhuawei.cn.doraemonvideo.base;
-
-import android.view.View;
+package com.lanhuawei.cn.doraemonvideo.module.base;
 
 import java.lang.ref.WeakReference;
 
