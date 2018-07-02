@@ -150,9 +150,9 @@ public abstract class GestureVideoController extends BaseVideoController {
         int currentPosition = mediaPlayer.getCurrentPosition();
         int position = (int) (deltaX / width * duration + currentPosition);
         if (position > currentPosition) {
-            mCenterView.setIcon(R.drawable.ic_action_fast_forward);
+            mCenterView.setIcon(R.drawable.icon_action_fast_forward);
         } else {
-            mCenterView.setIcon(R.drawable.ic_action_fast_rewind);
+            mCenterView.setIcon(R.drawable.icon_action_fast_rewind);
         }
         if (position > duration) position = duration;
         if (position < 0) position = 0;
@@ -192,10 +192,10 @@ public abstract class GestureVideoController extends BaseVideoController {
         float index = streamVolume + deltaV;
         if (index > streamMaxVolume) index = streamMaxVolume;
         if (index < 0) {
-            mCenterView.setIcon(R.drawable.ic_action_volume_off);
+            mCenterView.setIcon(R.drawable.icon_action_volume_off);
             index = 0;
         } else {
-            mCenterView.setIcon(R.drawable.ic_action_volume_up);
+            mCenterView.setIcon(R.drawable.icon_action_volume_up);
         }
         int percent = (int) (index / streamMaxVolume * 100);
         mCenterView.setTextView(percent + "%");
