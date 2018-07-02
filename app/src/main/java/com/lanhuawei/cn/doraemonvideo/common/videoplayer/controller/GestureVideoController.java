@@ -167,7 +167,7 @@ public abstract class GestureVideoController extends BaseVideoController {
         mCenterView.setProVisibility(View.VISIBLE);
         Window window = WindowUtil.scanForActivity(getContext()).getWindow();
         WindowManager.LayoutParams attributes = window.getAttributes();
-        mCenterView.setIcon(R.drawable.ic_action_brightness);
+        mCenterView.setIcon(R.drawable.icon_action_brightness);
         int height = getMeasuredHeight();
         if (mBrightness == -1.0f) mBrightness = 0.5f;
         float brightness = deltaY * 2 / height * 1.0f + mBrightness;
