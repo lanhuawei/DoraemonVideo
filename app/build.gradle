@@ -53,9 +53,14 @@ dependencies {
     implementation "com.android.support:design:$gradle.ext.supportLibraryVersion"
 
     //ButterKnife 黄油刀
-    compile('com.jakewharton:butterknife:8.4.0') {
+    implementation('com.jakewharton:butterknife:8.4.0') {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-compat'
     }
+
+    /*ijk视频播放*/
+    implementation "tv.danmaku.ijk.media:ijkplayer-java:$gradle.ext.ijkPlayerVersion"
+    /*视频缓存*/
+    implementation 'com.danikula:videocache:2.7.0'
 
 }

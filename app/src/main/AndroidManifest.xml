@@ -32,7 +32,7 @@
         android:supportsRtl="true"
         android:largeHeap="true"
         android:theme="@style/HLAppTheme">
-        <activity android:name=".module.view.ui.SplashActivity"
+        <activity android:name=".module.view.ui.activity.SplashActivity"
             android:theme="@style/ThemeSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
