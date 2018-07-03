@@ -109,6 +109,7 @@ public class MainTabActivity extends BaseActivity {
         if (!VideoViewManager.instance().onBackPressed()) {
             if ((System.currentTimeMillis() - mExitTime) > 2000) {
                 ToastUtil.showToast("再按一次退出程序");
+                mExitTime = System.currentTimeMillis();
             } else {
                 finish();
                 android.os.Process.killProcess(android.os.Process.myPid());
