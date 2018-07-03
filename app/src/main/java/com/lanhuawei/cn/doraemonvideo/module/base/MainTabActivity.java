@@ -65,8 +65,6 @@ public class MainTabActivity extends BaseActivity {
                 mTabHost.newTabSpec(TAB3).setIndicator(createTabIndicatorView(R.layout.tab_discover)), DiscoverVideoFragment.class, null);
         tabManager.addTab(
                 mTabHost.newTabSpec(TAB4).setIndicator(createTabIndicatorView(R.layout.tab_mine)), MineCenterFragment.class, null);
-
-
     }
 
     private View createTabIndicatorView(int layoutResource) {

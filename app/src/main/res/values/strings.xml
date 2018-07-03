@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">哆啦A梦</string>
 
+    <!--视频播放-->
     <string name="float_window_warning">当前无权限使用悬浮窗，请授权！</string>
     <string name="error_message">出了点小问题，稍后重试</string>
     <string name="retry">重    试</string>
@@ -10,4 +11,16 @@
     <string name="unlocked">已解锁</string>
     <string name="locked">已锁定</string>
     <string name="replay">重新播放</string>
+
+    <!--下拉刷新-->
+    <string name="cube_ptr_pull_down">下拉</string>
+    <string name="cube_ptr_pull_down_to_refresh">下拉刷新</string>
+    <string name="cube_ptr_release_to_refresh">释放刷新</string>
+    <string name="cube_ptr_refreshing">加载中...</string>
+    <string name="cube_ptr_refresh_complete">更新完成.</string>
+
+    <string name="cube_ptr_last_update">上次更新:&#160;</string>
+    <string name="cube_ptr_seconds_ago">&#160;秒之前</string>
+    <string name="cube_ptr_minutes_ago">&#160;分钟之前</string>
+    <string name="cube_ptr_hours_ago">&#160;小时之前</string>
 </resources>
