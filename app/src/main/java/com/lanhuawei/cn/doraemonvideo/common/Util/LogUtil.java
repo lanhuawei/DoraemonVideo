@@ -1,7 +1,11 @@
 package com.lanhuawei.cn.doraemonvideo.common.Util;
 
+import android.os.Build;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.lanhuawei.cn.doraemonvideo.BuildConfig;
 
 
 /**
@@ -11,7 +15,7 @@ import android.util.Log;
 
 public class LogUtil {
     private static boolean LOG_DEBUG = true;
-
+//    private static boolean LOG_DEBUG = BuildConfig.DEBUG;
     public static int v(String tag, String msg) {
         if (LOG_DEBUG) {
             if (!(TextUtils.isEmpty(msg))) {

@@ -1,4 +1,4 @@
-package com.lanhuawei.cn.doraemonvideo.common.Util;
+package com.lanhuawei.cn.doraemonvideo.common.Util.statusbar.statusbarcompat;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

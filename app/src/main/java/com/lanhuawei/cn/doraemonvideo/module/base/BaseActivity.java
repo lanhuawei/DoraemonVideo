@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.baidu.mobstat.StatService;
-import com.lanhuawei.cn.doraemonvideo.common.Util.StatusBarCompat;
+import com.lanhuawei.cn.doraemonvideo.common.Util.statusbar.statusbarcompat.StatusBarCompat;
 import com.lanhuawei.cn.doraemonvideo.common.Util.ToastUtil;
 import com.lanhuawei.cn.doraemonvideo.common.http.callback.BaseImpl;
 
