@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--fragment_dou_yin_view-->
+    <!--没有数据的展示页-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:textColor="@color/color_b6b4b4"
+        android:text="暂无更多数据..."
+        android:layout_centerInParent="true"/>
+
+
+</RelativeLayout>

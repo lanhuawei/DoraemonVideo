@@ -14,10 +14,10 @@ import android.view.ViewGroup;
  *
  */
 
-public final class CygView {
-    private static final String TAG = "CygView";
+public final class ViewInflate {
+    private static final String TAG = "ViewInflate";
 
-    private CygView() {
+    private ViewInflate() {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

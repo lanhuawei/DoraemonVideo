@@ -10,13 +10,26 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters /*"armeabi",*/ "armeabi-v7a"/*,"x86","arm64-v8a"*/
+        }
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
     greendao{
         schemaVersion 1 //数据库版本号
         daoPackage 'com.lanhuawei.cn.doraemonvideo.module.library.greendao.generator.db'// 设置DaoMaster、DaoSession、Dao 包名
@@ -57,10 +70,17 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-compat'
     }
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     /*ijk视频播放*/
     implementation "tv.danmaku.ijk.media:ijkplayer-java:$gradle.ext.ijkPlayerVersion"
     /*视频缓存*/
     implementation 'com.danikula:videocache:2.7.0'
+
+    /*fresco ----facebook*/
+    implementation 'com.facebook.fresco:fresco:1.7.1'
+    implementation 'com.facebook.fresco:animated-webp:1.7.1'
+    implementation 'com.facebook.fresco:webpsupport:1.7.1'
+    implementation 'com.facebook.soloader:soloader:0.3.0' //webp需要引用这个库
 
 }

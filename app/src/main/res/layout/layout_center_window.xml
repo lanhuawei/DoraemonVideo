@@ -7,6 +7,7 @@
     android:background="@color/color_background"
     android:gravity="center">
     <!--显示亮度，音量，进度-->
+    <!--CenterView-->
 
     <ImageView
         android:id="@+id/iv_icon"

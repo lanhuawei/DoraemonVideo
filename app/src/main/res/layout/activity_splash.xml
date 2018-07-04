@@ -23,7 +23,7 @@
         android:layout_above="@+id/v_center"
         android:gravity="center"
         android:text="哆啦A梦视频"
-        android:textColor="@color/color_56B6ED"
+        android:textColor="@color/white"
         android:textSize="16sp"/>
 
     <ImageView
@@ -31,7 +31,7 @@
         android:layout_height="110dp"
         android:layout_above="@+id/tv_app_name"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/icon_logo"/>
+        android:src="@drawable/icon_splash_logo"/>
 
 
 

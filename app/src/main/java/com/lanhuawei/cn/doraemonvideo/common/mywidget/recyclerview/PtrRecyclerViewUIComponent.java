@@ -10,7 +10,7 @@ import com.lanhuawei.cn.doraemonvideo.R;
 import com.lanhuawei.cn.doraemonvideo.common.mywidget.implloadmore.OnScrollToBottomLoadMoreListener;
 import com.lanhuawei.cn.doraemonvideo.common.mywidget.recyclerview.divider.RecyclerViewDivider;
 import com.lanhuawei.cn.doraemonvideo.common.mywidget.refersh.OnPullToRefreshListener;
-import com.lanhuawei.cn.doraemonvideo.common.mywidget.util.CygView;
+import com.lanhuawei.cn.doraemonvideo.common.mywidget.util.ViewInflate;
 import com.lanhuawei.cn.doraemonvideo.common.pulltorefresh.PtrClassicFrameLayout;
 import com.lanhuawei.cn.doraemonvideo.common.pulltorefresh.PtrDefaultHandler;
 import com.lanhuawei.cn.doraemonvideo.common.pulltorefresh.PtrFrameLayout;
@@ -105,7 +105,7 @@ public class PtrRecyclerViewUIComponent extends PtrClassicFrameLayout {
     }
 
     public void setEmptyView(@LayoutRes int emptyResLayout) {
-        View emptyView = CygView.inflateLayout(getContext(), emptyResLayout);
+        View emptyView = ViewInflate.inflateLayout(getContext(), emptyResLayout);
         setEmptyView(emptyView);
     }
 
