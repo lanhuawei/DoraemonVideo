@@ -139,6 +139,8 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
                     getDouyinListData();
                 }
 
+
+
             }
         });
 
