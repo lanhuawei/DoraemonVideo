@@ -42,6 +42,8 @@ public abstract class BaseFragment<PRESENTER extends BasePresenter> extends Frag
         if (null == rootView) {
             rootView = inflater.inflate(layoutResId(), null);
             onViewReallyCreated(rootView);
+            initView();
+            initData();
         } else {
             ViewGroup parent = (ViewGroup) rootView.getParent();
             if (parent != null) {
@@ -50,6 +52,8 @@ public abstract class BaseFragment<PRESENTER extends BasePresenter> extends Frag
         }
         return rootView;
     }
+
+
 
     @Override
     public void onPause() {

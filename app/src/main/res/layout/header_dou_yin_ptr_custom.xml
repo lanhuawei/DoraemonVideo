@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--DouYinPtrCustomHeader-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <ImageView
+                android:id="@+id/iv_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="matrix"
+                android:src="@drawable/icon_refresh_down" />
+
+            <ProgressBar
+                android:id="@+id/progressbar_pull"
+                android:layout_width="23.5dp"
+                android:layout_height="23.5dp"
+                android:layout_centerInParent="true"
+                android:indeterminateDuration="700"
+                android:indeterminateDrawable="@drawable/bg_pull_refresh_progress"
+                android:maxHeight="23.5dp"
+                android:maxWidth="23.5dp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_pull_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="为你推荐了新的内容"
+                android:textColor="@color/color_1296db"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

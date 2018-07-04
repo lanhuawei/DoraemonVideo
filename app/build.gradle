@@ -62,6 +62,7 @@ dependencies {
     implementation('com.squareup.retrofit2:converter-gson:2.3.0') {
         exclude group: 'com.google.code.gson', module: 'gson'
     }
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
     implementation "com.android.support:design:$gradle.ext.supportLibraryVersion"
 
@@ -82,5 +83,9 @@ dependencies {
     implementation 'com.facebook.fresco:animated-webp:1.7.1'
     implementation 'com.facebook.fresco:webpsupport:1.7.1'
     implementation 'com.facebook.soloader:soloader:0.3.0' //webp需要引用这个库
+
+    implementation 'com.android.support:multidex:1.0.3'
+    /*eventbus*/
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
 }

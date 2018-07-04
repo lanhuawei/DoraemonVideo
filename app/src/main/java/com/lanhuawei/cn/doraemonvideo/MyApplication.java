@@ -1,8 +1,10 @@
 package com.lanhuawei.cn.doraemonvideo;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.multidex.MultiDex;
 
 /**
  * Created by Ivan.L on 2018/6/29.
@@ -71,5 +73,11 @@ public class MyApplication extends Application {
         mMainThread = Thread.currentThread();
         mMainThreadHandler = new Handler();
         mMainLooper = getMainLooper();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }
