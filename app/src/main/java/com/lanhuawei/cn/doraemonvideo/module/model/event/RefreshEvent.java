@@ -1,6 +1,6 @@
 package com.lanhuawei.cn.doraemonvideo.module.model.event;
 
-import com.lanhuawei.cn.doraemonvideo.module.bean.DouYinMainVideoDataBean;
+import com.lanhuawei.cn.doraemonvideo.module.bean.MainVideoDataBean;
 
 import java.util.List;
 
@@ -10,17 +10,17 @@ import java.util.List;
  */
 
 public class RefreshEvent {
-    private List<DouYinMainVideoDataBean> mainVideoDataBeans;
+    private List<MainVideoDataBean> mainVideoDataBeans;
     private int position;
     private long max_cursor;
 
-    public RefreshEvent(List<DouYinMainVideoDataBean> mainVideoDataBeans, int position, long max_cursor) {
+    public RefreshEvent(List<MainVideoDataBean> mainVideoDataBeans, int position, long max_cursor) {
         this.mainVideoDataBeans = mainVideoDataBeans;
         this.position = position;
         this.max_cursor = max_cursor;
     }
 
-    public List<DouYinMainVideoDataBean> getMainVideoDataBeans() {
+    public List<MainVideoDataBean> getMainVideoDataBeans() {
         return mainVideoDataBeans;
     }
 

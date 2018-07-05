@@ -1,7 +1,6 @@
 package com.lanhuawei.cn.doraemonvideo.module.view.holder;
 
 import android.graphics.drawable.Animatable;
-import android.graphics.drawable.DrawableWrapper;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -20,7 +19,7 @@ import com.lanhuawei.cn.doraemonvideo.common.Util.DensityUtil;
 import com.lanhuawei.cn.doraemonvideo.common.Util.KindsOfUtil;
 import com.lanhuawei.cn.doraemonvideo.common.mywidget.recyclerview.adapter.BaseRecyclerViewHolder;
 import com.lanhuawei.cn.doraemonvideo.common.videoplayer.util.WindowUtil;
-import com.lanhuawei.cn.doraemonvideo.module.bean.DouYinMainVideoDataBean;
+import com.lanhuawei.cn.doraemonvideo.module.bean.MainVideoDataBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +29,7 @@ import butterknife.ButterKnife;
  * 首页抖音页面展示Holder
  */
 
-public class DouYinVideoShowHolder extends BaseRecyclerViewHolder<DouYinMainVideoDataBean> {
+public class DouYinVideoShowHolder extends BaseRecyclerViewHolder<MainVideoDataBean> {
     @BindView(R.id.sdv_img) SimpleDraweeView sdvImg;
     @BindView(R.id.tv_play_count) TextView tvPlayCount;
     @BindView(R.id.tv_like_count) TextView tvLikeCount;
@@ -42,15 +41,15 @@ public class DouYinVideoShowHolder extends BaseRecyclerViewHolder<DouYinMainVide
     }
 
     @Override
-    protected void onItemDataUpdated(@Nullable DouYinMainVideoDataBean douYinMainVideoDataBean) {
-        if (douYinMainVideoDataBean != null) {
+    protected void onItemDataUpdated(@Nullable MainVideoDataBean mainVideoDataBean) {
+        if (mainVideoDataBean != null) {
             ViewGroup.LayoutParams params = sdvImg.getLayoutParams();
             params.width = (
                     WindowUtil.getScreenWidth(MyApplication.getInstance()) - DensityUtil.dip2px(MyApplication.getInstance(), 2)) / 2;
             params.height = (params.width) * 8 / 5;
             sdvImg.setLayoutParams(params);
-            final Uri uri = Uri.parse(douYinMainVideoDataBean.getDynamicCover());
-            if (isNotEqualsUriPath(sdvImg, douYinMainVideoDataBean.getDynamicCover())) {
+            final Uri uri = Uri.parse(mainVideoDataBean.getDynamicCover());
+            if (isNotEqualsUriPath(sdvImg, mainVideoDataBean.getDynamicCover())) {
                 DraweeController controller = Fresco.newDraweeControllerBuilder()
                         .setUri(uri)
                         .setAutoPlayAnimations(true)
@@ -64,9 +63,9 @@ public class DouYinVideoShowHolder extends BaseRecyclerViewHolder<DouYinMainVide
                         }).build();
                 sdvImg.setController(controller);
             }
-            tvVideoTitle.setText(douYinMainVideoDataBean.getTitle());
-            tvPlayCount.setText(KindsOfUtil.formatNumber(douYinMainVideoDataBean.getPlayCount()) + "播放");
-            tvLikeCount.setText(KindsOfUtil.formatNumber(douYinMainVideoDataBean.getLikeCount()) + "赞");
+            tvVideoTitle.setText(mainVideoDataBean.getTitle());
+            tvPlayCount.setText(KindsOfUtil.formatNumber(mainVideoDataBean.getPlayCount()) + "播放");
+            tvLikeCount.setText(KindsOfUtil.formatNumber(mainVideoDataBean.getLikeCount()) + "赞");
         }
     }
 

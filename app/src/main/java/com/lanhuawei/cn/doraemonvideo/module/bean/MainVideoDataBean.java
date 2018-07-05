@@ -5,10 +5,10 @@ import android.os.Parcelable;
 
 /**
  * Created by Ivan.L on 2018/7/4.
- * 首页返回的类似抖音页面数据
+ * 首页返回的类似抖音火山页面数据
  */
 
-public class DouYinMainVideoDataBean implements Parcelable {
+public class MainVideoDataBean implements Parcelable {
 
     public String title;//视频标题
     public String authorImgUrl;//作者头像地址
@@ -191,10 +191,10 @@ public class DouYinMainVideoDataBean implements Parcelable {
         dest.writeInt(this.type);
     }
 
-    public DouYinMainVideoDataBean() {
+    public MainVideoDataBean() {
     }
 
-    protected DouYinMainVideoDataBean(Parcel in) {
+    protected MainVideoDataBean(Parcel in) {
         this.title = in.readString();
         this.authorImgUrl = in.readString();
         this.authorName = in.readString();
@@ -224,15 +224,15 @@ public class DouYinMainVideoDataBean implements Parcelable {
         this.type = in.readInt();
     }
 
-    public static final Creator<DouYinMainVideoDataBean> CREATOR = new Creator<DouYinMainVideoDataBean>() {
+    public static final Creator<MainVideoDataBean> CREATOR = new Creator<MainVideoDataBean>() {
         @Override
-        public DouYinMainVideoDataBean createFromParcel(Parcel source) {
-            return new DouYinMainVideoDataBean(source);
+        public MainVideoDataBean createFromParcel(Parcel source) {
+            return new MainVideoDataBean(source);
         }
 
         @Override
-        public DouYinMainVideoDataBean[] newArray(int size) {
-            return new DouYinMainVideoDataBean[size];
+        public MainVideoDataBean[] newArray(int size) {
+            return new MainVideoDataBean[size];
         }
     };
 

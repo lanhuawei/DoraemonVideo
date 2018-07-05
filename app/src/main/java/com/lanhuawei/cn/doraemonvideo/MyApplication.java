@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.support.multidex.MultiDex;
 
 import com.baidu.mobstat.StatService;
+import com.bumptech.glide.Glide;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.lanhuawei.cn.doraemonvideo.common.Util.CommonUtil;
@@ -124,15 +125,27 @@ public class MyApplication extends Application {
         UserInfo.setAppId(2);
         UserInfo.initUser("a3668f0afac72ca3f6c1697d29e0e1bb1fef4ab0285319b95ac39fa42c38d05f");
 
-
-
-
-
     }
 
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        if (level == TRIM_MEMORY_UI_HIDDEN) {
+            Glide.get(this).clearMemory();
+        }
+        Glide.get(this).trimMemory(level);
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        //内存低的时候，清理Glide的缓存
+        Glide.get(this).clearMemory();
     }
 }

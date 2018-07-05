@@ -1,6 +1,7 @@
 package com.lanhuawei.cn.doraemonvideo.module.view.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,7 +14,9 @@ import com.lanhuawei.cn.doraemonvideo.common.Util.DensityUtil;
 import com.lanhuawei.cn.doraemonvideo.common.Util.LogUtil;
 import com.lanhuawei.cn.doraemonvideo.common.Util.NoDoubleClickUtil;
 import com.lanhuawei.cn.doraemonvideo.common.Util.ToastUtil;
+import com.lanhuawei.cn.doraemonvideo.common.Util.WeakDataHolderUtil;
 import com.lanhuawei.cn.doraemonvideo.common.Util.httputil.DouyinUtil;
+import com.lanhuawei.cn.doraemonvideo.common.Util.httputil.HuoShanUtil;
 import com.lanhuawei.cn.doraemonvideo.common.Util.statusbar.StatusBarFontHelper;
 import com.lanhuawei.cn.doraemonvideo.common.Util.statusbar.statusbarcompat.StatusBarCompat;
 import com.lanhuawei.cn.doraemonvideo.common.customview.DouYinPtrCustomHeader;
@@ -26,11 +29,13 @@ import com.lanhuawei.cn.doraemonvideo.common.okhttp.manager.OkHttpClientManager;
 import com.lanhuawei.cn.doraemonvideo.common.pulltorefresh.PtrFrameLayout;
 import com.lanhuawei.cn.doraemonvideo.common.pulltorefresh.recyclerview.RecyclerAdapterWithHF;
 import com.lanhuawei.cn.doraemonvideo.module.base.BaseFragment;
-import com.lanhuawei.cn.doraemonvideo.module.bean.DouYinMainVideoDataBean;
+import com.lanhuawei.cn.doraemonvideo.module.bean.HuoShanVideoListDataBean;
+import com.lanhuawei.cn.doraemonvideo.module.bean.MainVideoDataBean;
 import com.lanhuawei.cn.doraemonvideo.module.bean.DouYinMainVideoListDataBean;
 import com.lanhuawei.cn.doraemonvideo.module.model.event.RefreshEvent;
 import com.lanhuawei.cn.doraemonvideo.module.view.adapter.DouYinVideoShowAdapter;
 import com.lanhuawei.cn.doraemonvideo.module.view.holder.DouYinVideoShowHolder;
+import com.lanhuawei.cn.doraemonvideo.module.view.ui.activity.VerticalVideoActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -58,10 +63,10 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
     private TextView retry;
     private DouYinVideoShowAdapter douYinVideoShowAdapter;
     private RecyclerAdapterWithHF adapterWithHF;
-    private List<DouYinMainVideoDataBean> douYinMainVideoDataBeans = new ArrayList<>();
+    private List<MainVideoDataBean> mainVideoDataBeans = new ArrayList<>();
     private long max_cursor = 0;
     private boolean isLoadMore = false;
-    private boolean douYinDisable = false;//是否是抖音。火山显示不同效果
+    private boolean douYinDisable = true;//是否是抖音。火山显示不同效果
     private DouYinPtrCustomHeader douYinPtrCustomHeader;
     private Context context;
     private static final String TAG = "---->DouYinVideoFragment";
@@ -102,9 +107,9 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
             public void onClick(View view) {
                 if (!NoDoubleClickUtil.isDoubleClick()) {
                     if (douYinDisable) {
-                        getHuoshanListData();
+                        getHuoShanListData();
                     } else {
-                        getDouyinListData();
+                        getDouYinListData();
                     }
 
                 }
@@ -131,17 +136,15 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
             public void onPullToRefresh() {
                 max_cursor = 0;
                 isLoadMore = false;
-                if (douYinMainVideoDataBeans != null && douYinMainVideoDataBeans.size() > 0) {
-                    douYinMainVideoDataBeans.clear();
+                if (mainVideoDataBeans != null && mainVideoDataBeans.size() > 0) {
+                    mainVideoDataBeans.clear();
                 }
 
                 if (douYinDisable) {
-                    getHuoshanListData();
+                    getHuoShanListData();
                 } else {
-                    getDouyinListData();
+                    getDouYinListData();
                 }
-
-
 
             }
         });
@@ -151,9 +154,9 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
             public void onScrollToBottomLoadMore() {
                 isLoadMore = true;
                 if (douYinDisable) {
-                    getHuoshanListData();
+                    getHuoShanListData();
                 } else {
-                    getDouyinListData();
+                    getDouYinListData();
                 }
 
             }
@@ -167,13 +170,12 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
      * 第三次以及后面所有的请求都只带max_cursor字段，值为第一次请求返回的json数据中的max_cursor字段
      * 获取抖音数据
      */
-    private void getDouyinListData() {
+    private void getDouYinListData() {
         String url = DouyinUtil.getEncryptUrl(getActivity(), 0, max_cursor);
         LogUtil.e(TAG, url + "       ");
         OkHttpClientManager.getAsyn(url, new OkHttpClientManager.StringCallback() {
             @Override
             public void onResponse(String response) {
-//                LogUtil.e(TAG, response + "dfdsfdsf");
                 loadFrameLayout.showContentView();
                 try {
                     DouYinMainVideoListDataBean listDataBean = DouYinMainVideoListDataBean.fromJSONData(response);
@@ -182,7 +184,7 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
                         douYinDisable = true;
                         max_cursor = 0;
                         isLoadMore = false;
-                        getHuoshanListData();
+                        getHuoShanListData();
                         return;
                     } else {
                         douYinDisable = false;
@@ -192,24 +194,25 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
                     ptrRecyclerViewUIComponent.removeView(douYinPtrCustomHeader);
                     ptrRecyclerViewUIComponent.setHeaderView(douYinPtrCustomHeader);
                     if (isLoadMore) {
-                        douYinMainVideoDataBeans.addAll(listDataBean.getVideoDataBeanList());
-                        douYinVideoShowAdapter.setDataList(douYinMainVideoDataBeans, false);
+                        mainVideoDataBeans.addAll(listDataBean.getVideoDataBeanList());
+                        douYinVideoShowAdapter.setDataList(mainVideoDataBeans, false);
                         adapterWithHF.notifyDataSetChanged();
                         ptrRecyclerViewUIComponent.loadMoreComplete(true);
                     } else {
-                        douYinMainVideoDataBeans = listDataBean.getVideoDataBeanList();
-                        if (douYinMainVideoDataBeans.size() == 0) {
+                        mainVideoDataBeans = listDataBean.getVideoDataBeanList();
+                        if (mainVideoDataBeans.size() == 0) {
                             emptyView.setVisibility(View.VISIBLE);
                             ptrRecyclerViewUIComponent.setLoadMoreEnable(false);
                         } else {
                             emptyView.setVisibility(View.GONE);
                             ptrRecyclerViewUIComponent.setLoadMoreEnable(true);
                         }
-                        douYinVideoShowAdapter.setDataList(douYinMainVideoDataBeans);
+                        douYinVideoShowAdapter.setDataList(mainVideoDataBeans);
                         adapterWithHF.notifyDataSetChanged();
                         ptrRecyclerViewUIComponent.refreshComplete();
                     }
                 } catch (Exception e) {
+                    ptrRecyclerViewUIComponent.refreshComplete();
                     e.printStackTrace();
                 }
             }
@@ -235,8 +238,51 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
      * 第三次以及后面所有的请求都只带max_cursor字段，值为第一次请求返回的json数据中的max_cursor字段
      * 获取火山数据
      */
-    public void getHuoshanListData() {
+    public void getHuoShanListData() {
+        String url = HuoShanUtil.getEncryptUrl(getActivity(), 0, max_cursor);
+        OkHttpClientManager.getAsyn(url, new OkHttpClientManager.StringCallback() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    HuoShanVideoListDataBean huoShanVideoListDataBean = HuoShanVideoListDataBean.fromJSONData(response);
+                    max_cursor = huoShanVideoListDataBean.getMaxTime();
+                    if (isLoadMore) {
+                        mainVideoDataBeans.addAll(huoShanVideoListDataBean.getVideoDataList());
+                        douYinVideoShowAdapter.setDataList(mainVideoDataBeans, false);
+                        adapterWithHF.notifyDataSetChanged();
+                        ptrRecyclerViewUIComponent.loadMoreComplete(true);
+                    } else {
+                        mainVideoDataBeans = huoShanVideoListDataBean.getVideoDataList();
+                        if (mainVideoDataBeans.size() == 0) {
+                            emptyView.setVisibility(View.VISIBLE);
+                            ptrRecyclerViewUIComponent.setLoadMoreEnable(false);
+                        } else {
+                            emptyView.setVisibility(View.GONE);
+                            ptrRecyclerViewUIComponent.setLoadMoreEnable(true);
+                        }
+                        douYinVideoShowAdapter.setDataList(mainVideoDataBeans);
+                        adapterWithHF.notifyDataSetChanged();
+                        ptrRecyclerViewUIComponent.refreshComplete();
+                    }
+                } catch (Exception e) {
+                    ptrRecyclerViewUIComponent.refreshComplete();
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Request request, IOException e) {
+                ptrRecyclerViewUIComponent.loadMoreComplete(true);
+                ptrRecyclerViewUIComponent.refreshComplete();
+                ToastUtil.showToast("网络连接失败");
 
+                douYinPtrCustomHeader.getTvtitle().setText("网络连接失败，请重试");
+                ptrRecyclerViewUIComponent.removeView(douYinPtrCustomHeader);
+                ptrRecyclerViewUIComponent.setHeaderView(douYinPtrCustomHeader);
+                loadFrameLayout.showErrorView();
+            }
+
+
+        });
     }
 
     /**
@@ -264,8 +310,11 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
         if (ptrRecyclerViewUIComponent.isLoadingMore() || ptrRecyclerViewUIComponent.isRefreshing()) {
             return;
         }
-        ToastUtil.showToast("Click:" + position);
-
+        Intent intent = new Intent(context, VerticalVideoActivity.class);
+        WeakDataHolderUtil.getInstance().saveData(VerticalVideoActivity.VIDEO_URL_LIST, mainVideoDataBeans);
+        intent.putExtra(VerticalVideoActivity.MAX_CURSOR, max_cursor);
+        intent.putExtra(VerticalVideoActivity.POSITION, position);
+        context.startActivity(intent);
     }
 
     @Override
@@ -302,7 +351,6 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
         adapterWithHF.notifyDataSetChanged();
         ptrRecyclerViewUIComponent.getRecyclerView().scrollToPosition(event.getPosition());
         max_cursor = event.getMax_cursor();
-
     }
 
 }

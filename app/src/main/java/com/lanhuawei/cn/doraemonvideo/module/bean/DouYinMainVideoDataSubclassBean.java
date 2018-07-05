@@ -11,7 +11,7 @@ import org.json.JSONObject;
  *
  */
 
-public class DouYinMainVideoDataSubclassBean extends DouYinMainVideoDataBean {
+public class DouYinMainVideoDataSubclassBean extends MainVideoDataBean {
 
     public static DouYinMainVideoDataSubclassBean fromJSONData(String jsonStr) {
         DouYinMainVideoDataSubclassBean data = new DouYinMainVideoDataSubclassBean();

@@ -2,36 +2,37 @@ package com.lanhuawei.cn.doraemonvideo.common.Util.httputil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.util.Log;
 
 import com.lanhuawei.cn.doraemonvideo.common.Util.KindsOfUtil;
-import com.lanhuawei.cn.doraemonvideo.common.Util.LogUtil;
+import com.lanhuawei.cn.doraemonvideo.common.Util.NetworkMainUtil;
+import com.ss.android.common.applog.GlobalContext;
 import com.ss.android.common.applog.UserInfo;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Ivan.L on 2018/7/4.
- * 抖音参数传递
+ * Created by Ivan.L on 2018/7/5.
+ * 火山视频参数
  */
 
-public class DouyinUtil {
-    private static String appVersionCode = "159";
-    private static String appVersionName = "1.5.9";
-    private final static String GETDATA_JSON_URL = "https://api.amemv.com/aweme/v1/feed/";
-    private static final String TAG = "-->DouyinUtil";
+public class HuoShanUtil {
+    public static String appVersionCode = "159";
+    public static String appVersionName = "1.5.9";
 
+    public static final String PKGNAME = "com.ss.android.ugc.live";
+
+    private final static String GETDATA_JSON_URL = "https://hotsoon.snssdk.com/hotsoon/feed/";
     /**
-     * 下拉数据规律：min_cursor=max_cursor=0
+     * 下拉数据规律：min_time=0
      * <p>
      * 上拉数据规律：
-     * 第二次请求取第一次请求返回的json数据中的min_cursor字段，max_cursor不需要携带。
-     * 第三次以及后面所有的请求都只带max_cursor字段，值为第一次请求返回的json数据中的max_cursor字段
+     * 第二次请求取第一次请求返回的json数据中的min_time字段，max_time不需要携带。
+     * 第三次以及后面所有的请求都只带max_time字段，值为第一次请求返回的json数据中的max_time字段
      *
      * @return
      */
-    public static String getEncryptUrl(Activity act, long minCursor, long maxCursor) {
+    public static String getEncryptUrl(Activity act, long minTime, long maxTime) {
         String url = null;
         int time = (int) (System.currentTimeMillis() / 1000);
         try {
@@ -46,15 +47,22 @@ public class DouyinUtil {
             }
 
             paramsMap.put("count", "20");
-            paramsMap.put("type", "0");
-            paramsMap.put("retry_type", "no_retry");
+            paramsMap.put("type", "video");
+            paramsMap.put("live_sdk_version", "272");
+            paramsMap.put("req_from", "enter_auto");
             paramsMap.put("ts", "" + time);
+            //这里需要注意这两个字段是进行分页请求功能，大致规则如下：
+            /**
+             * 第一次请求，这两个字段都是0
+             * 第二次请求取第一次请求返回的json数据中的min_cursor字段，max_cursor不需要携带。
+             * 第三次以及后面所有的请求都只带max_cursor字段，值为第一次请求返回的json数据中的max_cursor字段。
+             */
 
-            if (minCursor >= 0) {
-                paramsMap.put("max_cursor", minCursor + "");
+            if (maxTime >= 0) {
+                paramsMap.put("max_time", "0");
             }
-            if (maxCursor >= 0) {
-                paramsMap.put("min_cursor", maxCursor + "");
+            if (minTime >= 0) {
+                paramsMap.put("min_time", "0");
             }
 
             StringBuilder paramsSb = new StringBuilder();
@@ -74,7 +82,6 @@ public class DouyinUtil {
             url = urlStr + "&as=" + asStr + "&cp=" + cpStr;
 
         } catch (Exception e) {
-            Log.i("jw", "get url err:" + Log.getStackTraceString(e));
         }
         return url;
     }
@@ -85,30 +92,27 @@ public class DouyinUtil {
      * @return
      */
     @SuppressLint("DefaultLocale")
-    private static HashMap<String, String> getCommonParams(Activity act) {
+    public static HashMap<String, String> getCommonParams(Activity act) {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("iid", "16715863991");
+        params.put("device_id", "40545321430");
+        params.put("ac", NetworkMainUtil.getNetworkType(GlobalContext.getContext()).toLowerCase());
         params.put("channel", "360");
         params.put("aid", "1128");
-        params.put("uuid", KindsOfUtil.getDeviceUUID(act));
-        params.put("openudid", "b39d9675ee6af5b2");
         params.put("app_name", "aweme");
         params.put("version_code", appVersionCode);
         params.put("version_name", appVersionName);
+        params.put("device_platform", "android");
         params.put("ssmix", "a");
-        params.put("manifest_version_code", appVersionCode);
         params.put("device_type", KindsOfUtil.getDeviceName());
         params.put("device_brand", KindsOfUtil.getDeviceFactory());
         params.put("os_api", KindsOfUtil.getOSSDK());
         params.put("os_version", KindsOfUtil.getOSRelease());
+        params.put("uuid", "863970029764198");
+        params.put("openudid", "b39d9675ee6af5b2");
+        params.put("manifest_version_code", appVersionCode);
         params.put("resolution", KindsOfUtil.getDeviceWidth(act) + "*" + KindsOfUtil.getDeviceHeight(act));
         params.put("dpi", KindsOfUtil.getDeviceDpi(act) + "");
-//        params.put("device_id", "34971691517");
-//        params.put("device_id", "40545321430");
-        LogUtil.e(TAG, KindsOfUtil.getDeviceIMEI(act));
-//		params.put("ac", NetworkUtil.getNetworkType(GlobalContext.getContext()).toLowerCase());
-        params.put("ac", "wifi");
-        params.put("device_platform", "android");
         params.put("update_version_code", "1592");
         params.put("app_type", "normal");
         return params;

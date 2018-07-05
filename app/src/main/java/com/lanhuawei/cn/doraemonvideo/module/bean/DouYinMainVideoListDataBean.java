@@ -22,7 +22,7 @@ public class DouYinMainVideoListDataBean {
      */
     private long maxCursor;//最大时间戳
     private long minCursor;//最小时间戳
-    private List<DouYinMainVideoDataBean> videoDataBeanList = null;
+    private List<MainVideoDataBean> videoDataBeanList = null;
 
     public static DouYinMainVideoListDataBean fromJSONData(String str) {
         DouYinMainVideoListDataBean data = new DouYinMainVideoListDataBean();
@@ -34,7 +34,7 @@ public class DouYinMainVideoListDataBean {
             data.maxCursor = json.optLong("max_cursor");
             data.minCursor = json.optLong("min_cursor");
             JSONArray videoAry = json.getJSONArray("aweme_list");
-            data.videoDataBeanList = new ArrayList<DouYinMainVideoDataBean>(videoAry.length());
+            data.videoDataBeanList = new ArrayList<MainVideoDataBean>(videoAry.length());
             for (int i = 0; i < videoAry.length(); i++) {
                 data.videoDataBeanList.add(DouYinMainVideoDataSubclassBean.fromJSONData(videoAry.getJSONObject(i).toString()));
             }
@@ -61,7 +61,7 @@ public class DouYinMainVideoListDataBean {
         return minCursor;
     }
 
-    public List<DouYinMainVideoDataBean> getVideoDataBeanList() {
+    public List<MainVideoDataBean> getVideoDataBeanList() {
         return videoDataBeanList;
     }
 }

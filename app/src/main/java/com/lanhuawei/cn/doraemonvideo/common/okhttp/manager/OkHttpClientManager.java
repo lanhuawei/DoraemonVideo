@@ -645,9 +645,9 @@ public class OkHttpClientManager {
      * 字符串回调接口
      */
     public interface StringCallback {
-        void onFailure(Request request, IOException e);
-
         void onResponse(String response);
+
+        void onFailure(Request request, IOException e);
     }
 
 
