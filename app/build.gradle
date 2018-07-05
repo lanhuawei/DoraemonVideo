@@ -10,6 +10,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
         ndk {
             abiFilters /*"armeabi",*/ "armeabi-v7a"/*,"x86","arm64-v8a"*/
         }
@@ -20,6 +22,8 @@ android {
         }
         release {
             minifyEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -82,7 +86,7 @@ dependencies {
     implementation 'com.facebook.fresco:fresco:1.7.1'
     implementation 'com.facebook.fresco:animated-webp:1.7.1'
     implementation 'com.facebook.fresco:webpsupport:1.7.1'
-    implementation 'com.facebook.soloader:soloader:0.3.0' //webp需要引用这个库
+    implementation 'com.facebook.soloader:soloader:0.3.0' //webp需要引用这个库  WebP（静态图+动图）加载使用
 
     implementation 'com.android.support:multidex:1.0.3'
     /*eventbus*/

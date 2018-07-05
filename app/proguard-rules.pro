@@ -103,3 +103,117 @@
 #–keepattributes Signature
 #####################常用的配置-end################
 
+#####################保护自己项目代码################
+-keep class simijkplayer.**{
+    public <fields>;
+    public <methods>;
+}
+-keep class tv.danmaku.ijk.media.**{
+    <fields>;
+    <methods>;
+}
+
+-keep class * extends java.lang.annotation.Annotation { *; }
+#-keep class com.lightsky.video.R$id {*;}
+
+#####################保护自己项目代码-end################
+
+#####################第三方架包不混淆################
+
+
+#okhttputils
+-dontwarn com.http.**
+-keep class com.http.**{*;}
+-keep interface com.http.**{*;}
+
+
+
+-keep @com.facebook.common.internal.DoNotStrip class *
+-keepclassmembers class * {
+    @com.facebook.common.internal.DoNotStrip *;
+}
+
+
+
+##友盟分享
+#-dontshrink
+#-dontoptimize
+#-dontwarn com.google.android.maps.**
+#-dontwarn android.webkit.WebView
+#-keep public class javax.**
+#-keep public class android.webkit.**
+#-dontwarn android.support.v4.**
+#-keep enum com.facebook.**
+#-keepattributes Exceptions,InnerClasses,Signature
+#-keepattributes SourceFile,LineNumberTable
+
+
+
+-keepclassmembers enum * {
+public static **[] values();
+public static ** valueOf(java.lang.String);
+}
+
+-keepnames class * implements android.os.Parcelable {
+public static final ** CREATOR;
+}
+
+-keepattributes Signature
+#####################第三方架包不混淆-end################
+
+-keep class com.lightsky.video.webview.JavascriptInterface {
+    <methods>;
+    <fields>;
+}
+
+-keep class com.lightsky.video.redpackets.webview.RedPacketJavascriptInterface {
+    <methods>;
+    <fields>;
+}
+
+#WebView 4.0以上和4.0以下 支持上传文件
+-keep public class * extends android.webkit.WebChromeClient {
+	public void openFileChooser(android.webkit.ValueCallback, java.lang.String, java.lang.String);
+	public void openFileChooser(android.webkit.ValueCallback);
+}
+
+-keep class com.lightsky.video.widget.pulltorefresh.* { *; }
+###############################友盟push start#################
+-keepattributes *Annotation*
+
+
+-keep public class **.R$*{
+   public static final int *;
+}
+
+
+
+
+
+
+
+#okhttp
+-dontwarn okhttp3.**
+-keep class okhttp3.**{*;}
+-keep interface okhttp3.**{*;}
+
+-dontwarn javax.annotation.**
+# A resource is loaded with a relative path so the package of this class must be preserved.
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+
+-keep class com.lightsky.utils.ToastUtil{ *;}
+-keep class com.lightsky.video.VideoHelper { *;}
+-keep class com.lightsky.video.VideoSetting{ *;}
+-keep class com.lightsky.video.sdk.**{ *;}
+-keep class com.lightsky.video.datamanager.category.CategoryQueryNotify{ *;}
+
+-keep class javax.annotation.**{ *;}
+-keep class java.lang.String{ *;}
+-keep class android.os.build.**{ *;}
+-keep class com.lightsky.video.BuildConfig{ *;}
+
+-keep public interface com.facebook.**
+-keep class com.facebook.**
+-keep class com.facebook.** { *; }
+
+

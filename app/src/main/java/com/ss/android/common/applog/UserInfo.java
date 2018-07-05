@@ -1,4 +1,4 @@
-package com.lanhuawei.cn.doraemonvideo.common.nativebean;
+package com.ss.android.common.applog;
 
 /**
  * Created by Ivan.L on 2018/7/4.

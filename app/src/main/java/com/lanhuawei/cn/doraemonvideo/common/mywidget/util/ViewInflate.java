@@ -20,7 +20,6 @@ public final class ViewInflate {
     private ViewInflate() {
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static <VIEW extends View> VIEW fromView(View view) {
         try {

@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.lanhuawei.cn.doraemonvideo.common.Util.KindsOfUtil;
 import com.lanhuawei.cn.doraemonvideo.common.Util.LogUtil;
-import com.lanhuawei.cn.doraemonvideo.common.nativebean.UserInfo;
+import com.ss.android.common.applog.UserInfo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,11 +67,13 @@ public class DouyinUtil {
             }
 
             String as_cp = UserInfo.getUserInfo(time, urlStr, paramsAry);
+            LogUtil.e("DOUYIn", as_cp + "///////");
 
             String asStr = as_cp.substring(0, as_cp.length() / 2);
             String cpStr = as_cp.substring(as_cp.length() / 2, as_cp.length());
 
             url = urlStr + "&as=" + asStr + "&cp=" + cpStr;
+//            url = urlStr + "&as=" + "a1b517839bfefb4d1d" + "&cp=" + "79efb558bcd236d8e1";
 
         } catch (Exception e) {
             Log.i("jw", "get url err:" + Log.getStackTraceString(e));

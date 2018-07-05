@@ -20,9 +20,9 @@ public class DouYinMainVideoListDataBean {
      * 第二次请求取第一次请求返回的json数据中的min_cursor字段，max_cursor不需要携带。
      * 第三次以及后面所有的请求都只带max_cursor字段，值为第一次请求返回的json数据中的max_cursor字段。
      */
-    public long maxCursor;//最大时间戳
-    public long minCursor;//最小时间戳
-    public List<DouYinMainVideoDataBean> videoDataBeanList = null;
+    private long maxCursor;//最大时间戳
+    private long minCursor;//最小时间戳
+    private List<DouYinMainVideoDataBean> videoDataBeanList = null;
 
     public static DouYinMainVideoListDataBean fromJSONData(String str) {
         DouYinMainVideoListDataBean data = new DouYinMainVideoListDataBean();

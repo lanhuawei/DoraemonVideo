@@ -50,7 +50,7 @@ public class DouYinVideoShowHolder extends BaseRecyclerViewHolder<DouYinMainVide
             params.height = (params.width) * 8 / 5;
             sdvImg.setLayoutParams(params);
             final Uri uri = Uri.parse(douYinMainVideoDataBean.getDynamicCover());
-            if (isNotEqualUriPath(sdvImg, douYinMainVideoDataBean.getDynamicCover())) {
+            if (isNotEqualsUriPath(sdvImg, douYinMainVideoDataBean.getDynamicCover())) {
                 DraweeController controller = Fresco.newDraweeControllerBuilder()
                         .setUri(uri)
                         .setAutoPlayAnimations(true)
@@ -77,7 +77,8 @@ public class DouYinVideoShowHolder extends BaseRecyclerViewHolder<DouYinMainVide
      * @param imgUrl
      * @return
      */
-    private boolean isNotEqualUriPath(SimpleDraweeView sdvImg, String imgUrl) {
+    private boolean isNotEqualsUriPath(SimpleDraweeView sdvImg, String imgUrl) {
         return !(TextUtils.isEmpty(imgUrl) || TextUtils.isEmpty(sdvImg.getTag(R.id.sdv_img) + "")) && !(sdvImg.getTag(R.id.sdv_img) + "").equals(imgUrl);
     }
+
 }
