@@ -6,6 +6,7 @@
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
     <color name="color_theme">#39C5BB</color>
     <color name="color_background">#96000000</color>
     <color name="color_5F3A41">#5F3A41</color>
@@ -15,5 +16,7 @@
     <color name="color_text_default">#5D646E</color>
     <color name="color_b6b4b4">#b6b4b4</color>
     <color name="color_white_text">#E8E9EC</color>
+
+    <color name="color_F4F5F7">#F4F5F7</color>
 
 </resources>

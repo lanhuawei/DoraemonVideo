@@ -66,7 +66,7 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
     private List<MainVideoDataBean> mainVideoDataBeans = new ArrayList<>();
     private long max_cursor = 0;
     private boolean isLoadMore = false;
-    private boolean douYinDisable = true;//是否是抖音。火山显示不同效果
+    private boolean douYinDisable = false;//是否是抖音。火山显示不同效果
     private DouYinPtrCustomHeader douYinPtrCustomHeader;
     private Context context;
     private static final String TAG = "---->DouYinVideoFragment";

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--VerticalVideoActivity-->
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <com.lanhuawei.cn.doraemonvideo.common.customview.ShadowView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignBottom="@id/fl_container"/>
+
+    <TextView
+        android:id="@+id/tv_video_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/fl_container"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:text="蓝华威蓝华威"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp">
+
+        <com.lanhuawei.cn.doraemonvideo.common.customview.CircleImageView
+            android:id="@+id/iv_user_avatar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            app:civ_border_color="@color/color_F4F5F7"
+            app:civ_border_width="0.5dp"/>
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_user_avatar"
+            android:ellipsize="end"
+            android:maxEms="6"
+            android:maxLines="1"
+            android:text="蓝华威蓝华威"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+        
+        <com.lanhuawei.cn.doraemonvideo.common.customview.TextImageView
+            android:id="@+id/tv_like_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/tv_play_count"
+            android:drawableLeft="@drawable/icon_video_screen_like"
+            android:drawablePadding="5dp"
+            android:textColor="@color/color_white_text"
+            android:textSize="11sp"
+            app:drawableLeftHeight="14dp"
+            app:drawableLeftWidth="14dp"/>
+
+        <com.lanhuawei.cn.doraemonvideo.common.customview.TextImageView
+            android:id="@+id/tv_play_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:drawableLeft="@drawable/icon_video_screen_play"
+            android:drawablePadding="5dp"
+            android:textColor="@color/color_white_text"
+            android:textSize="11sp"
+            app:drawableLeftHeight="14.5dp"
+            app:drawableLeftWidth="14.5dp" />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

@@ -46,6 +46,7 @@ public class IjkVideoView extends BaseIjkVideoView {
     public static final int SCREEN_SCALE_MATCH_PARENT = 3;
     public static final int SCREEN_SCALE_ORIGINAL = 4;
 
+//    protected int mCurrentScreenScale = SCREEN_SCALE_MATCH_PARENT;
     protected int mCurrentScreenScale = SCREEN_SCALE_DEFAULT;
 
     public IjkVideoView(@NonNull Context context) {
@@ -214,6 +215,7 @@ public class IjkVideoView extends BaseIjkVideoView {
             mSurfaceTexture = null;
         }
         mCurrentScreenScale = SCREEN_SCALE_DEFAULT;
+//        mCurrentScreenScale = SCREEN_SCALE_MATCH_PARENT;
     }
 
     @Override
