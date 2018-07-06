@@ -237,7 +237,6 @@ public class VerticalVideoActivity extends BaseActivity {
                     douYinAdapter.notifyDataSetChanged();
                 } catch (Exception e) {
                     e.printStackTrace();
-
                 }
             }
 
