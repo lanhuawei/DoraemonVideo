@@ -98,6 +98,7 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
     protected void initView() {
         context = getActivity();
         retry = loadFrameLayout.findViewById(R.id.tv_retry);
+//        loadFrameLayout.showEmptyView();
     }
 
     @Override
