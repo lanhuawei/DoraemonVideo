@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TabHost;
 
 import com.baidu.mobstat.StatService;
+import com.lanhuawei.cn.doraemonvideo.common.Util.ToastUtil;
 
 import java.util.HashMap;
 
@@ -83,10 +84,13 @@ public class TabManager implements TabHost.OnTabChangeListener {
         int pos = tabHost.getCurrentTab(); // To get tab position
         if (pos == 0) {
             StatService.onEvent(fragmentActivity, "aweme", "小视频");
+//            ToastUtil.showToast("小视频");
         } else if (pos == 1) {
-            StatService.onEvent(fragmentActivity, "recommon_tab", "底部推荐");
+            StatService.onEvent(fragmentActivity, "recommon_tab", "发现");
+//            ToastUtil.showToast("发现");
         } else if (pos == 2) {
-            StatService.onEvent(fragmentActivity, "discover", "发现");
+            StatService.onEvent(fragmentActivity, "discover", "我的");
+//            ToastUtil.showToast("我的");
         }
 
         TabInfo newTab = tabInfoHashMap.get(s);
@@ -111,5 +115,7 @@ public class TabManager implements TabHost.OnTabChangeListener {
             fragmentActivity.getSupportFragmentManager().executePendingTransactions();
         }
     }
+
+
 
 }

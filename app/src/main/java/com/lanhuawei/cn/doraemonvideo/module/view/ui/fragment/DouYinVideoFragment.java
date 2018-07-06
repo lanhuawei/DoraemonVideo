@@ -352,6 +352,9 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
         adapterWithHF.notifyDataSetChanged();
         ptrRecyclerViewUIComponent.getRecyclerView().scrollToPosition(event.getPosition());
         max_cursor = event.getMax_cursor();
+
+//        ptrRecyclerViewUIComponent.delayRefresh(100);
+
     }
 
 }

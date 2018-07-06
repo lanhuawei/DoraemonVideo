@@ -2,6 +2,7 @@ package com.lanhuawei.cn.doraemonvideo.module.base;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
@@ -65,6 +66,14 @@ public class MainTabActivity extends BaseActivity {
                 mTabHost.newTabSpec(TAB3).setIndicator(createTabIndicatorView(R.layout.tab_discover)), DiscoverVideoFragment.class, null);
         tabManager.addTab(
                 mTabHost.newTabSpec(TAB4).setIndicator(createTabIndicatorView(R.layout.tab_mine)), MineCenterFragment.class, null);
+        mTabHost.getTabWidget().getChildTabViewAt(0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtil.showToast("小视频");
+                doubleClick(view);
+            }
+        });
+
     }
 
     private View createTabIndicatorView(int layoutResource) {
@@ -124,5 +133,37 @@ public class MainTabActivity extends BaseActivity {
             StatusBarFontHelper.setStatusBarMode(this, true);
         }
         super.onConfigurationChanged(newConfig);
+    }
+
+
+    long firstClickTime = 0;
+    long secondClickTime = 0;
+
+    public void doubleClick(View view) {
+
+        if (firstClickTime > 0) {
+            secondClickTime = SystemClock.uptimeMillis();
+            if (secondClickTime - firstClickTime < 500) {
+//                DouYinVideoFragment.ScrollToTop();
+                ToastUtil.showToast("hahaha");
+            }
+            firstClickTime = 0;
+            return;
+        }
+
+        firstClickTime = SystemClock.uptimeMillis();
+
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(500);
+                    firstClickTime = 0;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }
