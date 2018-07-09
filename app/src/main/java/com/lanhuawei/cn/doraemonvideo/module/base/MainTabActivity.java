@@ -1,14 +1,14 @@
 package com.lanhuawei.cn.doraemonvideo.module.base;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import com.lanhuawei.cn.doraemonvideo.R;
 import com.lanhuawei.cn.doraemonvideo.common.Util.LogUtil;
@@ -46,7 +46,8 @@ public class MainTabActivity extends BaseActivity{
     private long mExitTime;
     private Handler handler = new Handler();
     private MyThread myThread;
-    private ImageView iv_icon_tab;
+    private ImageView iv_icon_tab_douyin;
+    private TextView tv_tab_name_douyin;
     private boolean isRefresh = false;
 
     @Override
@@ -79,7 +80,8 @@ public class MainTabActivity extends BaseActivity{
                 mTabHost.newTabSpec(TAB4).setIndicator(createTabIndicatorView(R.layout.tab_mine)), MineCenterFragment.class, null);
 
         View tabOne = mTabHost.getTabWidget().getChildTabViewAt(0);
-        iv_icon_tab = (ImageView) tabOne.findViewById(R.id.iv_icon_tab);
+        iv_icon_tab_douyin = (ImageView) tabOne.findViewById(R.id.iv_icon_tab);
+        tv_tab_name_douyin = (TextView) tabOne.findViewById(R.id.tv_tab_name);
         tabClick();
 
         setRefresh();
@@ -94,7 +96,7 @@ public class MainTabActivity extends BaseActivity{
                 mTabHost.setCurrentTab(0);
                 if (isRefresh) {
                     EventBus.getDefault().post(new DoubleClickToRefresh(true));
-                    iv_icon_tab.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
+                    iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
                     isRefresh = false;
                     setRefresh();
                 } else {
@@ -105,7 +107,8 @@ public class MainTabActivity extends BaseActivity{
                     isRefresh = false;
                     setRefresh();
                 }
-
+                tv_tab_name_douyin.setText("小视频");
+                tv_tab_name_douyin.setTextColor(Color.parseColor("#1296db"));
 
             }
         });
@@ -115,7 +118,9 @@ public class MainTabActivity extends BaseActivity{
             public void onClick(View view) {
                 mTabHost.setCurrentTab(1);
                 handler.removeCallbacks(myThread);
-                iv_icon_tab.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
+                iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
+                tv_tab_name_douyin.setText("小视频");
+                tv_tab_name_douyin.setTextColor(Color.parseColor("#707070"));
                 isRefresh = false;
             }
         });
@@ -125,7 +130,10 @@ public class MainTabActivity extends BaseActivity{
             public void onClick(View view) {
                 mTabHost.setCurrentTab(2);
                 handler.removeCallbacks(myThread);
-                iv_icon_tab.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
+                iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
+                tv_tab_name_douyin.setText("小视频");
+                tv_tab_name_douyin.setTextColor(R.drawable.bg_tab_text_color);
+                tv_tab_name_douyin.setTextColor(Color.parseColor("#707070"));
                 isRefresh = false;
             }
         });
@@ -146,7 +154,9 @@ public class MainTabActivity extends BaseActivity{
         @Override
         public void run() {
             isRefresh = true;
-            iv_icon_tab.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video_refresh));
+            iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video_refresh));
+            tv_tab_name_douyin.setText("刷新");
+            tv_tab_name_douyin.setTextColor(Color.parseColor("#1296db"));
         }
     }
 
