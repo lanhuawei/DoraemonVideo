@@ -46,7 +46,6 @@ public class MainTabActivity extends BaseActivity{
     private long mExitTime;
     private Handler handler = new Handler();
     private MyThread myThread;
-    private View tabOne;
     private ImageView iv_icon_tab;
     private boolean isRefresh = false;
 
@@ -79,7 +78,7 @@ public class MainTabActivity extends BaseActivity{
         tabManager.addTab(
                 mTabHost.newTabSpec(TAB4).setIndicator(createTabIndicatorView(R.layout.tab_mine)), MineCenterFragment.class, null);
 
-        tabOne = mTabHost.getTabWidget().getChildTabViewAt(0);
+        View tabOne = mTabHost.getTabWidget().getChildTabViewAt(0);
         iv_icon_tab = (ImageView) tabOne.findViewById(R.id.iv_icon_tab);
         tabClick();
 
