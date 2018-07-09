@@ -28,8 +28,8 @@ import com.lanhuawei.cn.doraemonvideo.common.okhttp.manager.OkHttpClientManager;
 import com.lanhuawei.cn.doraemonvideo.common.videoplayer.player.IjkVideoView;
 import com.lanhuawei.cn.doraemonvideo.common.videoplayer.player.PlayerConfig;
 import com.lanhuawei.cn.doraemonvideo.module.base.BaseActivity;
-import com.lanhuawei.cn.doraemonvideo.module.bean.DouYinMainVideoListDataBean;
-import com.lanhuawei.cn.doraemonvideo.module.bean.MainVideoDataBean;
+import com.lanhuawei.cn.doraemonvideo.module.bean.databean.DouYinMainVideoListDataBean;
+import com.lanhuawei.cn.doraemonvideo.module.bean.databean.MainVideoDataBean;
 import com.lanhuawei.cn.doraemonvideo.module.model.event.RefreshEvent;
 import com.lanhuawei.cn.doraemonvideo.module.view.adapter.DouYinAdapter;
 

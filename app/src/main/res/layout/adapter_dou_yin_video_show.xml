@@ -35,7 +35,8 @@
             android:drawableLeft="@drawable/icon_douyin_video_show"
             android:drawablePadding="5dp"
             android:textColor="@color/color_white_text"
-            android:textSize="11sp"/>
+            android:textSize="11sp"
+            />
 
         <TextView
             android:id="@+id/tv_like_count"

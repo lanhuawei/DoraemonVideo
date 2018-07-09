@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.lanhuawei.cn.doraemonvideo.R;
 import com.lanhuawei.cn.doraemonvideo.common.mywidget.recyclerview.adapter.BaseRecyclerAdapter;
 import com.lanhuawei.cn.doraemonvideo.common.mywidget.util.ViewInflate;
-import com.lanhuawei.cn.doraemonvideo.module.bean.MainVideoDataBean;
+import com.lanhuawei.cn.doraemonvideo.module.bean.databean.MainVideoDataBean;
 import com.lanhuawei.cn.doraemonvideo.module.view.holder.DouYinVideoShowHolder;
 
 

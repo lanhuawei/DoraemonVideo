@@ -1,6 +1,6 @@
 package com.lanhuawei.cn.doraemonvideo.module.model.event;
 
-import com.lanhuawei.cn.doraemonvideo.module.bean.MainVideoDataBean;
+import com.lanhuawei.cn.doraemonvideo.module.bean.databean.MainVideoDataBean;
 
 import java.util.List;
 

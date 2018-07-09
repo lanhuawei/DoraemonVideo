@@ -19,7 +19,7 @@ import com.lanhuawei.cn.doraemonvideo.common.Util.DensityUtil;
 import com.lanhuawei.cn.doraemonvideo.common.Util.KindsOfUtil;
 import com.lanhuawei.cn.doraemonvideo.common.mywidget.recyclerview.adapter.BaseRecyclerViewHolder;
 import com.lanhuawei.cn.doraemonvideo.common.videoplayer.util.WindowUtil;
-import com.lanhuawei.cn.doraemonvideo.module.bean.MainVideoDataBean;
+import com.lanhuawei.cn.doraemonvideo.module.bean.databean.MainVideoDataBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

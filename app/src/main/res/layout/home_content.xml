@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="false">
+
+    <RelativeLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:background="@color/white"
+        android:paddingLeft="5dp">
+
+        <com.lightsky.video.widget.PagerSlidingTab
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="invisible"
+            app:pstsDividerColor="@color/white"
+            app:pstsIndicatorColor="@color/color_1296db"
+            app:pstsShouldExpand="true"
+            app:pstsTabPaddingLeft="8dp"
+            app:pstsTabPaddingRight="14dp"
+            app:pstsUnderlineColor="@android:color/transparent" />
+
+        <ImageView
+            android:id="@+id/tab_search"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/white"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            android:src="@drawable/icon_search_discover"
+            />
+
+        <ImageView
+            android:id="@+id/tab_float"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/tab_search"
+            android:src="@drawable/icon_discover_img_shadow"
+            android:layout_toStartOf="@id/tab_search" />
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tab_layout">
+    </android.support.v4.view.ViewPager>
+
+
+</RelativeLayout>

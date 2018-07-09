@@ -1,4 +1,4 @@
-package com.lanhuawei.cn.doraemonvideo.module.bean;
+package com.lanhuawei.cn.doraemonvideo.module.bean.databean;
 
 import android.text.TextUtils;
 
