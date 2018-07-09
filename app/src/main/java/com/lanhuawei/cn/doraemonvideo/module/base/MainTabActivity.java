@@ -1,10 +1,13 @@
 package com.lanhuawei.cn.doraemonvideo.module.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TabHost;
 
 import com.lanhuawei.cn.doraemonvideo.R;
@@ -41,6 +44,11 @@ public class MainTabActivity extends BaseActivity{
     private final String TAB4 = "MINE";
 
     private long mExitTime;
+    private Handler handler = new Handler();
+    private MyThread myThread;
+    private View tabOne;
+    private ImageView iv_icon_tab;
+    private boolean isRefresh = false;
 
     @Override
     protected int layoutResId() {
@@ -60,6 +68,7 @@ public class MainTabActivity extends BaseActivity{
         mTabHost.setup();
         mTabHost.getTabWidget().setDividerDrawable(null);//去除分割线
         tabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
+        myThread = new MyThread();
 
         tabManager.addTab(
                 mTabHost.newTabSpec(TAB1).setIndicator(createTabIndicatorView(R.layout.tab_main)), DouYinVideoFragment.class, null);
@@ -69,16 +78,77 @@ public class MainTabActivity extends BaseActivity{
                 mTabHost.newTabSpec(TAB3).setIndicator(createTabIndicatorView(R.layout.tab_discover)), DiscoverVideoFragment.class, null);
         tabManager.addTab(
                 mTabHost.newTabSpec(TAB4).setIndicator(createTabIndicatorView(R.layout.tab_mine)), MineCenterFragment.class, null);
+
+        tabOne = mTabHost.getTabWidget().getChildTabViewAt(0);
+        iv_icon_tab = (ImageView) tabOne.findViewById(R.id.iv_icon_tab);
+        tabClick();
+
+        setRefresh();
+
+
+    }
+
+    private void tabClick() {
         mTabHost.getTabWidget().getChildTabViewAt(0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mTabHost.setCurrentTab(0);
-                if (NoDoubleClickUtil.isDoubleClick()) {
+                if (isRefresh) {
                     EventBus.getDefault().post(new DoubleClickToRefresh(true));
+                    iv_icon_tab.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
+                    isRefresh = false;
+                    setRefresh();
+                } else {
+                    if (NoDoubleClickUtil.isDoubleClick()) {
+                        EventBus.getDefault().post(new DoubleClickToRefresh(true));
+                    }
+                    handler.removeCallbacks(myThread);
+                    isRefresh = false;
+                    setRefresh();
                 }
+
+
             }
         });
 
+        mTabHost.getTabWidget().getChildTabViewAt(1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mTabHost.setCurrentTab(1);
+                handler.removeCallbacks(myThread);
+                iv_icon_tab.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
+                isRefresh = false;
+            }
+        });
+
+        mTabHost.getTabWidget().getChildTabViewAt(2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mTabHost.setCurrentTab(2);
+                handler.removeCallbacks(myThread);
+                iv_icon_tab.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
+                isRefresh = false;
+            }
+        });
+    }
+
+    private void setRefresh() {
+        if (tabManager.getCurrentTab() == 0 && !isRefresh) {
+            handler.postDelayed(myThread, 1000 * 60 * 5);
+//            handler.postDelayed(myThread, 5000 );
+        }
+    }
+
+
+    /**
+     * 动态更新
+     */
+    private class MyThread implements Runnable {
+        @Override
+        public void run() {
+            isRefresh = true;
+            iv_icon_tab.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video_refresh));
+        }
     }
 
 

@@ -24,6 +24,7 @@ public class TabManager implements TabHost.OnTabChangeListener {
     private final int mContainerId;
     private final HashMap<String, TabInfo> tabInfoHashMap = new HashMap<>();
     private TabInfo mlastTab;
+    private int currentTab = -1;
 
     public TabManager(FragmentActivity fragmentActivity, TabHost tabHost, int mContainerId) {
         this.fragmentActivity = fragmentActivity;
@@ -85,12 +86,15 @@ public class TabManager implements TabHost.OnTabChangeListener {
         if (pos == 0) {
             StatService.onEvent(fragmentActivity, "aweme", "小视频");
 //            ToastUtil.showToast("小视频");
+            currentTab = 0;
         } else if (pos == 1) {
             StatService.onEvent(fragmentActivity, "recommon_tab", "发现");
 //            ToastUtil.showToast("发现");
+            currentTab = 1;
         } else if (pos == 2) {
             StatService.onEvent(fragmentActivity, "discover", "我的");
 //            ToastUtil.showToast("我的");
+            currentTab = 2;
         }
 
         TabInfo newTab = tabInfoHashMap.get(s);
@@ -116,4 +120,11 @@ public class TabManager implements TabHost.OnTabChangeListener {
         }
     }
 
+    /**
+     * 获取当前tab
+     * @return
+     */
+    public int getCurrentTab() {
+        return currentTab;
+    }
 }
