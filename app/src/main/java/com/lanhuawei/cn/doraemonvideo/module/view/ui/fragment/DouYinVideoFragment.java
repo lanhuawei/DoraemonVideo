@@ -365,6 +365,8 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
     public void toRefresh(DoubleClickToRefresh doubleClickToRefresh) {
         if (doubleClickToRefresh.isDoubleClick()) {
             ptrRecyclerViewUIComponent.delayRefresh(100);
+//            adapterWithHF.notifyDataSetChanged();
+            ptrRecyclerViewUIComponent.getRecyclerView().scrollToPosition(0);
         }
     }
 

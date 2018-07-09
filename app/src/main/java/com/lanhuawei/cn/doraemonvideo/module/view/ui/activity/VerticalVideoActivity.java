@@ -186,7 +186,8 @@ public class VerticalVideoActivity extends BaseActivity {
 
         frameLayout.addView(ijkVideoView);
         ijkVideoView.setUrl(mainVideoDataBeanList.get(mCurrentItem).getVideoPlayUrl());
-        ijkVideoView.setScreenScale(IjkVideoView.SCREEN_SCALE_MATCH_PARENT);//充满屏幕
+//        ijkVideoView.setScreenScale(IjkVideoView.SCREEN_SCALE_MATCH_PARENT);//充满屏幕
+        ijkVideoView.setScreenScale(IjkVideoView.SCREEN_SCALE_DEFAULT);//充满屏幕
         ijkVideoView.start();
         mPlayingPosition = mCurrentItem;
     }

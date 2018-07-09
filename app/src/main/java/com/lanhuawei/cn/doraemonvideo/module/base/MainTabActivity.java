@@ -73,7 +73,6 @@ public class MainTabActivity extends BaseActivity{
             @Override
             public void onClick(View view) {
                 mTabHost.setCurrentTab(0);
-                ToastUtil.showToast("小视频");
                 if (NoDoubleClickUtil.isDoubleClick()) {
                     EventBus.getDefault().post(new DoubleClickToRefresh(true));
                 }
