@@ -32,6 +32,7 @@ import com.lanhuawei.cn.doraemonvideo.module.base.BaseFragment;
 import com.lanhuawei.cn.doraemonvideo.module.bean.HuoShanVideoListDataBean;
 import com.lanhuawei.cn.doraemonvideo.module.bean.MainVideoDataBean;
 import com.lanhuawei.cn.doraemonvideo.module.bean.DouYinMainVideoListDataBean;
+import com.lanhuawei.cn.doraemonvideo.module.model.event.DoubleClickToRefresh;
 import com.lanhuawei.cn.doraemonvideo.module.model.event.RefreshEvent;
 import com.lanhuawei.cn.doraemonvideo.module.view.adapter.DouYinVideoShowAdapter;
 import com.lanhuawei.cn.doraemonvideo.module.view.holder.DouYinVideoShowHolder;
@@ -55,10 +56,13 @@ import okhttp3.Request;
  * 仿抖音页面展示
  */
 
-public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAdapter.OnItemClickListener<DouYinVideoShowHolder>{
-    @BindView(R.id.load_frameLayout) LoadFrameLayout loadFrameLayout;
-    @BindView(R.id.empty_view) View emptyView;
-    @BindView(R.id.am_ptr_framelayout) PtrRecyclerViewUIComponent ptrRecyclerViewUIComponent;
+public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAdapter.OnItemClickListener<DouYinVideoShowHolder> {
+    @BindView(R.id.load_frameLayout)
+    LoadFrameLayout loadFrameLayout;
+    @BindView(R.id.empty_view)
+    View emptyView;
+    @BindView(R.id.am_ptr_framelayout)
+    PtrRecyclerViewUIComponent ptrRecyclerViewUIComponent;
     Unbinder unbinder;
     private TextView retry;
     private DouYinVideoShowAdapter douYinVideoShowAdapter;
@@ -217,6 +221,7 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Request request, IOException e) {
                 ptrRecyclerViewUIComponent.loadMoreComplete(false);
@@ -270,6 +275,7 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Request request, IOException e) {
                 ptrRecyclerViewUIComponent.loadMoreComplete(true);
@@ -344,6 +350,7 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
 
     /**
      * EventBus
+     *
      * @param event
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -352,9 +359,13 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
         adapterWithHF.notifyDataSetChanged();
         ptrRecyclerViewUIComponent.getRecyclerView().scrollToPosition(event.getPosition());
         max_cursor = event.getMax_cursor();
+    }
 
-//        ptrRecyclerViewUIComponent.delayRefresh(100);
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void toRefresh(DoubleClickToRefresh doubleClickToRefresh) {
+        if (doubleClickToRefresh.isDoubleClick()) {
+            ptrRecyclerViewUIComponent.delayRefresh(100);
+        }
     }
 
 }

@@ -23,7 +23,7 @@ public class TabManager implements TabHost.OnTabChangeListener {
     private final TabHost tabHost;
     private final int mContainerId;
     private final HashMap<String, TabInfo> tabInfoHashMap = new HashMap<>();
-    TabInfo mlastTab;
+    private TabInfo mlastTab;
 
     public TabManager(FragmentActivity fragmentActivity, TabHost tabHost, int mContainerId) {
         this.fragmentActivity = fragmentActivity;
@@ -115,7 +115,5 @@ public class TabManager implements TabHost.OnTabChangeListener {
             fragmentActivity.getSupportFragmentManager().executePendingTransactions();
         }
     }
-
-
 
 }

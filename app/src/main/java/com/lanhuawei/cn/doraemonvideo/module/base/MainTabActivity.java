@@ -9,23 +9,26 @@ import android.widget.TabHost;
 
 import com.lanhuawei.cn.doraemonvideo.R;
 import com.lanhuawei.cn.doraemonvideo.common.Util.LogUtil;
+import com.lanhuawei.cn.doraemonvideo.common.Util.NoDoubleClickUtil;
 import com.lanhuawei.cn.doraemonvideo.common.Util.statusbar.StatusBarFontHelper;
 import com.lanhuawei.cn.doraemonvideo.common.Util.statusbar.statusbarcompat.StatusBarCompat;
 import com.lanhuawei.cn.doraemonvideo.common.Util.ToastUtil;
 import com.lanhuawei.cn.doraemonvideo.common.manager.TabManager;
 import com.lanhuawei.cn.doraemonvideo.common.videoplayer.player.VideoViewManager;
+import com.lanhuawei.cn.doraemonvideo.module.model.event.DoubleClickToRefresh;
 import com.lanhuawei.cn.doraemonvideo.module.view.ui.fragment.DiscoverVideoFragment;
 import com.lanhuawei.cn.doraemonvideo.module.view.ui.fragment.DouYinVideoFragment;
-import com.lanhuawei.cn.doraemonvideo.module.view.ui.fragment.HotVideoFragment;
 import com.lanhuawei.cn.doraemonvideo.module.view.ui.fragment.MineCenterFragment;
 import com.lightsky.video.VideoHelper;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Ivan.L on 2018/6/29.
  * PS:activity_main.xml 跟360快视频SDK冲突
  */
 
-public class MainTabActivity extends BaseActivity {
+public class MainTabActivity extends BaseActivity{
     private TabHost mTabHost;
     private TabManager tabManager;
     private LayoutInflater layoutInflater;
@@ -69,12 +72,16 @@ public class MainTabActivity extends BaseActivity {
         mTabHost.getTabWidget().getChildTabViewAt(0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mTabHost.setCurrentTab(0);
                 ToastUtil.showToast("小视频");
-                doubleClick(view);
+                if (NoDoubleClickUtil.isDoubleClick()) {
+                    EventBus.getDefault().post(new DoubleClickToRefresh(true));
+                }
             }
         });
 
     }
+
 
     private View createTabIndicatorView(int layoutResource) {
         return layoutInflater.inflate(layoutResource, null);
@@ -135,35 +142,4 @@ public class MainTabActivity extends BaseActivity {
         super.onConfigurationChanged(newConfig);
     }
 
-
-    long firstClickTime = 0;
-    long secondClickTime = 0;
-
-    public void doubleClick(View view) {
-
-        if (firstClickTime > 0) {
-            secondClickTime = SystemClock.uptimeMillis();
-            if (secondClickTime - firstClickTime < 500) {
-//                DouYinVideoFragment.ScrollToTop();
-                ToastUtil.showToast("hahaha");
-            }
-            firstClickTime = 0;
-            return;
-        }
-
-        firstClickTime = SystemClock.uptimeMillis();
-
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(500);
-                    firstClickTime = 0;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
 }
