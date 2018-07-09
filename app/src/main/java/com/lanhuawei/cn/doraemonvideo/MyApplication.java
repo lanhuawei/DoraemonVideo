@@ -99,7 +99,7 @@ public class MyApplication extends Application {
         //缓存起来防止每次网络请求都去拿
         PACKAGE_NAME = CommonUtil.getProcessName();
         VERSION_NAME = KindsOfUtil.getHasDotVersion(MyApplication.getInstance());
-        CHANNEL_ID = CommonUtil.getMetaData(MyApplication.getInstance(), "BaiduMobAd_CHANNEL");
+//        CHANNEL_ID = CommonUtil.getMetaData(MyApplication.getInstance(), "BaiduMobAd_CHANNEL");
         IMEI = KindsOfUtil.getDeviceIMEI(MyApplication.getInstance());
         ANDROID_ID = KindsOfUtil.getDeviceAndroidId(MyApplication.getInstance());
         SERIAL_NO = KindsOfUtil.getSerialNo();
