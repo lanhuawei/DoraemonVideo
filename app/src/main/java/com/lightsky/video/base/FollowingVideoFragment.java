@@ -36,7 +36,8 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Ivan.L on 2018/7/17.
- *
+ * 发现页面
+ * 发现的视频Fragment
  */
 
 public class FollowingVideoFragment extends com.lightsky.video.module.base.BaseFragment implements CategoryQueryNotify {
