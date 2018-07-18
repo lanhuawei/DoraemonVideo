@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!--确定按钮形状  styles-->
+    <corners android:radius="4dp" />
+    <solid android:color="@color/themeColorRed" />
+</shape>

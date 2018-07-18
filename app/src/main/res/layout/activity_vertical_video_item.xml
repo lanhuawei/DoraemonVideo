@@ -16,7 +16,7 @@
 
     </FrameLayout>
 
-    <com.lanhuawei.cn.doraemonvideo.common.customview.ShadowView
+    <com.lightsky.video.common.customview.ShadowView
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_alignBottom="@id/fl_container"/>
@@ -39,7 +39,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp">
 
-        <com.lanhuawei.cn.doraemonvideo.common.customview.CircleImageView
+        <com.lightsky.video.common.customview.CircleImageView
             android:id="@+id/iv_user_avatar"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -61,7 +61,7 @@
             android:textColor="@color/white"
             android:textSize="14sp"/>
         
-        <com.lanhuawei.cn.doraemonvideo.common.customview.TextImageView
+        <com.lightsky.video.common.customview.TextImageView
             android:id="@+id/tv_like_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
             app:drawableLeftHeight="14dp"
             app:drawableLeftWidth="14dp"/>
 
-        <com.lanhuawei.cn.doraemonvideo.common.customview.TextImageView
+        <com.lightsky.video.common.customview.TextImageView
             android:id="@+id/tv_play_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

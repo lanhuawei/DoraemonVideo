@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
     android:gravity="center"
-    android:paddingTop="2dp">
+    android:paddingTop="2dp"
+    android:background="@drawable/bg_tab_click">
     <!--热门 tab-->
 
     <ImageView

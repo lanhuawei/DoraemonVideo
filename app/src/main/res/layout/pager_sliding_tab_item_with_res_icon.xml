@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.uibase.ui.ripple.RippleView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    app:mrl_rippleColor="@color/common_list_clip_color"
+    app:mrl_rippleDuration="100"
+    app:mrl_rippleFromCenter="true"
+    app:mrl_rippleHover="false">
+    <!--QuickVideo SDK中的 PagerSlidingTab  点击产生的水波纹效果 应该是可以显示图片的tab-->
+    <RelativeLayout
+        android:id="@+id/user_protocol_root"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tab_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/tab_item_icon"
+            android:layout_width="20dp"
+            android:layout_height="10dp"
+            android:layout_alignTop="@id/tab_item_title"
+            android:layout_marginLeft="-6dp"
+            android:layout_marginTop="-2dp"
+            android:layout_toRightOf="@id/tab_item_title" />
+    </RelativeLayout>
+
+
+</com.uibase.ui.ripple.RippleView>

@@ -5,10 +5,9 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
     android:gravity="center"
-    android:paddingTop="2dp">
-
+    android:paddingTop="2dp"
+    android:background="@drawable/bg_tab_click">
     <!--我的按钮 tab布局-->
-
     <ImageView
         android:id="@+id/iv_icon_tab"
         android:layout_width="wrap_content"

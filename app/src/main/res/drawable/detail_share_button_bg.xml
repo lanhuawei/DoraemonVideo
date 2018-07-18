@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!--video_list_hot_word_selected_item   详情页分享按钮背景-->
+
+    <stroke
+        android:width="1px"
+        android:color="#e5e5e5" />
+    <corners android:radius="4dp"/>
+
+    <solid android:color="@color/transparent" />
+
+
+</shape>

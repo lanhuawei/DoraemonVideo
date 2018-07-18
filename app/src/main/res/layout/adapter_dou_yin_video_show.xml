@@ -15,7 +15,7 @@
         app:placeholderImage="@color/color_white_text"
         app:placeholderImageScaleType="centerInside"/>
 
-    <com.lanhuawei.cn.doraemonvideo.common.customview.ShadowView
+    <com.lightsky.video.common.customview.ShadowView
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_alignBottom="@id/sdv_img"/>

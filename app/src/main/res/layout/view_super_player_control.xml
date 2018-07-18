@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tv.danmaku.ijk.media.support.PlayerController
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--QuickVideo SDK中的 PlayerView  view_super_player-->
+    <RelativeLayout
+        android:id="@+id/app_video_ctrl_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/view_super_player_center" />
+
+        <!--bottom 放大，进度条，全屏按钮等-->
+        <View
+            android:id="@+id/bottom_block"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"/>
+
+        <include
+            android:id="@+id/app_video_bottom_box"
+            layout="@layout/view_super_player_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_above="@id/bottom_block" />
+
+        <include layout="@layout/view_super_player_top" />
+
+    </RelativeLayout>
+
+    <!--加速-->
+    <RelativeLayout
+        android:id="@+id/change_play_rate_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
+        android:layout_marginLeft="7dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rl_fast">
+            <ImageView
+                android:id="@+id/change_play_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/change_play_rate_normal" />
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:id="@+id/change_play_rate_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/change_play_rate_icon" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/change_play_rate_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_fast"
+            android:layout_marginTop="2dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/change_play_rate"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+        <TextView
+            android:id="@+id/player_is_system"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/change_play_rate_tip"
+            android:layout_marginTop="2dp"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textColor="@color/themeColorRed"
+            android:visibility="gone"
+            android:textSize="10dp" />
+    </RelativeLayout>
+
+    <!--静音-->
+    <ImageView
+        android:id="@+id/app_video_mute_outer"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/mute_on_outer"
+        android:layout_marginLeft="7dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="7.5dp"
+        android:visibility="invisible"
+        />
+
+    <!--可调动的进度条消失之后，最底部的进度条展示-->
+    <ProgressBar
+        android:id="@+id/bottom_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:max="1000"
+        android:progress="0"
+        android:progressDrawable="@drawable/player_bottom_progressbar"
+        android:secondaryProgress="0"
+        android:visibility="gone" />
+
+
+</tv.danmaku.ijk.media.support.PlayerController>

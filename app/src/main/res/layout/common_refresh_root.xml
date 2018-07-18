@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+    <!--QuickVideo SDK中的 MultiTabDataLoadFragment   -->
+    <!--这个是展示每一个的item加载展示样式-->
+
+    <!--视频加载-->
+    <include
+        android:id="@+id/common_loading_home"
+        layout="@layout/common_loading_home_comtent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <include
+        android:id="@+id/common_loading"
+        layout="@layout/common_loading_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--无网络重试-->
+    <include
+        android:id="@+id/common_retry"
+        layout="@layout/common_retry"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <!--没有视频的空展示页-->
+    <include
+        android:id="@+id/common_no_content"
+        layout="@layout/common_no_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+</LinearLayout>

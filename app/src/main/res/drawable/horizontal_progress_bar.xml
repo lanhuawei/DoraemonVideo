@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--view_super_player_center 水平进度条-->
+    <!--快进快退的视屏控制view-->
+    <item android:id="@android:id/background">
+        <shape>
+            <corners android:radius="0dp" />
+
+            <solid android:color="#4cffffff" />
+        </shape>
+    </item>
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape>
+                <corners android:radius="0dp" />
+
+                <solid android:color="#ffffffff" />
+            </shape>
+        </clip>
+    </item>
+
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <corners android:radius="0dp" />
+
+                <solid android:color="#ffffff" />
+            </shape>
+        </clip>
+    </item>
+
+
+
+</layer-list>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="rectangle">
+    <!--查看详情  premovie_ad_item-->
+    <solid android:color="#E54292FF"/>
+    <corners android:radius="2dp" />
+
+</shape>

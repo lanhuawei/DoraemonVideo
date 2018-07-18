@@ -4,7 +4,7 @@ apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.lanhuawei.cn.doraemonvideo"
+        applicationId "com.lightsky.video"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -36,7 +36,7 @@ android {
 
     greendao{
         schemaVersion 1 //数据库版本号
-        daoPackage 'com.lanhuawei.cn.doraemonvideo.module.library.greendao.generator.db'// 设置DaoMaster、DaoSession、Dao 包名
+        daoPackage 'com.lightsky.video.module.library.greendao.generator.db'// 设置DaoMaster、DaoSession、Dao 包名
         targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
     }
 //    buildToolsVersion '27.0.3'
@@ -44,8 +44,8 @@ android {
 
 dependencies {
     /*防止出现重新开启app出现  Error:Execution failed for task ‘:app:preDebugAndroidTestBuild’.
-                Conflict with dependency ‘com.android.support:support-annotations’ in project ‘:app’.
-                Resolved versions for app (26.1.0) and test app (27.1.1) differ. */
+                        Conflict with dependency ‘com.android.support:support-annotations’ in project ‘:app’.
+                        Resolved versions for app (26.1.0) and test app (27.1.1) differ. */
     androidTestImplementation('com.android.support:support-annotations:26.1.0') {
         force = true
     }
@@ -69,30 +69,29 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
     implementation "com.android.support:design:$gradle.ext.supportLibraryVersion"
-
     //ButterKnife 黄油刀
     implementation('com.jakewharton:butterknife:8.4.0') {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-compat'
     }
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-
     /*ijk视频播放*/
     implementation "tv.danmaku.ijk.media:ijkplayer-java:$gradle.ext.ijkPlayerVersion"
     /*视频缓存*/
     implementation 'com.danikula:videocache:2.7.0'
-
     /*fresco ----facebook*/
     implementation 'com.facebook.fresco:fresco:1.7.1'
     implementation 'com.facebook.fresco:animated-webp:1.7.1'
     implementation 'com.facebook.fresco:webpsupport:1.7.1'
-    implementation 'com.facebook.soloader:soloader:0.3.0' //webp需要引用这个库  WebP（静态图+动图）加载使用
-
+    implementation 'com.facebook.soloader:soloader:0.3.0'
+    //webp需要引用这个库  WebP（静态图+动图）加载使用
     implementation 'com.android.support:multidex:1.0.3'
     /*eventbus*/
     implementation 'org.greenrobot:eventbus:3.1.1'
-
     /*Glide*/
     implementation 'com.github.bumptech.glide:glide:3.7.0'
-
+    /*日志输出 只在debug版本中输出，release版本不输出*/
+    debugImplementation 'com.apkfuns.logutils:library:1.5.1.1'
+    releaseImplementation 'com.apkfuns.logutils:logutils-no-op:1.5.1.1'
+    implementation files('libs/akad_4.2.3042_1019.jar')
 }
