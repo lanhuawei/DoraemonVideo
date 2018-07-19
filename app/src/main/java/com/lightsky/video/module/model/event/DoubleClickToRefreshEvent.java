@@ -5,10 +5,10 @@ package com.lightsky.video.module.model.event;
  * 双击刷新
  */
 
-public class DoubleClickToRefresh {
+public class DoubleClickToRefreshEvent {
     private boolean isDoubleClick;
 
-    public DoubleClickToRefresh(boolean isDoubleClick) {
+    public DoubleClickToRefreshEvent(boolean isDoubleClick) {
         this.isDoubleClick = isDoubleClick;
     }
 

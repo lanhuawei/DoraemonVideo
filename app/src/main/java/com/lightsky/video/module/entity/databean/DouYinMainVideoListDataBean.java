@@ -1,4 +1,4 @@
-package com.lightsky.video.module.bean.databean;
+package com.lightsky.video.module.entity.databean;
 
 import android.text.TextUtils;
 

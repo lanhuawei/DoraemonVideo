@@ -16,7 +16,7 @@ import com.apkfuns.logutils.LogUtils;
 import com.baidu.mobstat.StatService;
 import com.lightsky.video.R;
 import com.lightsky.video.common.Util.NetworkMainUtil;
-import com.lightsky.video.module.bean.EventEntity;
+import com.lightsky.video.module.entity.EventEntity;
 import com.lightsky.video.VideoHelper;
 import com.lightsky.video.datamanager.category.CategoryQueryNotify;
 import com.lightsky.video.sdk.CategoryInfoBase;
@@ -276,7 +276,6 @@ public class FollowingVideoFragment extends com.lightsky.video.module.base.BaseF
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         VideoHelper.get().unInit();
         isInit = false;
     }

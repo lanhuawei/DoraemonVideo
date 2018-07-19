@@ -16,17 +16,21 @@ import com.baidu.mobstat.StatService;
 import com.lightsky.video.R;
 import com.lightsky.video.common.Util.NetworkMainUtil;
 import com.lightsky.video.common.Util.statusbar.StatusBarFontHelper;
-import com.lightsky.video.common.Util.statusbar.statusbarcompat.StatusBarCompat;
 import com.lightsky.video.module.base.BaseFragment;
-import com.lightsky.video.module.bean.EventEntity;
+import com.lightsky.video.module.entity.EventEntity;
 import com.lightsky.video.VideoHelper;
 import com.lightsky.video.datamanager.category.CategoryQueryNotify;
+import com.lightsky.video.module.model.event.DiscoveryClickToRefreshEvent;
 import com.lightsky.video.sdk.CategoryInfoBase;
 import com.lightsky.video.sdk.VideoOption;
 import com.lightsky.video.sdk.VideoSwitcher;
 import com.lightsky.video.sdk.VideoTabFragement;
 import com.lightsky.video.sdk.VideoTypesLoader;
 import com.lightsky.video.widget.PagerSlidingTab;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,10 +71,12 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
 //            loadFrameLayout.showErrorView();
             return;
         }
-        initVideoType();
-//        videoTypesLoader = new VideoTypesLoader();
-//        videoTypesLoader.Init(this);
-//        initSdk();
+//        initVideoType();
+        videoTypesLoader = new VideoTypesLoader();
+        videoTypesLoader.Init(this);
+        initSdk();
+
+        EventBus.getDefault().register(this);
 
     }
 
@@ -115,7 +121,7 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
 //            @Override
 //            public void onClick(View view) {
 //                if (NetworkMainUtil.isNetworkActive(getActivity())) {
-//                    if (!NoDoubleClickUtil.isDoubleClick()) {
+//                    if (!NoDoubleClickUtil.isDoubleClickOne()) {
 //                        loadFrameLayout.showContentView();
 //                        initVideoType();
 //                    }
@@ -299,8 +305,8 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
     @Override
     protected void onViewReallyCreated(View view) {
         unbinder = ButterKnife.bind(this, view);
-//        StatService.onEvent(getActivity(), "discover", "发现");
-        StatService.onEvent(getActivity(), "music", "音乐");
+        StatService.onEvent(getActivity(), "discover", "发现");
+//        StatService.onEvent(getActivity(), "music", "音乐");
 
     }
 
@@ -328,5 +334,20 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
                 videoTabFragement.mViewPager.setCurrentItem(currentPos, false);
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void click(DiscoveryClickToRefreshEvent event) {
+        if (event.isClick()) {
+            int position = videoTabFragement.mViewPager.getCurrentItem();
+            videoTabFragement.onTabItemClickListener(event.getView(), position, position);
+        }
+
     }
 }

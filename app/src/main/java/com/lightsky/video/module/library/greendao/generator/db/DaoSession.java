@@ -8,7 +8,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.lightsky.video.module.bean.UserInfoBean;
+import com.lightsky.video.module.entity.UserInfoBean;
 
 import com.lightsky.video.module.library.greendao.generator.db.UserInfoBeanDao;
 

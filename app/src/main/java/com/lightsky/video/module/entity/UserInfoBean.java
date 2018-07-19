@@ -1,4 +1,4 @@
-package com.lightsky.video.module.bean;
+package com.lightsky.video.module.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

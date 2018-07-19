@@ -31,6 +31,7 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['src/main/assets']
         }
     }
 
@@ -81,10 +82,11 @@ dependencies {
     implementation 'com.danikula:videocache:2.7.0'
     /*fresco ----facebook*/
     implementation 'com.facebook.fresco:fresco:1.7.1'
+    //webp需要引用这个库  WebP（静态图+动图）加载使用
     implementation 'com.facebook.fresco:animated-webp:1.7.1'
     implementation 'com.facebook.fresco:webpsupport:1.7.1'
     implementation 'com.facebook.soloader:soloader:0.3.0'
-    //webp需要引用这个库  WebP（静态图+动图）加载使用
+
     implementation 'com.android.support:multidex:1.0.3'
     /*eventbus*/
     implementation 'org.greenrobot:eventbus:3.1.1'

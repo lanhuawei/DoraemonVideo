@@ -17,6 +17,7 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.lightsky.video.common.Util.CommonUtil;
 import com.lightsky.video.common.Util.KindsOfUtil;
 import com.lightsky.video.common.Util.SpUtil;
+import com.lightsky.video.common.Util.hookpms.ServiceManagerWraper;
 import com.lightsky.video.module.base.MainTabActivity;
 import com.ss.android.common.applog.GlobalContext;
 import com.ss.android.common.applog.UserInfo;
@@ -92,11 +93,11 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+//        ServiceManagerWraper.hookPMS(this.getApplicationContext());
         mMainThreadId = android.os.Process.myTid();
         mMainThread = Thread.currentThread();
         mMainThreadHandler = new Handler();
         mMainLooper = getMainLooper();
-//        initCrashHandler();
         SpUtil.init(this);
 
         //缓存起来防止每次网络请求都去拿
@@ -134,6 +135,7 @@ public class MyApplication extends Application {
         }
         UserInfo.setAppId(2);
         UserInfo.initUser("a3668f0afac72ca3f6c1697d29e0e1bb1fef4ab0285319b95ac39fa42c38d05f");
+//        initCrashHandler();
 
     }
 

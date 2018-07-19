@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.lightsky.video.R;
 import com.lightsky.video.common.mywidget.recyclerview.adapter.BaseRecyclerAdapter;
 import com.lightsky.video.common.mywidget.util.ViewInflate;
-import com.lightsky.video.module.bean.databean.MainVideoDataBean;
+import com.lightsky.video.module.entity.databean.MainVideoDataBean;
 import com.lightsky.video.module.view.holder.DouYinVideoShowHolder;
 
 

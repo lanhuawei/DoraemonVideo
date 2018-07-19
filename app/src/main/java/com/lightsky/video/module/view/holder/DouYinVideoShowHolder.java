@@ -19,7 +19,7 @@ import com.lightsky.video.common.Util.DensityUtil;
 import com.lightsky.video.common.Util.KindsOfUtil;
 import com.lightsky.video.common.mywidget.recyclerview.adapter.BaseRecyclerViewHolder;
 import com.lightsky.video.common.videoplayer.util.WindowUtil;
-import com.lightsky.video.module.bean.databean.MainVideoDataBean;
+import com.lightsky.video.module.entity.databean.MainVideoDataBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -28,8 +28,8 @@ import com.lightsky.video.common.okhttp.manager.OkHttpClientManager;
 import com.lightsky.video.common.videoplayer.player.IjkVideoView;
 import com.lightsky.video.common.videoplayer.player.PlayerConfig;
 import com.lightsky.video.module.base.BaseActivity;
-import com.lightsky.video.module.bean.databean.DouYinMainVideoListDataBean;
-import com.lightsky.video.module.bean.databean.MainVideoDataBean;
+import com.lightsky.video.module.entity.databean.DouYinMainVideoListDataBean;
+import com.lightsky.video.module.entity.databean.MainVideoDataBean;
 import com.lightsky.video.module.model.event.RefreshEvent;
 import com.lightsky.video.module.view.adapter.DouYinAdapter;
 

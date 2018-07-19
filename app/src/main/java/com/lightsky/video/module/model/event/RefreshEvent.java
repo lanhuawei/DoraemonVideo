@@ -1,6 +1,6 @@
 package com.lightsky.video.module.model.event;
 
-import com.lightsky.video.module.bean.databean.MainVideoDataBean;
+import com.lightsky.video.module.entity.databean.MainVideoDataBean;
 
 import java.util.List;
 

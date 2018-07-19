@@ -1,4 +1,4 @@
-package com.lightsky.video.module.bean;
+package com.lightsky.video.module.entity;
 
 /**
  * Created by Ivan.L on 2018/7/9.

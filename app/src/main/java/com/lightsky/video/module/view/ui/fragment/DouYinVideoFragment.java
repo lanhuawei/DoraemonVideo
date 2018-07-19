@@ -2,13 +2,15 @@ package com.lightsky.video.module.view.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.widget.TextView;
 
-import com.apkfuns.logutils.LogUtils;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.lightsky.video.MyApplication;
 
 import com.lightsky.video.R;
@@ -31,10 +33,10 @@ import com.lightsky.video.common.okhttp.manager.OkHttpClientManager;
 import com.lightsky.video.common.pulltorefresh.PtrFrameLayout;
 import com.lightsky.video.common.pulltorefresh.recyclerview.RecyclerAdapterWithHF;
 import com.lightsky.video.module.base.BaseFragment;
-import com.lightsky.video.module.bean.databean.HuoShanVideoListDataBean;
-import com.lightsky.video.module.bean.databean.MainVideoDataBean;
-import com.lightsky.video.module.bean.databean.DouYinMainVideoListDataBean;
-import com.lightsky.video.module.model.event.DoubleClickToRefresh;
+import com.lightsky.video.module.entity.databean.HuoShanVideoListDataBean;
+import com.lightsky.video.module.entity.databean.MainVideoDataBean;
+import com.lightsky.video.module.entity.databean.DouYinMainVideoListDataBean;
+import com.lightsky.video.module.model.event.DoubleClickToRefreshEvent;
 import com.lightsky.video.module.model.event.RefreshEvent;
 import com.lightsky.video.module.view.adapter.DouYinVideoShowAdapter;
 import com.lightsky.video.module.view.holder.DouYinVideoShowHolder;
@@ -112,7 +114,7 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
         retry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!NoDoubleClickUtil.isDoubleClick()) {
+                if (!NoDoubleClickUtil.isDoubleClickTry()) {
                     if (douYinDisable) {
                         getHuoShanListData();
                     } else {
@@ -366,8 +368,8 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void toRefresh(DoubleClickToRefresh doubleClickToRefresh) {
-        if (doubleClickToRefresh.isDoubleClick()) {
+    public void toRefresh(DoubleClickToRefreshEvent doubleClickToRefreshEvent) {
+        if (doubleClickToRefreshEvent.isDoubleClick()) {
             ptrRecyclerViewUIComponent.delayRefresh(100);
 //            adapterWithHF.notifyDataSetChanged();
             ptrRecyclerViewUIComponent.getRecyclerView().scrollToPosition(0);

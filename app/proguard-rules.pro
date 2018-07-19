@@ -217,3 +217,5 @@ public static final ** CREATOR;
 -keep class com.facebook.** { *; }
 
 
+#-keep class com.facebook.imagepipeline.gif.** { *; }
+#-keep class com.facebook.imagepipeline.webp.** { *; }
