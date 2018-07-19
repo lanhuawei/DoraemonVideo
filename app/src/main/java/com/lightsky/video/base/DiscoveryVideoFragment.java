@@ -198,7 +198,7 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
             return;
         }
 
-        tabFilter.add(mTabs.get("音乐"));
+        tabFilter.add(mTabs.get("推荐"));
         tabFilter.add(mTabs.get("社会"));
         tabFilter.add(mTabs.get("影视"));
         tabFilter.add(mTabs.get("生活"));

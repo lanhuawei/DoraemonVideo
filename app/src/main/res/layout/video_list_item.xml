@@ -43,7 +43,8 @@
             android:layout_gravity="center"
             app:placeholderImageScaleType="fitXY"
             app:roundAsCircle="true"
-            app:roundedCornerRadius="16dp" />
+            app:roundedCornerRadius="16dp"
+            />
 
         <ImageView
             android:id="@+id/imageV"
