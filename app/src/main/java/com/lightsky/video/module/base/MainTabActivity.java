@@ -62,7 +62,6 @@ public class MainTabActivity extends BaseActivity{
 
     @Override
     protected void initView() {
-
     }
 
     @Override
