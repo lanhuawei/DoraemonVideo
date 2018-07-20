@@ -24,6 +24,7 @@ import com.lightsky.video.common.videoplayer.player.VideoViewManager;
 import com.lightsky.video.module.model.event.DiscoveryClickToRefreshEvent;
 import com.lightsky.video.module.model.event.DoubleClickToRefreshEvent;
 import com.lightsky.video.module.view.ui.fragment.DouYinVideoFragment;
+import com.lightsky.video.module.view.ui.fragment.HotVideoFragment;
 import com.lightsky.video.module.view.ui.fragment.MineCenterFragment;
 import com.lightsky.video.VideoHelper;
 
@@ -41,9 +42,9 @@ public class MainTabActivity extends BaseActivity{
     private Context context;
     private static final String TAG = "--->MainTabActivity";
 
-    private final String TAB1 = "MAIN";
-    private final String TAB2 = "VIDEO";
-    private final String TAB3 = "FOLLOWING";
+    private final String TAB1 = "DOUYIN";
+    private final String TAB2 = "DISCOVER";
+    private final String TAB3 = "HOT";
     private final String TAB4 = "MINE";
 
     private long mExitTime;
@@ -74,13 +75,14 @@ public class MainTabActivity extends BaseActivity{
         tabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
         myThread = new MyThread();
 
-//        tabManager.addTab(
-//                mTabHost.newTabSpec(TAB2).setIndicator(createTabIndicatorView(R.layout.tab_hot)), HotVideoFragment.class, null);
 
         tabManager.addTab(
                 mTabHost.newTabSpec(TAB1).setIndicator(createTabIndicatorView(R.layout.tab_main)), DouYinVideoFragment.class, null);
         tabManager.addTab(
-                mTabHost.newTabSpec(TAB3).setIndicator(createTabIndicatorView(R.layout.tab_discover)), DiscoveryVideoFragment.class, null);
+                mTabHost.newTabSpec(TAB2).setIndicator(createTabIndicatorView(R.layout.tab_discover)), DiscoveryVideoFragment.class, null);
+
+        tabManager.addTab(
+                mTabHost.newTabSpec(TAB3).setIndicator(createTabIndicatorView(R.layout.tab_hot)), HotVideoFragment.class, null);
 
 //        tabManager.addTab(
 //                mTabHost.newTabSpec(TAB3).setIndicator(createTabIndicatorView(R.layout.tab_discover)), FollowingVideoFragment.class, null);
@@ -117,7 +119,7 @@ public class MainTabActivity extends BaseActivity{
 //                    setRefresh();
                 }
                 setRefresh();
-                tv_tab_name_douyin.setText("小视频");
+                tv_tab_name_douyin.setText("短视频");
                 tv_tab_name_douyin.setTextColor(Color.parseColor("#1296db"));
             }
         });
@@ -128,7 +130,7 @@ public class MainTabActivity extends BaseActivity{
                 mTabHost.setCurrentTab(1);
                 handler.removeCallbacks(myThread);
                 iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
-                tv_tab_name_douyin.setText("小视频");
+                tv_tab_name_douyin.setText("短视频");
                 tv_tab_name_douyin.setTextColor(Color.parseColor("#707070"));
                 isTabOneRefresh = false;
                 if (NoDoubleClickUtil.isDoubleClickTwo()) {
@@ -144,7 +146,7 @@ public class MainTabActivity extends BaseActivity{
                 mTabHost.setCurrentTab(2);
                 handler.removeCallbacks(myThread);
                 iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
-                tv_tab_name_douyin.setText("小视频");
+                tv_tab_name_douyin.setText("短视频");
                 tv_tab_name_douyin.setTextColor(R.drawable.bg_tab_text_color);
                 tv_tab_name_douyin.setTextColor(Color.parseColor("#707070"));
                 isTabOneRefresh = false;
