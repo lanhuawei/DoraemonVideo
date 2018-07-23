@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+    <!--仿抖音页面 全屏视频 可以上下滑动-->
+    <com.lightsky.video.common.customview.VerticalViewPager
+        android:id="@+id/verticalviewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="15dp"
+        android:paddingTop="50dp"
+        android:src="@drawable/icon_back"/>
+
+</RelativeLayout>

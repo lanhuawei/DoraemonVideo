@@ -41,6 +41,8 @@ import com.lightsky.video.module.model.event.RefreshEvent;
 import com.lightsky.video.module.view.adapter.DouYinVideoShowAdapter;
 import com.lightsky.video.module.view.holder.DouYinVideoShowHolder;
 import com.lightsky.video.module.view.ui.activity.VerticalVideoActivity;
+import com.lightsky.video.module.view.ui.activity.VerticalVideoMainActivity;
+import com.lightsky.video.module.view.ui.fragment.subfragment.VerticalVideoFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -323,10 +325,17 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
         if (ptrRecyclerViewUIComponent.isLoadingMore() || ptrRecyclerViewUIComponent.isRefreshing()) {
             return;
         }
-        Intent intent = new Intent(context, VerticalVideoActivity.class);
-        WeakDataHolderUtil.getInstance().saveData(VerticalVideoActivity.VIDEO_URL_LIST, mainVideoDataBeans);
-        intent.putExtra(VerticalVideoActivity.MAX_CURSOR, max_cursor);
-        intent.putExtra(VerticalVideoActivity.POSITION, position);
+//        Intent intent = new Intent(context, VerticalVideoActivity.class);
+//        WeakDataHolderUtil.getInstance().saveData(VerticalVideoActivity.VIDEO_URL_LIST, mainVideoDataBeans);
+//        intent.putExtra(VerticalVideoActivity.MAX_CURSOR, max_cursor);
+//        intent.putExtra(VerticalVideoActivity.POSITION, position);
+//        context.startActivity(intent);
+
+
+        Intent intent = new Intent(context, VerticalVideoMainActivity.class);
+        WeakDataHolderUtil.getInstance().saveData(VerticalVideoFragment.VIDEO_URL_LIST, mainVideoDataBeans);
+        intent.putExtra(VerticalVideoMainActivity.MAX_CURSOR, max_cursor);
+        intent.putExtra(VerticalVideoMainActivity.POSITION, position);
         context.startActivity(intent);
     }
 

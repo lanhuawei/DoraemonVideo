@@ -11,6 +11,7 @@ import com.lightsky.video.common.Util.ToastUtil;
 import com.lightsky.video.common.http.callback.BaseImpl;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -23,6 +24,7 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseActivity<PRESENTER extends BasePresenter> extends AppCompatActivity implements BaseImpl {
     private CompositeDisposable compositeDisposable;
     protected PRESENTER mPresenter;
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public abstract class BaseActivity<PRESENTER extends BasePresenter> extends AppC
         }
         setContentView(layoutResId());
         StatusBarCompat.translucentStatusBar(this, true);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         initView();
         initData();
 //        ToastUtil.showToast("" + getClass().getSimpleName());
@@ -72,6 +74,9 @@ public abstract class BaseActivity<PRESENTER extends BasePresenter> extends AppC
         }
         if (null != mPresenter) {
             mPresenter.detachView();
+        }
+        if (null != unbinder) {
+            unbinder.unbind();//解除绑定，官方文档只对fragment做了解绑
         }
     }
 

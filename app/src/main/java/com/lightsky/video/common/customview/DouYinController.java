@@ -12,6 +12,7 @@ import com.lightsky.video.R;
 import com.lightsky.video.common.Util.LogUtil;
 import com.lightsky.video.common.Util.ToastUtil;
 import com.lightsky.video.common.videoplayer.controller.BaseVideoController;
+import com.lightsky.video.common.videoplayer.listener.MediaPlayerControl;
 import com.lightsky.video.common.videoplayer.player.IjkVideoView;
 
 /**
@@ -108,5 +109,13 @@ public class DouYinController extends BaseVideoController {
 
     public void setSelect(boolean selected) {
         isSelected = selected;
+    }
+
+    public boolean getSelect() {
+        return isSelected;
+    }
+
+    public MediaPlayerControl getMideaPlayer() {
+        return mediaPlayer;
     }
 }

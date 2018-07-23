@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.lightsky.video.R;
 import com.lightsky.video.base.DiscoveryVideoFragment;
-import com.lightsky.video.base.FollowingVideoFragment;
 import com.lightsky.video.common.Util.LogUtil;
 import com.lightsky.video.common.Util.NoDoubleClickUtil;
 import com.lightsky.video.common.Util.statusbar.StatusBarFontHelper;
@@ -44,8 +43,9 @@ public class MainTabActivity extends BaseActivity{
 
     private final String TAB1 = "DOUYIN";
     private final String TAB2 = "DISCOVER";
-    private final String TAB3 = "HOT";
-    private final String TAB4 = "MINE";
+    private final String TAB3 = "POST";
+    private final String TAB4 = "HOT";
+    private final String TAB5 = "MINE";
 
     private long mExitTime;
     private Handler handler = new Handler();
@@ -54,6 +54,7 @@ public class MainTabActivity extends BaseActivity{
     private TextView tv_tab_name_douyin;
     private boolean isTabOneRefresh = false;
     private boolean isTabTwoRefresh = false;
+    private int currentTab = 0;
 
     @Override
     protected int layoutResId() {
@@ -80,13 +81,16 @@ public class MainTabActivity extends BaseActivity{
         tabManager.addTab(
                 mTabHost.newTabSpec(TAB2).setIndicator(createTabIndicatorView(R.layout.tab_discover)), DiscoveryVideoFragment.class, null);
 
+//        tabManager.addTab(
+//                mTabHost.newTabSpec(TAB3).setIndicator(createTabIndicatorView(R.layout.tab_post)), null, null);
+
         tabManager.addTab(
-                mTabHost.newTabSpec(TAB3).setIndicator(createTabIndicatorView(R.layout.tab_hot)), HotVideoFragment.class, null);
+                mTabHost.newTabSpec(TAB4).setIndicator(createTabIndicatorView(R.layout.tab_hot)), HotVideoFragment.class, null);
 
 //        tabManager.addTab(
-//                mTabHost.newTabSpec(TAB3).setIndicator(createTabIndicatorView(R.layout.tab_discover)), FollowingVideoFragment.class, null);
+//                mTabHost.newTabSpec(TAB4).setIndicator(createTabIndicatorView(R.layout.tab_discover)), FollowingVideoFragment.class, null);
         tabManager.addTab(
-                mTabHost.newTabSpec(TAB4).setIndicator(createTabIndicatorView(R.layout.tab_mine)), MineCenterFragment.class, null);
+                mTabHost.newTabSpec(TAB5).setIndicator(createTabIndicatorView(R.layout.tab_mine)), MineCenterFragment.class, null);
 
         View tabOne = mTabHost.getTabWidget().getChildTabViewAt(0);
         iv_icon_tab_douyin = (ImageView) tabOne.findViewById(R.id.iv_icon_tab);
@@ -100,10 +104,12 @@ public class MainTabActivity extends BaseActivity{
      * tab点击
      */
     private void tabClick() {
+//        短视频
         mTabHost.getTabWidget().getChildTabViewAt(0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mTabHost.setCurrentTab(0);
+                currentTab = 0;
                 if (isTabOneRefresh) {
                     EventBus.getDefault().post(new DoubleClickToRefreshEvent(true));
                     iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
@@ -122,11 +128,12 @@ public class MainTabActivity extends BaseActivity{
                 tv_tab_name_douyin.setTextColor(Color.parseColor("#1296db"));
             }
         });
-
+//        发现
         mTabHost.getTabWidget().getChildTabViewAt(1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mTabHost.setCurrentTab(1);
+                currentTab = 1;
                 handler.removeCallbacks(myThread);
                 iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
                 tv_tab_name_douyin.setText("短视频");
@@ -138,11 +145,27 @@ public class MainTabActivity extends BaseActivity{
 
             }
         });
-
+//        热门  没有发布按钮时的位置
         mTabHost.getTabWidget().getChildTabViewAt(2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                mTabHost.setCurrentTab(currentTab);
                 mTabHost.setCurrentTab(2);
+                handler.removeCallbacks(myThread);
+                iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
+                tv_tab_name_douyin.setText("短视频");
+                tv_tab_name_douyin.setTextColor(R.drawable.bg_tab_text_color);
+                tv_tab_name_douyin.setTextColor(Color.parseColor("#707070"));
+                isTabOneRefresh = false;
+
+            }
+        });
+//        我的
+        mTabHost.getTabWidget().getChildTabViewAt(3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mTabHost.setCurrentTab(3);
+                currentTab = 3;
                 handler.removeCallbacks(myThread);
                 iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
                 tv_tab_name_douyin.setText("短视频");
@@ -151,6 +174,20 @@ public class MainTabActivity extends BaseActivity{
                 isTabOneRefresh = false;
             }
         });
+
+//        mTabHost.getTabWidget().getChildTabViewAt(4).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mTabHost.setCurrentTab(4);
+//                currentTab = 4;
+//                handler.removeCallbacks(myThread);
+//                iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
+//                tv_tab_name_douyin.setText("短视频");
+//                tv_tab_name_douyin.setTextColor(R.drawable.bg_tab_text_color);
+//                tv_tab_name_douyin.setTextColor(Color.parseColor("#707070"));
+//                isTabOneRefresh = false;
+//            }
+//        });
     }
 
     private void setRefresh() {

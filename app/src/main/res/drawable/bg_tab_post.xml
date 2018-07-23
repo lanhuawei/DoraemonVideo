@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--post点击按下弹起显示-->
+    <item android:drawable="@drawable/icon_tab_post" android:state_selected="true" />
+    <item android:drawable="@drawable/icon_tab_post" android:state_focused="true" />
+    <item android:drawable="@drawable/icon_tab_post"  />
+</selector>
