@@ -19,6 +19,9 @@ public class HotVideoFragment extends BaseFragment {
 
     }
 
+
+
+
     @Override
     protected void initData() {
 
