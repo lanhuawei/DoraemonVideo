@@ -49,6 +49,9 @@ public abstract class BaseFragment<PRESENTER extends BasePresenter> extends Frag
                 parent.removeView(rootView);
             }
         }
+
+
+
         return rootView;
     }
 
