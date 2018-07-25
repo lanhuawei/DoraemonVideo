@@ -8,18 +8,24 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.apkfuns.logutils.LogUtils;
 import com.baidu.mobstat.StatService;
 import com.lightsky.video.R;
+import com.lightsky.video.VideoHelper;
 import com.lightsky.video.common.Util.NetworkMainUtil;
+import com.lightsky.video.common.Util.NoDoubleClickUtil;
+import com.lightsky.video.common.Util.ToastUtil;
 import com.lightsky.video.common.Util.statusbar.StatusBarFontHelper;
+import com.lightsky.video.common.customview.LoadFrameLayout;
+import com.lightsky.video.datamanager.category.CategoryQueryNotify;
 import com.lightsky.video.module.base.BaseFragment;
 import com.lightsky.video.module.entity.EventEntity;
-import com.lightsky.video.VideoHelper;
-import com.lightsky.video.datamanager.category.CategoryQueryNotify;
 import com.lightsky.video.module.model.event.DiscoveryClickToRefreshEvent;
 import com.lightsky.video.sdk.CategoryInfoBase;
 import com.lightsky.video.sdk.VideoOption;
@@ -37,7 +43,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by Ivan.L on 2018/7/10.
@@ -47,6 +55,9 @@ import butterknife.ButterKnife;
 
 public class DiscoveryVideoFragment extends BaseFragment implements CategoryQueryNotify {
 
+    @BindView(R.id.load_frameLayout)
+    LoadFrameLayout loadFrameLayout;
+//    Unbinder unbinder;
     private VideoTypesLoader videoTypesLoader;
     private Map<String, Integer> mTabs = new HashMap<>();
     private List<CategoryInfoBase> mTabInfos = new ArrayList<>();
@@ -58,6 +69,7 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
     PagerSlidingTab pagerSlidingTab;
     private boolean isInit = false;
     int currentPos;
+    private TextView retry;
 
     @Override
     protected int layoutResId() {
@@ -67,16 +79,13 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         if (!NetworkMainUtil.isNetworkActive(getActivity())) {
-//            loadFrameLayout.showErrorView();
+            ToastUtil.showToast("网络连接失败");
             return;
         }
-//        initVideoType();
-        videoTypesLoader = new VideoTypesLoader();
-        videoTypesLoader.Init(this);
-        initSdk();
+        initVideoType();
 
-        EventBus.getDefault().register(this);
 
     }
 
@@ -98,10 +107,6 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
         setting.UseLogCatLog = false;
         setting.UseShareLayout = false;
         VideoOption option = new VideoOption();
-
-//        VideoHelper.get().Init(getActivity(), setting, option);
-//        videoTypesLoader.loadData();
-
         InitVideoHelper(setting, option);
     }
 
@@ -112,25 +117,25 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
 
     @Override
     protected void initView() {
-//        retry = loadFrameLayout.findViewById(R.id.tv_retry);
+        retry = loadFrameLayout.findViewById(R.id.tv_retry);
     }
 
     @Override
     protected void initData() {
-//        retry.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (NetworkMainUtil.isNetworkActive(getActivity())) {
-//                    if (!NoDoubleClickUtil.isDoubleClickOne()) {
-//                        loadFrameLayout.showContentView();
-//                        initVideoType();
-//                    }
-//                } else {
-//                    loadFrameLayout.showErrorView();
-//                }
-//
-//            }
-//        });
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (NetworkMainUtil.isNetworkActive(getActivity())) {
+                    if (!NoDoubleClickUtil.isDoubleClickOne()) {
+                        initVideoType();
+                    }
+                } else {
+                    ToastUtil.showToast("网络连接失败");
+                    loadFrameLayout.showErrorView();
+                }
+
+            }
+        });
 
 
     }
@@ -155,7 +160,7 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
      * 影视 -> 8
      * 社会 -> 3
      * 推荐 -> 0
-     *
+     * <p>
      * * 查询频道列表
      * 娱乐 -> 1
      * 生活 -> 18
@@ -169,7 +174,7 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
      * 社会 -> 3
      * 推荐 -> 0
      * 萌宠 -> 111
-     *
+     * <p>
      * 健康 -> 110
      * 美食 -> 113
      * 时尚 -> 112
@@ -186,11 +191,13 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
      * 军事 -> 19
      * 社会 -> 3
      * 广场舞 -> 127
-     *
+     * <p>
      * 类别查询完成
      */
     @Override
     public void onCategoryQueryFinish(boolean b, List<CategoryInfoBase> list) {
+
+        loadFrameLayout.showContentView();
         LogUtils.e("onCategoryQueryFinish");
         LogUtils.e(isInit);
         mTabs.clear();
@@ -219,7 +226,7 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
         videoTabFragement = new VideoTabFragement();
         if (isAdded()) {
             if (!NetworkMainUtil.isNetworkActive(getActivity())) {
-//                loadFrameLayout.showErrorView();
+                loadFrameLayout.showErrorView();
                 return;
             }
             showVideoFragment(videoTabFragement);
@@ -308,6 +315,9 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
         StatService.onEvent(getActivity(), "discover", "发现");
 //        StatService.onEvent(getActivity(), "music", "音乐");
 
+        if (!NetworkMainUtil.isNetworkActive(getActivity())) {
+            loadFrameLayout.showErrorView();
+        }
     }
 
     @Override
@@ -315,6 +325,7 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
         super.onDestroyView();
         VideoHelper.get().unInit();
         isInit = false;
+        unbinder.unbind();
     }
 
     @Override
@@ -350,4 +361,5 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
         }
 
     }
+
 }

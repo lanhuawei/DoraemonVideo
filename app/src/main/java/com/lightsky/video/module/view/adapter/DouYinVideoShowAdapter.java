@@ -25,4 +25,10 @@ public class DouYinVideoShowAdapter extends BaseRecyclerAdapter<MainVideoDataBea
     public DouYinVideoShowHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new DouYinVideoShowHolder(ViewInflate.inflateLayout(getContext(), R.layout.adapter_dou_yin_video_show, parent, false));
     }
+
+
+
+
+
+
 }

@@ -61,6 +61,11 @@
     <color name="common_blue2">#00a0e9</color>
 
     <color name="color_FF21272B">#FF21272B</color>
+    <color name="home_tab_normal_color">#5D646E</color>
+    <color name="home_tab_selected_color">#212832</color>
+    <color name="color_5D646E">#5D646E</color>
+    <color name="color_212832">#212832</color>
+
 
 
 

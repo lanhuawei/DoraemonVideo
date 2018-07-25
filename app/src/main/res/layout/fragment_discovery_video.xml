@@ -6,19 +6,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true">
 
-    <!--<com.lightsky.video.commonmmon.customview.LoadFrameLayout&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/load_frameLayout"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;app:errorView="@layout/layout_error">&ndash;&gt;-->
-
-       <!--&lt;!&ndash;&ndash;&gt;-->
-    <!--<!com.lightsky.video.commonmmon.customview.LoadFrameLayout>&ndash;&gt;-->
-
-    <FrameLayout
-        android:id="@+id/main_video_frame_layout"
+    <com.lightsky.video.common.customview.LoadFrameLayout
+        android:id="@+id/load_frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:errorView="@layout/layout_error">
+
+        <FrameLayout
+            android:id="@+id/main_video_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.lightsky.video.common.customview.LoadFrameLayout>
+
+
 
 
 

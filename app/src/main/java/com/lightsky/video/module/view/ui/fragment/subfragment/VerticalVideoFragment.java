@@ -260,7 +260,6 @@ public class VerticalVideoFragment extends BaseFragment {
      */
     @Override
     protected void onViewReallyCreated(View view) {
-        super.onViewReallyCreated(view);
         unbinder = ButterKnife.bind(this, view);
     }
 
@@ -296,7 +295,7 @@ public class VerticalVideoFragment extends BaseFragment {
     }
 
 //    /**
-//     * 使用add hide() show()方法切换fragment  不会走任何的生命周期 无法通过生命周期进行刷新
+//     * 使用add hide() show()方法切换fragment  不会走任何的生命周期 无法通过生命周期进行刷新，只能通过这个刷新
 //     * @param hidden
 //     */
 //    @Override

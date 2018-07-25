@@ -24,8 +24,7 @@ public abstract class BaseFragment<PRESENTER extends BasePresenter> extends Frag
     protected abstract int layoutResId();
     protected abstract void initView();
     protected abstract void initData();
-    protected void onViewReallyCreated(View view) {
-    }
+    protected abstract void onViewReallyCreated(View view);
 
     private View rootView;
 

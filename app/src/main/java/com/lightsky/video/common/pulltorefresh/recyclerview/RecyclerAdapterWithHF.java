@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Created by Ivan.L on 2018/7/3.
- *
+ * 可回收的RecyclerAdapter
  */
 
 public class RecyclerAdapterWithHF extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

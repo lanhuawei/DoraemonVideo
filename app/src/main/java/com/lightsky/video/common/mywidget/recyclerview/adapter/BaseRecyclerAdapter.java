@@ -3,6 +3,7 @@ package com.lightsky.video.common.mywidget.recyclerview.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -196,4 +197,5 @@ public abstract class BaseRecyclerAdapter<DATA, VH extends BaseRecyclerViewHolde
     public interface OnItemClickListener<VH> {
         void onItemClick(int position);
     }
+
 }

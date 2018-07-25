@@ -1,5 +1,7 @@
 package com.lightsky.video.module.view.ui.fragment;
 
+import android.view.View;
+
 import com.lightsky.video.R;
 import com.lightsky.video.module.base.BaseFragment;
 
@@ -21,6 +23,11 @@ public class MineCenterFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected void onViewReallyCreated(View view) {
 
     }
 }
