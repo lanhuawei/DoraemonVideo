@@ -134,11 +134,7 @@ public class MainTabActivity extends BaseActivity{
             public void onClick(View view) {
                 mTabHost.setCurrentTab(1);
                 currentTab = 1;
-                handler.removeCallbacks(myThread);
-                iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
-                tv_tab_name_douyin.setText("短视频");
-                tv_tab_name_douyin.setTextColor(Color.parseColor("#707070"));
-                isTabOneRefresh = false;
+                setOneTab();
                 if (NoDoubleClickUtil.isDoubleClickTwo()) {
                     EventBus.getDefault().post(new DiscoveryClickToRefreshEvent(true, view));
                 }
@@ -151,12 +147,7 @@ public class MainTabActivity extends BaseActivity{
             public void onClick(View view) {
 //                mTabHost.setCurrentTab(currentTab);
                 mTabHost.setCurrentTab(2);
-                handler.removeCallbacks(myThread);
-                iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
-                tv_tab_name_douyin.setText("短视频");
-                tv_tab_name_douyin.setTextColor(R.drawable.bg_tab_text_color);
-                tv_tab_name_douyin.setTextColor(Color.parseColor("#707070"));
-                isTabOneRefresh = false;
+                setOneTab();
 
             }
         });
@@ -166,12 +157,7 @@ public class MainTabActivity extends BaseActivity{
             public void onClick(View view) {
                 mTabHost.setCurrentTab(3);
                 currentTab = 3;
-                handler.removeCallbacks(myThread);
-                iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
-                tv_tab_name_douyin.setText("短视频");
-                tv_tab_name_douyin.setTextColor(R.drawable.bg_tab_text_color);
-                tv_tab_name_douyin.setTextColor(Color.parseColor("#707070"));
-                isTabOneRefresh = false;
+                setOneTab();
             }
         });
 
@@ -190,12 +176,30 @@ public class MainTabActivity extends BaseActivity{
 //        });
     }
 
+    /**
+     * 设置刷新
+     */
     private void setRefresh() {
         if (tabManager.getCurrentTab() == 0 && !isTabOneRefresh) {
             handler.postDelayed(myThread, 1000 * 60 * 5);
 //            handler.postDelayed(myThread, 5000 );
         }
     }
+
+    /**
+     * 设置第一个tab
+     */
+    private void setOneTab() {
+        handler.removeCallbacks(myThread);
+        iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
+        tv_tab_name_douyin.setText("短视频");
+//        tv_tab_name_douyin.setTextColor(R.drawable.bg_tab_text_color);
+        tv_tab_name_douyin.setTextColor(Color.parseColor("#707070"));
+        isTabOneRefresh = false;
+    }
+
+
+
 
 
     /**
