@@ -37,6 +37,8 @@ public abstract class BaseLoadFragment extends Fragment {
         if (getUserVisibleHint()) {
             loadData(false);
         }
+
+
     }
 
     @Override
