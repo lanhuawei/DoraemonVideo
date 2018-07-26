@@ -69,8 +69,6 @@ public abstract class BaseLoadFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         this.isVisible = isVisibleToUser;
         loadData(false);
-
-
     }
 
     /**
@@ -99,6 +97,9 @@ public abstract class BaseLoadFragment extends Fragment {
      */
     protected void fragmentInvisible() {
     }
+
+
+
 
 
     @Override
