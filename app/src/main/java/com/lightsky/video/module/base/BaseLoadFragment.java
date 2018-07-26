@@ -37,14 +37,13 @@ public abstract class BaseLoadFragment extends Fragment {
         if (getUserVisibleHint()) {
             loadData(false);
         }
-
-
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = (BaseActivity) getActivity();
+
     }
 
     @Nullable
@@ -70,6 +69,8 @@ public abstract class BaseLoadFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         this.isVisible = isVisibleToUser;
         loadData(false);
+
+
     }
 
     /**
