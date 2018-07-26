@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.lightsky.video.R;
-import com.lightsky.video.module.base.BaseFragment;
 import com.lightsky.video.module.base.BaseLoadFragment;
 
 import java.nio.Buffer;
@@ -33,6 +32,14 @@ public class HotVideoItemFragment extends BaseLoadFragment {
     }
     @Override
     protected void initView() {
+
+    }
+
+    /**
+     * 页面第一次加载
+     */
+    @Override
+    protected void lazyLoad() {
 
     }
 
