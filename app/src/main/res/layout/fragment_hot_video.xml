@@ -17,7 +17,7 @@
             app:tl_indicator_color="@color/color_1296db"
             app:tl_indicator_corner_radius="50dp"
             app:tl_indicator_height="4dp"
-            app:tl_indicator_width="12dp"
+            app:tl_indicator_width="18dp"
             app:tl_tab_padding="15dp"
             app:tl_tab_space_equal="false"
             app:tl_textSelectColor="@color/color_212832"

@@ -275,6 +275,7 @@ public class VerticalVideoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarCompat.translucentStatusBar(this, true);
     }
 
     @Override

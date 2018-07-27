@@ -2,6 +2,7 @@ package com.lightsky.video.module.view.ui.fragment.subfragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.lightsky.video.common.Util.KindsOfUtil;
 import com.lightsky.video.common.Util.ToastUtil;
 import com.lightsky.video.common.Util.WeakDataHolderUtil;
 import com.lightsky.video.common.Util.httputil.DouyinUtil;
+import com.lightsky.video.common.Util.statusbar.StatusBarFontHelper;
+import com.lightsky.video.common.Util.statusbar.statusbarcompat.StatusBarCompat;
 import com.lightsky.video.common.customview.CircleImageView;
 import com.lightsky.video.common.customview.DouYinController;
 import com.lightsky.video.common.customview.TextImageView;
@@ -85,6 +88,11 @@ public class VerticalVideoFragment extends BaseFragment {
     @Override
     protected int layoutResId() {
         return R.layout.fragment_vertical_video;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -329,6 +337,10 @@ public class VerticalVideoFragment extends BaseFragment {
             if (douYinController != null) {
                 douYinController.setSelect(false);
             }
+            if (getActivity() != null) {
+                StatusBarCompat.translucentStatusBar(getActivity(), true);
+            }
+
         } else {
             if (ijkVideoView != null) {
                 ijkVideoView.pause();
@@ -336,6 +348,11 @@ public class VerticalVideoFragment extends BaseFragment {
             if (douYinController != null) {
                 douYinController.getIv_play().setVisibility(View.GONE);
             }
+            if (getActivity() != null) {
+                StatusBarCompat.setStatusBarColor(getActivity(), 0xfffffff);
+                StatusBarFontHelper.setStatusBarMode(getActivity(), true);
+            }
+
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.lightsky.video.module.view.ui.fragment.subfragment;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.lightsky.video.R;
@@ -21,9 +23,17 @@ public class UserCenterFragment extends BaseFragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    @Override
     protected void initData() {
 
     }
+
+
 
     @Override
     protected void onViewReallyCreated(View view) {

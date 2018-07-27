@@ -93,14 +93,11 @@ public abstract class BaseLoadFragment extends Fragment {
     protected abstract void lazyLoad();
 
     /**
-     * 碎片不可见时候调用
+     * Fragment不可见时候调用
+     * 可调用可不调用
      */
     protected void fragmentInvisible() {
     }
-
-
-
-
 
     @Override
     public void onDestroyView() {

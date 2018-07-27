@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TabHost;
@@ -76,6 +77,7 @@ public class TabManager implements TabHost.OnTabChangeListener {
             fragmentTransaction.hide(tabInfo.fragment);
             fragmentTransaction.commitAllowingStateLoss();
         }
+//        ViewCompat.requestApplyInsets(fragmentActivity.findViewById(mContainerId));
         tabInfoHashMap.put(tag, tabInfo);
         tabHost.addTab(tabSpec);
     }
@@ -106,29 +108,29 @@ public class TabManager implements TabHost.OnTabChangeListener {
                 }
             }
 
-//            /**
-//             * 没有中间post
-//             */
-//            if (newTab != null) {
-//                if (newTab.fragment == null) {
-//                    newTab.fragment = Fragment.instantiate(fragmentActivity, newTab.aClass.getName(), newTab.args);
-//                    ft.add(mContainerId, newTab.fragment, newTab.tag);
-//                } else {
-//                    ft.show(newTab.fragment);
-//                }
-//            }
-
+            /**
+             * 没有中间post
+             */
             if (newTab != null) {
-                if (newTab.fragment == null && newTab.aClass != null) {
+                if (newTab.fragment == null) {
                     newTab.fragment = Fragment.instantiate(fragmentActivity, newTab.aClass.getName(), newTab.args);
                     ft.add(mContainerId, newTab.fragment, newTab.tag);
                 } else {
-                    if (newTab.aClass != null) {
-                        ft.show(newTab.fragment);
-                    }
-
+                    ft.show(newTab.fragment);
                 }
             }
+
+//            if (newTab != null) {
+//                if (newTab.fragment == null && newTab.aClass != null) {
+//                    newTab.fragment = Fragment.instantiate(fragmentActivity, newTab.aClass.getName(), newTab.args);
+//                    ft.add(mContainerId, newTab.fragment, newTab.tag);
+//                } else {
+//                    if (newTab.aClass != null) {
+//                        ft.show(newTab.fragment);
+//                    }
+//
+//                }
+//            }
 
             mlastTab = newTab;
             ft.commitAllowingStateLoss();

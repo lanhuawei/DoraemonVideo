@@ -2,9 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:fitsSystemWindows="true">
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.lightsky.video.common.customview.LoadFrameLayout
         android:id="@+id/load_frameLayout"
@@ -16,11 +15,6 @@
             android:id="@+id/main_video_frame_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
     </com.lightsky.video.common.customview.LoadFrameLayout>
-
-
-
-
 
 </LinearLayout>

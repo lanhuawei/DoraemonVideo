@@ -2,13 +2,13 @@ package com.lightsky.video.module.model.event;
 
 /**
  * Created by Ivan.L on 2018/7/9.
- * 双击刷新
+ * 点击刷新
  */
 
-public class DoubleClickToRefreshEvent {
+public class ClickToRefreshEvent {
     private boolean isDoubleClick;
 
-    public DoubleClickToRefreshEvent(boolean isDoubleClick) {
+    public ClickToRefreshEvent(boolean isDoubleClick) {
         this.isDoubleClick = isDoubleClick;
     }
 

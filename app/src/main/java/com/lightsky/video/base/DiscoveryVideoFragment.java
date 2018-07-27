@@ -1,12 +1,14 @@
 package com.lightsky.video.base;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.lightsky.video.common.Util.NetworkMainUtil;
 import com.lightsky.video.common.Util.NoDoubleClickUtil;
 import com.lightsky.video.common.Util.ToastUtil;
 import com.lightsky.video.common.Util.statusbar.StatusBarFontHelper;
+import com.lightsky.video.common.Util.statusbar.statusbarcompat.StatusBarCompat;
 import com.lightsky.video.common.customview.LoadFrameLayout;
 import com.lightsky.video.datamanager.category.CategoryQueryNotify;
 import com.lightsky.video.module.base.BaseFragment;
@@ -143,8 +146,6 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        int result = StatusBarFontHelper.setStatusBarMode(getActivity(), true);
-        StatusBarFontHelper.setLightMode(getActivity(), result);
     }
 
     /**
@@ -288,7 +289,7 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
      * 和搜索点击
      */
     private void onStatistics() {
-        videoTabFragement.mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        videoTabFragement.mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 try {
@@ -313,11 +314,10 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
     protected void onViewReallyCreated(View view) {
         unbinder = ButterKnife.bind(this, view);
         StatService.onEvent(getActivity(), "discover", "发现");
-//        StatService.onEvent(getActivity(), "music", "音乐");
-
         if (!NetworkMainUtil.isNetworkActive(getActivity())) {
             loadFrameLayout.showErrorView();
         }
+        view.setFitsSystemWindows(true);
     }
 
     @Override
@@ -340,11 +340,22 @@ public class DiscoveryVideoFragment extends BaseFragment implements CategoryQuer
                     videoTabFragement.mViewPager.setCurrentItem(0);
                 }
             }
+            rootView.setFitsSystemWindows(false);
+
         } else {
             if (videoTabFragement != null && videoTabFragement.mViewPager != null) {
                 videoTabFragement.mViewPager.setCurrentItem(currentPos, false);
             }
+            rootView.setFitsSystemWindows(true);
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            rootView.requestApplyInsets();
+        } else {
+            ViewCompat.requestApplyInsets(rootView);
+        }
+
+
+
     }
 
     @Override

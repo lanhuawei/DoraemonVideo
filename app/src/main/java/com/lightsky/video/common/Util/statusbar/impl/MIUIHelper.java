@@ -40,7 +40,9 @@ public class MIUIHelper implements IStatusBarFontHelper {
                 result = true;
                 /*这个地方要注意*/
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    //开发版 7.7.13 及以后版本采用了系统API，旧方法无效但不会报错，所以两个方式都要加上
+                    //开发版 7.7.13 及以后版本采用了系统API，旧方法无效但不会报错，所以两个方式都要加上 设置状态栏黑色字体。但是
+//                    但是这个方法出现会导致  DouYinVideoFragment中的StatusBarFontHelper.setStatusBarMode(getActivity(), true);
+//                    出现没有适配状态栏高度，因此我才用view.setFitsSystemWindows(true);这个方法适应状态栏高度
                     if (isFontColorDark) {
                         activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                     } else {

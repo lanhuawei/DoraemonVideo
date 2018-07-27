@@ -21,7 +21,7 @@ import com.lightsky.video.common.Util.ToastUtil;
 import com.lightsky.video.common.manager.TabManager;
 import com.lightsky.video.common.videoplayer.player.VideoViewManager;
 import com.lightsky.video.module.model.event.DiscoveryClickToRefreshEvent;
-import com.lightsky.video.module.model.event.DoubleClickToRefreshEvent;
+import com.lightsky.video.module.model.event.ClickToRefreshEvent;
 import com.lightsky.video.module.view.ui.fragment.DouYinVideoFragment;
 import com.lightsky.video.module.view.ui.fragment.HotVideoFragment;
 import com.lightsky.video.module.view.ui.fragment.MineCenterFragment;
@@ -52,8 +52,8 @@ public class MainTabActivity extends BaseActivity{
     private MyThread myThread;
     private ImageView iv_icon_tab_douyin;
     private TextView tv_tab_name_douyin;
-    private boolean isTabOneRefresh = false;
-    private boolean isTabTwoRefresh = false;
+    //    更换图标的单击刷新，弃用
+//    private boolean isTabOneRefresh = false;
     private int currentTab = 0;
 
     @Override
@@ -75,11 +75,13 @@ public class MainTabActivity extends BaseActivity{
         tabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
         myThread = new MyThread();
 
-
         tabManager.addTab(
                 mTabHost.newTabSpec(TAB1).setIndicator(createTabIndicatorView(R.layout.tab_main)), DouYinVideoFragment.class, null);
         tabManager.addTab(
                 mTabHost.newTabSpec(TAB2).setIndicator(createTabIndicatorView(R.layout.tab_discover)), DiscoveryVideoFragment.class, null);
+
+//        tabManager.addTab(
+//                mTabHost.newTabSpec(TAB2).setIndicator(createTabIndicatorView(R.layout.tab_discover)), FollowingVideoFragment.class, null);
 
 //        tabManager.addTab(
 //                mTabHost.newTabSpec(TAB3).setIndicator(createTabIndicatorView(R.layout.tab_post)), null, null);
@@ -109,23 +111,32 @@ public class MainTabActivity extends BaseActivity{
             @Override
             public void onClick(View view) {
                 mTabHost.setCurrentTab(0);
-                currentTab = 0;
-                if (isTabOneRefresh) {
-                    EventBus.getDefault().post(new DoubleClickToRefreshEvent(true));
-                    iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
-                    isTabOneRefresh = false;
-//                    setRefresh();
-                } else {
-                    if (NoDoubleClickUtil.isDoubleClickOne()) {
-                        EventBus.getDefault().post(new DoubleClickToRefreshEvent(true));
+
+//                更换完图片的单机刷新和原始短视频的双击刷新
+//                if (isTabOneRefresh) {
+//                    EventBus.getDefault().post(new ClickToRefreshEvent(true));
+//                    iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
+//                    isTabOneRefresh = false;
+////                    setRefresh();
+//                } else {
+//                    if (NoDoubleClickUtil.isDoubleClickOne()) {
+//                        EventBus.getDefault().post(new ClickToRefreshEvent(true));
+//                    }
+//                    handler.removeCallbacks(myThread);
+//                    isTabOneRefresh = false;
+////                    setRefresh();
+//                }
+                if (currentTab == 0) {
+                    if (!NoDoubleClickUtil.isDoubleClickOne()) {
+                        EventBus.getDefault().post(new ClickToRefreshEvent(true));
                     }
                     handler.removeCallbacks(myThread);
-                    isTabOneRefresh = false;
-//                    setRefresh();
                 }
                 setRefresh();
+                iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video));
                 tv_tab_name_douyin.setText("短视频");
                 tv_tab_name_douyin.setTextColor(Color.parseColor("#1296db"));
+                currentTab = 0;
             }
         });
 //        发现
@@ -133,11 +144,13 @@ public class MainTabActivity extends BaseActivity{
             @Override
             public void onClick(View view) {
                 mTabHost.setCurrentTab(1);
-                currentTab = 1;
                 setOneTab();
-                if (NoDoubleClickUtil.isDoubleClickTwo()) {
-                    EventBus.getDefault().post(new DiscoveryClickToRefreshEvent(true, view));
+                if (currentTab == 1) {
+                    if (!NoDoubleClickUtil.isDoubleClickTwo()) {
+                        EventBus.getDefault().post(new DiscoveryClickToRefreshEvent(true, view));
+                    }
                 }
+                currentTab = 1;
 
             }
         });
@@ -146,9 +159,10 @@ public class MainTabActivity extends BaseActivity{
             @Override
             public void onClick(View view) {
 //                mTabHost.setCurrentTab(currentTab);
+
                 mTabHost.setCurrentTab(2);
                 setOneTab();
-
+                currentTab = 2;
             }
         });
 //        我的
@@ -156,8 +170,9 @@ public class MainTabActivity extends BaseActivity{
             @Override
             public void onClick(View view) {
                 mTabHost.setCurrentTab(3);
-                currentTab = 3;
+
                 setOneTab();
+                currentTab = 3;
             }
         });
 
@@ -180,9 +195,9 @@ public class MainTabActivity extends BaseActivity{
      * 设置刷新
      */
     private void setRefresh() {
-        if (tabManager.getCurrentTab() == 0 && !isTabOneRefresh) {
-            handler.postDelayed(myThread, 1000 * 60 * 2);
-//            handler.postDelayed(myThread, 5000 );
+        if (tabManager.getCurrentTab() == 0 ) {//&& !isTabOneRefresh
+//            handler.postDelayed(myThread, 1000 * 60 * 2);
+            handler.postDelayed(myThread, 5000 );
         }
     }
 
@@ -195,7 +210,7 @@ public class MainTabActivity extends BaseActivity{
         tv_tab_name_douyin.setText("短视频");
 //        tv_tab_name_douyin.setTextColor(R.drawable.bg_tab_text_color);
         tv_tab_name_douyin.setTextColor(Color.parseColor("#707070"));
-        isTabOneRefresh = false;
+//        isTabOneRefresh = false;
     }
 
 
@@ -208,7 +223,7 @@ public class MainTabActivity extends BaseActivity{
     private class MyThread implements Runnable {
         @Override
         public void run() {
-            isTabOneRefresh = true;
+//            isTabOneRefresh = true;
             iv_icon_tab_douyin.setImageDrawable(getResources().getDrawable(R.drawable.bg_tab_small_video_refresh));
             tv_tab_name_douyin.setText("刷新");
             tv_tab_name_douyin.setTextColor(Color.parseColor("#1296db"));

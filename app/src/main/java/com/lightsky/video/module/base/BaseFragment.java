@@ -18,7 +18,6 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragment<PRESENTER extends BasePresenter> extends Fragment {
     private static final String TAG = "BaseFragment";
-
     public BaseActivity context;
     protected Unbinder unbinder;
     protected abstract int layoutResId();
@@ -26,7 +25,7 @@ public abstract class BaseFragment<PRESENTER extends BasePresenter> extends Frag
     protected abstract void initData();
     protected abstract void onViewReallyCreated(View view);
 
-    private View rootView;
+    protected View rootView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,9 +48,6 @@ public abstract class BaseFragment<PRESENTER extends BasePresenter> extends Frag
                 parent.removeView(rootView);
             }
         }
-
-
-
         return rootView;
     }
 
@@ -77,7 +73,6 @@ public abstract class BaseFragment<PRESENTER extends BasePresenter> extends Frag
         if (this.unbinder != null) {
             this.unbinder.unbind();
         }
-
         super.onDestroyView();
     }
 }

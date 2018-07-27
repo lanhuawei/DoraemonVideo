@@ -2,12 +2,14 @@ package com.lightsky.video.base;
 
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +18,7 @@ import com.apkfuns.logutils.LogUtils;
 import com.baidu.mobstat.StatService;
 import com.lightsky.video.R;
 import com.lightsky.video.common.Util.NetworkMainUtil;
+import com.lightsky.video.common.Util.statusbar.StatusBarFontHelper;
 import com.lightsky.video.module.entity.EventEntity;
 import com.lightsky.video.VideoHelper;
 import com.lightsky.video.datamanager.category.CategoryQueryNotify;
@@ -26,6 +29,7 @@ import com.lightsky.video.sdk.VideoTabFragement;
 import com.lightsky.video.sdk.VideoTypesLoader;
 import com.lightsky.video.sdk.listener.PlayerControler;
 import com.lightsky.video.widget.PagerSlidingTab;
+import com.lightsky.video.module.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,26 +44,21 @@ import butterknife.ButterKnife;
  * 发现的视频Fragment
  */
 
-public class FollowingVideoFragment extends com.lightsky.video.module.base.BaseFragment implements CategoryQueryNotify {
+public class FollowingVideoFragment extends BaseFragment implements CategoryQueryNotify {
     private VideoTypesLoader mTabLoader;
     private Map<String, Integer> mTabs = new HashMap<>();
     private List<CategoryInfoBase> mTabinfos = new ArrayList<>();
 
-    List<Integer> tabfilter = new ArrayList<>();
+    private List<Integer> tabfilter = new ArrayList<>();
 
     private VideoTabFragement mVideoFragment;
     private Handler mHandler = new Handler();
-    ImageView mSearch;
-
-    List<EventEntity> mEventList = new ArrayList<>();
-
-    PagerSlidingTab mPagerSlidingTab;
-
+    private ImageView mSearch;
+    private List<EventEntity> mEventList = new ArrayList<>();
+    private PagerSlidingTab mPagerSlidingTab;
     private boolean isInit = false;
-
     private PlayerControler mplayctrl;
-
-    int currentPos;
+    private int currentPos;
 
 
     @Override
@@ -91,8 +90,8 @@ public class FollowingVideoFragment extends com.lightsky.video.module.base.BaseF
     @Override
     protected void onViewReallyCreated(View view) {
         unbinder = ButterKnife.bind(this, view);
-        StatService.onEvent(getActivity(), "music", "音乐");
-
+        StatService.onEvent(getActivity(), "music", "发现");
+        view.setFitsSystemWindows(true);
     }
 
     private void generateEvent() {
@@ -138,12 +137,14 @@ public class FollowingVideoFragment extends com.lightsky.video.module.base.BaseF
         setting.UseLogCatLog = false;
         setting.UseShareLayout = false;
         VideoOption option = new VideoOption();
-
         InitVideoHelper(setting, option);
-
     }
 
-
+    /**
+     * 初始化VideoHelper
+     * @param setting
+     * @param opt
+     */
     private void InitVideoHelper(VideoSwitcher setting, VideoOption opt) {
         VideoHelper.get().Init(getActivity(), setting, opt);
         mTabLoader.loadData();
@@ -238,7 +239,10 @@ public class FollowingVideoFragment extends com.lightsky.video.module.base.BaseF
         isInit = true;
     }
 
-
+    /**
+     * 展示fragment
+     * @param fragment
+     */
     private void showVideoFragment(Fragment fragment) {
         FragmentManager fm = getChildFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -250,8 +254,7 @@ public class FollowingVideoFragment extends com.lightsky.video.module.base.BaseF
      * 打点相关造的方法
      */
     private void onStatistics() {
-        mVideoFragment.mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-
+        mVideoFragment.mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 try {
@@ -292,12 +295,20 @@ public class FollowingVideoFragment extends com.lightsky.video.module.base.BaseF
                     mVideoFragment.mViewPager.setCurrentItem(0);
                 }
             }
+            rootView.setFitsSystemWindows(false);
 
         } else {
             if (mVideoFragment != null && mVideoFragment.mViewPager != null) {
                 mVideoFragment.mViewPager.setCurrentItem(currentPos, false);
-
             }
+            rootView.setFitsSystemWindows(true);
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            rootView.requestApplyInsets();
+        } else {
+            ViewCompat.requestApplyInsets(rootView);
+        }
+
     }
 }

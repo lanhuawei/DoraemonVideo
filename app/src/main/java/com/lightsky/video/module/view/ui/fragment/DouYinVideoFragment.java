@@ -2,16 +2,12 @@ package com.lightsky.video.module.view.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.TextView;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.lightsky.video.MyApplication;
 
 import com.lightsky.video.R;
@@ -37,11 +33,10 @@ import com.lightsky.video.module.base.BaseFragment;
 import com.lightsky.video.module.entity.databean.HuoShanVideoListDataBean;
 import com.lightsky.video.module.entity.databean.MainVideoDataBean;
 import com.lightsky.video.module.entity.databean.DouYinMainVideoListDataBean;
-import com.lightsky.video.module.model.event.DoubleClickToRefreshEvent;
+import com.lightsky.video.module.model.event.ClickToRefreshEvent;
 import com.lightsky.video.module.model.event.RefreshEvent;
 import com.lightsky.video.module.view.adapter.DouYinVideoShowAdapter;
 import com.lightsky.video.module.view.holder.DouYinVideoShowHolder;
-import com.lightsky.video.module.view.ui.activity.VerticalVideoActivity;
 import com.lightsky.video.module.view.ui.activity.VerticalVideoMainActivity;
 import com.lightsky.video.module.view.ui.fragment.subfragment.VerticalVideoFragment;
 
@@ -346,6 +341,9 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
         if (!hidden) {
             StatusBarCompat.translucentStatusBar(getActivity(), true);
         } else {
+//            设置了距离状态栏的高度，使得其他fragment有距离状态栏的高度，但是由于MIUI的状态栏设置字体颜色方式有俩种，
+//           所以出现  StatusBarFontHelper.setStatusBarMode(getActivity(), true);的话StatusBarCompat.setStatusBarColor(getActivity(), 0xfffffff);会失效
+//            MIUI要是设置了StatusBarCompat.setStatusBarColor(getActivity(), 0xfffffff);这句话，状态栏颜色文字颜色就一直白色。
             StatusBarCompat.setStatusBarColor(getActivity(), 0xfffffff);
             StatusBarFontHelper.setStatusBarMode(getActivity(), true);
         }
@@ -378,8 +376,8 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void toRefresh(DoubleClickToRefreshEvent doubleClickToRefreshEvent) {
-        if (doubleClickToRefreshEvent.isDoubleClick()) {
+    public void toRefresh(ClickToRefreshEvent clickToRefreshEvent) {
+        if (clickToRefreshEvent.isDoubleClick()) {
             ptrRecyclerViewUIComponent.delayRefresh(100);
 //            adapterWithHF.notifyDataSetChanged();
             ptrRecyclerViewUIComponent.getRecyclerView().scrollToPosition(0);

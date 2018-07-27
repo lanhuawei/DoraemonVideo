@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.lightsky.video.R;
+import com.lightsky.video.common.Util.statusbar.statusbarcompat.StatusBarCompat;
 import com.lightsky.video.module.base.BaseActivity;
 import com.lightsky.video.module.view.adapter.VerticalVideoAdapter;
 import com.lightsky.video.module.view.ui.fragment.subfragment.PublishFragment;
@@ -46,7 +47,7 @@ public class VerticalVideoMainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        StatusBarCompat.translucentStatusBar(this, true);
         position = getIntent().getIntExtra(POSITION, -1);
         max_cursor = getIntent().getIntExtra(MAX_CURSOR, -1);
 
