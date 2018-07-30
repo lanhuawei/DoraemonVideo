@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.baidu.mobstat.StatService;
 import com.lightsky.video.common.Util.statusbar.statusbarcompat.StatusBarCompat;
 import com.lightsky.video.common.Util.ToastUtil;
+import com.lightsky.video.common.fragmentback.HandleBackUtil;
 import com.lightsky.video.common.http.callback.BaseImpl;
 
 import butterknife.ButterKnife;
@@ -94,5 +95,12 @@ public abstract class BaseActivity<PRESENTER extends BasePresenter> extends AppC
         // 页面结束埋点，需要使用Activity的引用，以便代码能够统计到具体页面名
         StatService.onPageEnd(this, getClass().getName());
         StatService.onPause(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!HandleBackUtil.handleBackPress(this)) {
+            super.onBackPressed();
+        }
     }
 }

@@ -298,11 +298,17 @@ public class VerticalVideoFragment extends BaseFragment {
 
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
-        getActivity().onBackPressed();
         EventBus.getDefault().post(new RefreshEvent(mainVideoDataBeanList, mCurrentItem, max_cursor));
+        getActivity().finish();
     }
 
-//    /**
+    @Override
+    public boolean onBackPressed() {
+        EventBus.getDefault().post(new RefreshEvent(mainVideoDataBeanList, mCurrentItem, max_cursor));
+        return super.onBackPressed();
+    }
+
+    //    /**
 //     * 使用add hide() show()方法切换fragment  不会走任何的生命周期 无法通过生命周期进行刷新，只能通过这个刷新
 //     * @param hidden
 //     */
@@ -352,6 +358,7 @@ public class VerticalVideoFragment extends BaseFragment {
                 StatusBarCompat.setStatusBarColor(getActivity(), 0xfffffff);
                 StatusBarFontHelper.setStatusBarMode(getActivity(), true);
             }
+            EventBus.getDefault().post(new RefreshEvent(mainVideoDataBeanList, mCurrentItem, max_cursor));
 
         }
     }

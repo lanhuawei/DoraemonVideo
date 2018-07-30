@@ -8,6 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.baidu.mobstat.StatService;
+import com.lightsky.video.common.fragmentback.HandleBackInterface;
+import com.lightsky.video.common.fragmentback.HandleBackUtil;
+import com.lightsky.video.module.entity.databean.MainVideoDataBean;
+
+import java.util.List;
 
 import butterknife.Unbinder;
 
@@ -16,7 +21,7 @@ import butterknife.Unbinder;
  * fagment Base
  */
 
-public abstract class BaseFragment<PRESENTER extends BasePresenter> extends Fragment {
+public abstract class BaseFragment<PRESENTER extends BasePresenter> extends Fragment implements HandleBackInterface {
     private static final String TAG = "BaseFragment";
     public BaseActivity context;
     protected Unbinder unbinder;
@@ -24,7 +29,6 @@ public abstract class BaseFragment<PRESENTER extends BasePresenter> extends Frag
     protected abstract void initView();
     protected abstract void initData();
     protected abstract void onViewReallyCreated(View view);
-
     protected View rootView;
 
     @Override
@@ -75,4 +79,11 @@ public abstract class BaseFragment<PRESENTER extends BasePresenter> extends Frag
         }
         super.onDestroyView();
     }
+
+    @Override
+    public boolean onBackPressed() {
+        return HandleBackUtil.handleBackPress(this);
+    }
+
+
 }

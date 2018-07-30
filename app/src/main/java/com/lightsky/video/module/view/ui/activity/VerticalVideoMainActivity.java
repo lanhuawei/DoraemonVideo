@@ -62,4 +62,5 @@ public class VerticalVideoMainActivity extends BaseActivity {
         vpVideoDetail.setCurrentItem(1);
     }
 
+
 }

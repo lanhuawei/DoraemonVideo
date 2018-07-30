@@ -27,7 +27,7 @@ import com.lightsky.video.common.pulltorefresh.indicator.PtrTensionIndicator;
  * header_dou_yin_ptr_custom
  */
 
-public class DouYinPtrCustomHeader extends FrameLayout implements PtrUIHandler {
+public class PtrCustomHeader extends FrameLayout implements PtrUIHandler {
     ImageView iv_refresh;
     ProgressBar progressbar_pull;
     TextView tv_pull_title;
@@ -48,15 +48,15 @@ public class DouYinPtrCustomHeader extends FrameLayout implements PtrUIHandler {
         }
     };
 
-    public DouYinPtrCustomHeader(@NonNull Context context) {
+    public PtrCustomHeader(@NonNull Context context) {
         this(context, null);
     }
 
-    public DouYinPtrCustomHeader(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public PtrCustomHeader(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public DouYinPtrCustomHeader(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public PtrCustomHeader(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 /**
  * Created by Ivan.L on 2018/7/3.
- *
+ * ViewInflate
  */
 
 public final class ViewInflate {

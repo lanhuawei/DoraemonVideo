@@ -20,7 +20,7 @@ import com.lightsky.video.common.Util.httputil.DouyinUtil;
 import com.lightsky.video.common.Util.httputil.HuoShanUtil;
 import com.lightsky.video.common.Util.statusbar.StatusBarFontHelper;
 import com.lightsky.video.common.Util.statusbar.statusbarcompat.StatusBarCompat;
-import com.lightsky.video.common.customview.DouYinPtrCustomHeader;
+import com.lightsky.video.common.customview.PtrCustomHeader;
 import com.lightsky.video.common.customview.LoadFrameLayout;
 import com.lightsky.video.common.mywidget.implloadmore.OnScrollToBottomLoadMoreListener;
 import com.lightsky.video.common.mywidget.recyclerview.PtrRecyclerViewUIComponent;
@@ -73,7 +73,7 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
     private long max_cursor = 0;
     private boolean isLoadMore = false;
     private boolean douYinDisable = false;//是否是抖音。火山显示不同效果
-    private DouYinPtrCustomHeader douYinPtrCustomHeader;
+    private PtrCustomHeader ptrCustomHeader;
     private Context context;
     private static final String TAG = "---->DouYinVideoFragment";
 
@@ -198,9 +198,9 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
                         douYinDisable = false;
                     }
                     LogUtil.e(TAG, listDataBean.getVideoDataBeanList().size() + "  ");
-                    douYinPtrCustomHeader.getTvtitle().setText("为您推荐了一组新鲜内容");
-                    ptrRecyclerViewUIComponent.removeView(douYinPtrCustomHeader);
-                    ptrRecyclerViewUIComponent.setHeaderView(douYinPtrCustomHeader);
+                    ptrCustomHeader.getTvtitle().setText("为您推荐了一组新鲜内容");
+                    ptrRecyclerViewUIComponent.removeView(ptrCustomHeader);
+                    ptrRecyclerViewUIComponent.setHeaderView(ptrCustomHeader);
                     if (isLoadMore) {
                         mainVideoDataBeans.addAll(listDataBean.getVideoDataBeanList());
                         douYinVideoShowAdapter.setDataList(mainVideoDataBeans, false);
@@ -230,9 +230,9 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
                 ptrRecyclerViewUIComponent.loadMoreComplete(false);
                 ptrRecyclerViewUIComponent.refreshComplete();
                 ToastUtil.showToast("网络连接失败");
-                douYinPtrCustomHeader.getTvtitle().setText("网络连接失败，请重试");
-                ptrRecyclerViewUIComponent.removeView(douYinPtrCustomHeader);
-                ptrRecyclerViewUIComponent.setHeaderView(douYinPtrCustomHeader);
+                ptrCustomHeader.getTvtitle().setText("网络连接失败，请重试");
+                ptrRecyclerViewUIComponent.removeView(ptrCustomHeader);
+                ptrRecyclerViewUIComponent.setHeaderView(ptrCustomHeader);
                 loadFrameLayout.showErrorView();
             }
 
@@ -286,9 +286,9 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
                 ptrRecyclerViewUIComponent.refreshComplete();
                 ToastUtil.showToast("网络连接失败");
 
-                douYinPtrCustomHeader.getTvtitle().setText("网络连接失败，请重试");
-                ptrRecyclerViewUIComponent.removeView(douYinPtrCustomHeader);
-                ptrRecyclerViewUIComponent.setHeaderView(douYinPtrCustomHeader);
+                ptrCustomHeader.getTvtitle().setText("网络连接失败，请重试");
+                ptrRecyclerViewUIComponent.removeView(ptrCustomHeader);
+                ptrRecyclerViewUIComponent.setHeaderView(ptrCustomHeader);
                 loadFrameLayout.showErrorView();
             }
 
@@ -300,20 +300,20 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
      * 设置刷新头部
      */
     private void initHeader() {
-        douYinPtrCustomHeader = new DouYinPtrCustomHeader(context);
-        douYinPtrCustomHeader.setLayoutParams(new PtrFrameLayout.LayoutParams(PtrFrameLayout.LayoutParams.MATCH_PARENT, PtrFrameLayout.LayoutParams.WRAP_CONTENT));
-        douYinPtrCustomHeader.setPadding(
+        ptrCustomHeader = new PtrCustomHeader(context);
+        ptrCustomHeader.setLayoutParams(new PtrFrameLayout.LayoutParams(PtrFrameLayout.LayoutParams.MATCH_PARENT, PtrFrameLayout.LayoutParams.WRAP_CONTENT));
+        ptrCustomHeader.setPadding(
                 0,
                 DensityUtil.dip2px(MyApplication.getInstance(), 15),
                 0,
                 DensityUtil.dip2px(MyApplication.getInstance(), 10));
-        douYinPtrCustomHeader.setUp(ptrRecyclerViewUIComponent);
-        douYinPtrCustomHeader.getTvtitle().setText("为你推荐了新的内容");
+        ptrCustomHeader.setUp(ptrRecyclerViewUIComponent);
+        ptrCustomHeader.getTvtitle().setText("为你推荐了新的内容");
 
-        ptrRecyclerViewUIComponent.setHeaderView(douYinPtrCustomHeader);
+        ptrRecyclerViewUIComponent.setHeaderView(ptrCustomHeader);
         ptrRecyclerViewUIComponent.setDurationToCloseHeader(600);
         ptrRecyclerViewUIComponent.setLoadingMinTime(1200);
-        ptrRecyclerViewUIComponent.addPtrUIHandler(douYinPtrCustomHeader);
+        ptrRecyclerViewUIComponent.addPtrUIHandler(ptrCustomHeader);
     }
 
     @Override
@@ -364,7 +364,6 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
 
     /**
      * EventBus
-     *
      * @param event
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -375,6 +374,10 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
         max_cursor = event.getMax_cursor();
     }
 
+    /**
+     * EventBus
+     * @param clickToRefreshEvent
+     */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void toRefresh(ClickToRefreshEvent clickToRefreshEvent) {
         if (clickToRefreshEvent.isDoubleClick()) {

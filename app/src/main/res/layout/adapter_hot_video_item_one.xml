@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--HotVideoItemOneAdapter -->
+    <com.lightsky.video.common.videoplayer.player.IjkVideoView
+        android:layout_width="match_parent"
+        android:layout_height="202dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="8dp">
+
+        <com.lightsky.video.common.customview.CircleImageView
+            android:id="@+id/iv_user_avatar"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            app:civ_border_color="#F4F5F7"
+            app:civ_border_width="0.5dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
