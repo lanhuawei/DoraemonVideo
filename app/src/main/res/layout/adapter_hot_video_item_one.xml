@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="250dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <!--HotVideoItemOneAdapter -->
     <com.lightsky.video.common.videoplayer.player.IjkVideoView
+        android:id="@+id/ijk_videoview"
         android:layout_width="match_parent"
         android:layout_height="202dp" />
 
     <RelativeLayout
+        android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -23,6 +26,28 @@
             android:layout_height="26dp"
             app:civ_border_color="#F4F5F7"
             app:civ_border_width="0.5dp"/>
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen10"
+            android:layout_toRightOf="@id/iv_user_avatar"
+            android:singleLine="true"
+            android:textColor="@color/color_text_default"
+            android:textSize="14sp"
+            tools:text="蓝天白云"/>
+
+        <TextView
+            android:id="@+id/tv_play_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textColor="@color/color_text_default"
+            android:textSize="12sp"
+            tools:text="1208次观看"/>
 
     </RelativeLayout>
 
