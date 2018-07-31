@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.widget.TextView;
 
+import com.apkfuns.logutils.LogUtils;
 import com.lightsky.video.MyApplication;
 
 import com.lightsky.video.R;
@@ -183,7 +184,7 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
         OkHttpClientManager.getAsyn(url, new OkHttpClientManager.StringCallback() {
             @Override
             public void onResponse(String response) {
-//                LogUtils.json(response);
+                LogUtils.json(response);
                 loadFrameLayout.showContentView();
                 try {
                     DouYinMainVideoListDataBean listDataBean = DouYinMainVideoListDataBean.fromJSONData(response);

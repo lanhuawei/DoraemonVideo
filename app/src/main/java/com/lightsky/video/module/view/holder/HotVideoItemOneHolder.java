@@ -6,7 +6,12 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.lightsky.video.MyApplication;
 import com.lightsky.video.R;
+import com.lightsky.video.common.Util.CommonUtil;
+import com.lightsky.video.common.Util.GlideUtil;
+import com.lightsky.video.common.Util.KindsOfUtil;
+import com.lightsky.video.common.Util.LogUtil;
 import com.lightsky.video.common.customview.CircleImageView;
 import com.lightsky.video.common.mywidget.recyclerview.adapter.BaseRecyclerViewHolder;
 import com.lightsky.video.common.videoplayer.controller.StandardVideoController;
@@ -43,9 +48,34 @@ public class HotVideoItemOneHolder extends BaseRecyclerViewHolder<MainVideoDataB
     }
 
     @Override
-    protected void onItemDataUpdated(@Nullable MainVideoDataBean mainVideoDataBean) {
+    protected void onItemDataUpdated(@Nullable final MainVideoDataBean mainVideoDataBean) {
         if (mainVideoDataBean != null) {
+            GlideUtil.loadImage(MyApplication.getInstance(), mainVideoDataBean.getAuthorImgUrl(), ivUserAvatar, null,
+                    R.color.black, R.color.black);
+            GlideUtil.loadImage(MyApplication.getInstance(), mainVideoDataBean.getCoverImgUrl(), controller.getThumb(), null,
+                    R.color.white, R.color.white);
+            controller.getIjkTitle().setText(mainVideoDataBean.getTitle());
+            controller.getIjkControlSize().setText(CommonUtil.getTime(mainVideoDataBean.getDuration()) + "");
+            ijkVideoview.setPlayerConfig(mPlayerConfig);
+            ijkVideoview.setTitle(mainVideoDataBean.getTitle());
+            ijkVideoview.setVideoController(controller);
+            ijkVideoview.setTag(getAdapterPosition());
 
+            controller.getThumb().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ijkVideoview.setUrl(mainVideoDataBean.getVideoPlayUrl());
+                    ijkVideoview.start();
+                }
+            });
+            tvUsername.setText(mainVideoDataBean.getAuthorName());
+            tvPlayCount.setText(KindsOfUtil.formatNumber(mainVideoDataBean.getLikeCount()) + "次观看");
+            rlBottom.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         }
     }
 }

@@ -3,7 +3,7 @@
     android:id="@+id/video_list_last_refresh_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:background="@color/detail_watch_later_color"
     android:paddingBottom="10dp"
     android:paddingTop="10dp">
 
@@ -20,7 +20,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="@string/video_list_last_refresh"
-        android:textColor="@color/detail_watch_later_color"
+        android:textColor="@color/white"
         android:textSize="14dp"
         android:drawableRight="@drawable/bg_tab_small_video_refresh"
         android:drawablePadding="5dp"/>
@@ -28,7 +28,7 @@
     <View
         android:id="@+id/video_list_last_refresh_left"
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="1dp"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/video_list_last_refresh_title"
         android:background="@color/common_divide_color"/>
@@ -36,7 +36,7 @@
     <View
         android:id="@+id/video_list_last_refresh_right"
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="1dp"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/video_list_last_refresh_title"
         android:background="@color/common_divide_color"/>

@@ -34,7 +34,7 @@
             tools:visibility="visible"/>
 
 
-        <com.dueeeke.videoplayer.widget.MarqueeTextView
+        <com.lightsky.video.common.videoplayer.widget.MarqueeTextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

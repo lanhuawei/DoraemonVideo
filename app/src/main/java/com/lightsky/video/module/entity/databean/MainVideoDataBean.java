@@ -42,6 +42,12 @@ public class MainVideoDataBean implements Parcelable {
     public String formatPlayCountStr = "";
     public String formatLikeCountStr = "";
     public String filterMusicNameStr = "";
+    public int duration;
+
+    public int getDuration() {
+        return duration;
+    }
+
 
     //视频的Base64值
     public int type = 0;//视频类型：1 抖音 2 火山 3 快手 4 秒拍
@@ -189,6 +195,7 @@ public class MainVideoDataBean implements Parcelable {
         dest.writeString(this.formatLikeCountStr);
         dest.writeString(this.filterMusicNameStr);
         dest.writeInt(this.type);
+        dest.writeInt(this.duration);
     }
 
     public MainVideoDataBean() {
@@ -222,6 +229,7 @@ public class MainVideoDataBean implements Parcelable {
         this.formatLikeCountStr = in.readString();
         this.filterMusicNameStr = in.readString();
         this.type = in.readInt();
+        this.duration = in.readInt();
     }
 
     public static final Creator<MainVideoDataBean> CREATOR = new Creator<MainVideoDataBean>() {

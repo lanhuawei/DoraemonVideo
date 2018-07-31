@@ -207,6 +207,7 @@ public class StandardVideoController extends GestureVideoController implements V
                 thumb.setVisibility(GONE);
                 startPlayButton.setVisibility(GONE);
                 ijkTitle.setVisibility(GONE);
+//                ijkTitle.setVisibility(VISIBLE);
                 ijkControlSize.setVisibility(GONE);
                 viewLayer.setVisibility(GONE);
                 break;
@@ -215,6 +216,7 @@ public class StandardVideoController extends GestureVideoController implements V
                 playButton.setSelected(false);
                 startPlayButton.setVisibility(GONE);
                 ijkTitle.setVisibility(GONE);
+//                ijkTitle.setVisibility(VISIBLE);
                 ijkControlSize.setVisibility(GONE);
                 break;
             case IjkVideoView.STATE_PREPARING:
@@ -222,6 +224,7 @@ public class StandardVideoController extends GestureVideoController implements V
                 completeContainer.setVisibility(GONE);
                 startPlayButton.setVisibility(GONE);
                 ijkTitle.setVisibility(GONE);
+//                ijkTitle.setVisibility(VISIBLE);
                 ijkControlSize.setVisibility(GONE);
                 loadingProgress.setVisibility(VISIBLE);
                 break;
@@ -231,18 +234,21 @@ public class StandardVideoController extends GestureVideoController implements V
                 loadingProgress.setVisibility(GONE);
                 startPlayButton.setVisibility(GONE);
                 ijkTitle.setVisibility(GONE);
+//                ijkTitle.setVisibility(VISIBLE);
                 ijkControlSize.setVisibility(GONE);
                 break;
             case IjkVideoView.STATE_ERROR:
                 LogUtil.e(TAG, "STATE_ERROR");
                 startPlayButton.setVisibility(GONE);
                 ijkTitle.setVisibility(GONE);
+//                ijkTitle.setVisibility(VISIBLE);
                 ijkControlSize.setVisibility(GONE);
                 break;
             case IjkVideoView.STATE_BUFFERING:
                 LogUtil.e(TAG, "STATE_BUFFERING");
                 startPlayButton.setVisibility(GONE);
                 ijkTitle.setVisibility(GONE);
+//                ijkTitle.setVisibility(VISIBLE);
                 ijkControlSize.setVisibility(GONE);
                 loadingProgress.setVisibility(VISIBLE);
                 break;
@@ -250,6 +256,7 @@ public class StandardVideoController extends GestureVideoController implements V
                 loadingProgress.setVisibility(GONE);
                 startPlayButton.setVisibility(GONE);
                 ijkTitle.setVisibility(GONE);
+//                ijkTitle.setVisibility(VISIBLE);
                 ijkControlSize.setVisibility(GONE);
                 LogUtil.e(TAG, "STATE_BUFFERED");
                 break;
@@ -258,6 +265,7 @@ public class StandardVideoController extends GestureVideoController implements V
                 hide();
                 startPlayButton.setVisibility(GONE);
                 ijkTitle.setVisibility(GONE);
+//                ijkTitle.setVisibility(VISIBLE);
                 ijkControlSize.setVisibility(GONE);
                 thumb.setVisibility(VISIBLE);
                 completeContainer.setVisibility(VISIBLE);
@@ -339,6 +347,7 @@ public class StandardVideoController extends GestureVideoController implements V
                 playButton.setVisibility(GONE);
                 viewLayer.setVisibility(GONE);
                 bottomContainer.startAnimation(hideAnim);
+                ijkTitle.setVisibility(GONE);
             }
             if (!isLive && !isLocked) {
                 bottomProgress.setVisibility(VISIBLE);
@@ -353,6 +362,7 @@ public class StandardVideoController extends GestureVideoController implements V
         topContainer.startAnimation(hideAnim);
         bottomContainer.setVisibility(GONE);
         bottomContainer.startAnimation(hideAnim);
+        ijkTitle.setVisibility(GONE);
         playButton.setVisibility(GONE);
         viewLayer.setVisibility(GONE);
     }
@@ -367,6 +377,7 @@ public class StandardVideoController extends GestureVideoController implements V
             } else {
                 bottomContainer.setVisibility(VISIBLE);
                 bottomContainer.startAnimation(showAnim);
+                ijkTitle.setVisibility(VISIBLE);
                 playButton.setVisibility(VISIBLE);
                 viewLayer.setVisibility(VISIBLE);
             }
@@ -385,6 +396,7 @@ public class StandardVideoController extends GestureVideoController implements V
     private void showAllViews() {
         bottomContainer.setVisibility(VISIBLE);
         bottomContainer.startAnimation(showAnim);
+        ijkTitle.setVisibility(VISIBLE);
         topContainer.setVisibility(VISIBLE);
         topContainer.startAnimation(showAnim);
         playButton.setVisibility(VISIBLE);

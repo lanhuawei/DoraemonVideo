@@ -86,6 +86,7 @@ public class DouYinMainVideoDataSubclassBean extends MainVideoDataBean {
             data.musicImgUrl = musicThumbJson.getJSONArray("url_list").getString(0);
             data.musicName = musicJson.optString("title");
             data.musicAuthorName = musicJson.optString("author");
+            data.duration = musicJson.optInt("duration");
 
             data.formatTimeStr = KindsOfUtil.formatTimeStr(data.createTime);
             data.formatPlayCountStr = KindsOfUtil.formatNumber(data.playCount);

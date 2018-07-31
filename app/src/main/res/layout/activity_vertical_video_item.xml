@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <!--VerticalVideoActivity-->
     <FrameLayout
         android:id="@+id/fl_container"
@@ -31,7 +32,7 @@
         android:layout_marginRight="20dp"
         android:textColor="@color/white"
         android:textSize="14sp"
-        android:text="蓝华威蓝华威"/>
+        tools:text="蓝华威蓝华威" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -57,9 +58,9 @@
             android:ellipsize="end"
             android:maxEms="6"
             android:maxLines="1"
-            android:text="蓝华威蓝华威"
             android:textColor="@color/white"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            tools:text="蓝华威蓝华威"/>
         
         <com.lightsky.video.common.customview.TextImageView
             android:id="@+id/tv_like_count"
