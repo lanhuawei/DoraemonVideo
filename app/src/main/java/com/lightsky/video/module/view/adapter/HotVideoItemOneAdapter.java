@@ -17,6 +17,7 @@ import butterknife.BindView;
  * 热门tab one精选 Adapter
  */
 public class HotVideoItemOneAdapter extends BaseRecyclerAdapter<MainVideoDataBean, HotVideoItemOneHolder> {
+
     public HotVideoItemOneAdapter(Context context, OnItemClickListener<HotVideoItemOneHolder> listener) {
         super(context, listener);
     }
@@ -24,4 +25,5 @@ public class HotVideoItemOneAdapter extends BaseRecyclerAdapter<MainVideoDataBea
     public HotVideoItemOneHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new HotVideoItemOneHolder(ViewInflate.inflateLayout(getContext(), R.layout.adapter_hot_video_item_one, parent, false));
     }
+
 }

@@ -174,6 +174,9 @@ public class StandardVideoController extends GestureVideoController implements V
                 if (mShowing) {
                     lock.setVisibility(VISIBLE);
                     topContainer.setVisibility(VISIBLE);
+
+                    ijkTitle.setVisibility(GONE);
+
                 } else {
                     lock.setVisibility(GONE);
                 }
@@ -396,7 +399,7 @@ public class StandardVideoController extends GestureVideoController implements V
     private void showAllViews() {
         bottomContainer.setVisibility(VISIBLE);
         bottomContainer.startAnimation(showAnim);
-        ijkTitle.setVisibility(VISIBLE);
+        ijkTitle.setVisibility(GONE);
         topContainer.setVisibility(VISIBLE);
         topContainer.startAnimation(showAnim);
         playButton.setVisibility(VISIBLE);

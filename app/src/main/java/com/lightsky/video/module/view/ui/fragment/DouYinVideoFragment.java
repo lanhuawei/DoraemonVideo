@@ -15,6 +15,7 @@ import com.lightsky.video.R;
 import com.lightsky.video.common.Util.DensityUtil;
 import com.lightsky.video.common.Util.LogUtil;
 import com.lightsky.video.common.Util.NoDoubleClickUtil;
+import com.lightsky.video.common.Util.SpacesItemDecorationMain;
 import com.lightsky.video.common.Util.ToastUtil;
 import com.lightsky.video.common.Util.WeakDataHolderUtil;
 import com.lightsky.video.common.Util.httputil.DouyinUtil;
@@ -135,6 +136,8 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
 
         ptrRecyclerViewUIComponent.setLayoutManager(gridLayoutManager);
         ptrRecyclerViewUIComponent.setAdapter(adapterWithHF);
+        SpacesItemDecorationMain spacesItemDecorationMain = new SpacesItemDecorationMain(10);
+        ptrRecyclerViewUIComponent.getRecyclerView().addItemDecoration(spacesItemDecorationMain);
         initHeader();
         ptrRecyclerViewUIComponent.delayRefresh(100);
         ptrRecyclerViewUIComponent.setLoadMoreEnable(true);

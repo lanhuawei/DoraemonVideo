@@ -81,7 +81,7 @@ public abstract class BaseLoadFragment extends Fragment {
             isLoadData = true;
         } else {
             fragmentInvisible();
-            isLoadData = false;
+//            isLoadData = false;
         }
     }
 

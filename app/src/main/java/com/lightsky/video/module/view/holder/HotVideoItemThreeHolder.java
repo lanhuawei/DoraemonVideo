@@ -3,7 +3,6 @@ package com.lightsky.video.module.view.holder;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,32 +17,25 @@ import com.lightsky.video.MyApplication;
 import com.lightsky.video.R;
 import com.lightsky.video.common.Util.DensityUtil;
 import com.lightsky.video.common.Util.KindsOfUtil;
-import com.lightsky.video.common.Util.LogUtil;
-import com.lightsky.video.common.mywidget.recyclerview.adapter.BaseRecyclerAdapter;
-import com.lightsky.video.common.mywidget.recyclerview.adapter.BaseRecyclerViewHolder;
 import com.lightsky.video.common.videoplayer.util.WindowUtil;
 import com.lightsky.video.module.entity.databean.MainVideoDataBean;
 import com.lightsky.video.module.view.adapter.HotVideoItemTwoAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Ivan.L on 2018/7/31.
- * 热门tab one新鲜 Holder
+ * Created by Ivan.L on 2018/8/2.
  */
-public class HotVideoItemTwoHolder extends HotVideoItemBaseHolder {
-
+public class HotVideoItemThreeHolder extends HotVideoItemBaseHolder {
     @BindView(R.id.sdv_img) SimpleDraweeView sdvImg;
     @BindView(R.id.tv_play_count) TextView tvPlayCount;
     @BindView(R.id.tv_like_count) TextView tvLikeCount;
     @BindView(R.id.tv_video_title) TextView tvVideoTitle;
 
-    public HotVideoItemTwoHolder(View view) {
+    public HotVideoItemThreeHolder(View view) {
         super(view);
         ButterKnife.bind(this, view);
     }
@@ -51,10 +43,16 @@ public class HotVideoItemTwoHolder extends HotVideoItemBaseHolder {
     @Override
     protected void onItemDataUpdated(@Nullable MainVideoDataBean mainVideoDataBean, int position) {
         if (mainVideoDataBean != null) {
+            if (HotVideoItemTwoAdapter.mHeights.size() <= position) {
+                Random random = new Random();
+                HotVideoItemTwoAdapter.mHeights.add((int) (random.nextInt(8) % (4) + 5));
+            }
             ViewGroup.LayoutParams params = sdvImg.getLayoutParams();
             params.width = (
                     WindowUtil.getScreenWidth(MyApplication.getInstance()) - DensityUtil.dip2px(MyApplication.getInstance(), 2)) / 2;
-            params.height = (params.width) * 8 / 5;
+//            params.height = (params.width) * 8 / 5;
+
+            params.height = (params.width) * HotVideoItemTwoAdapter.mHeights.get(position) / 5;
             sdvImg.setLayoutParams(params);
             final Uri uri = Uri.parse(mainVideoDataBean.getDynamicCover());
             if (isNotEqualsUriPath(sdvImg, mainVideoDataBean.getDynamicCover())) {
@@ -86,6 +84,5 @@ public class HotVideoItemTwoHolder extends HotVideoItemBaseHolder {
     private boolean isNotEqualsUriPath(SimpleDraweeView sdvImg, String imgUrl) {
         return !(TextUtils.isEmpty(imgUrl) || TextUtils.isEmpty(sdvImg.getTag(R.id.sdv_img) + "")) && !(sdvImg.getTag(R.id.sdv_img) + "").equals(imgUrl);
     }
-
 
 }

@@ -3,12 +3,15 @@ package com.lightsky.video.module.view.ui.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.lightsky.video.MyApplication;
 import com.lightsky.video.R;
 import com.lightsky.video.common.Util.DensityUtil;
 import com.lightsky.video.common.Util.LogUtil;
+import com.lightsky.video.common.Util.SpacesItemDecorationHotTwo;
 import com.lightsky.video.common.Util.ToastUtil;
 import com.lightsky.video.common.Util.httputil.DouyinUtil;
 import com.lightsky.video.common.Util.httputil.HuoShanUtil;
@@ -25,8 +28,10 @@ import com.lightsky.video.module.base.BaseLoadFragment;
 import com.lightsky.video.module.entity.databean.DouYinMainVideoListDataBean;
 import com.lightsky.video.module.entity.databean.HuoShanVideoListDataBean;
 import com.lightsky.video.module.entity.databean.MainVideoDataBean;
+import com.lightsky.video.module.view.adapter.HotVideoItemBaseAdapter;
 import com.lightsky.video.module.view.adapter.HotVideoItemOneAdapter;
-import com.lightsky.video.module.view.holder.HotVideoItemOneHolder;
+import com.lightsky.video.module.view.adapter.HotVideoItemTwoAdapter;
+import com.lightsky.video.module.view.holder.HotVideoItemBaseHolder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,25 +45,26 @@ import okhttp3.Request;
  * Created by Ivan.L on 2018/7/25.
  * 热门itemFragment
  */
-public class HotVideoItemFragment extends BaseLoadFragment implements BaseRecyclerAdapter.OnItemClickListener<HotVideoItemOneHolder> {
+public class HotVideoItemFragment extends BaseLoadFragment
+        implements BaseRecyclerAdapter.OnItemClickListener<HotVideoItemBaseHolder>{
     private static final String TAG = "---->HotVideoItemFragment";
     public static final String POSITION = "position";
     public static final String TITLE = "title";
-    @BindView(R.id.am_ptr_framelayout)
-    PtrRecyclerViewUIComponent ptrRecyclerViewUIComponent;
-    @BindView(R.id.ar_empty_view)
-    View ar_empty_view;
+    @BindView(R.id.am_ptr_framelayout) PtrRecyclerViewUIComponent ptrRecyclerViewUIComponent;
+    @BindView(R.id.ar_empty_view) View ar_empty_view;
     private int position;
+
     private String title;
     private RecyclerAdapterWithHF adapterWithHF;
     private List<MainVideoDataBean> mainVideoDataBeans = new ArrayList<>();
     private PtrCustomHeader ptrCustomHeader;
     private HotVideoItemOneAdapter hotVideoItemOneAdapter;
-    private boolean douYinDisable = true;//是否抖音禁用 false 不是    是否是抖音。火山显示不同效果
-    private String LoadMoreOne = "down";
-    private String LoadMoreTwo = "down";
-    private String LoadMoreThree = "down";
+    private HotVideoItemTwoAdapter hotVideoItemTwoAdapter;
+    private HotVideoItemBaseAdapter hotVideoItemBaseAdapter;
+    private boolean douYinDisable = true;//是否抖音禁用 false 是抖音，true不是    是否是抖音。火山显示不同效果
     private boolean isLoadMore = false;
+    private long max_cursor = 0;
+    private StaggeredGridLayoutManager staggeredGridLayoutManager;
 
 
     public static HotVideoItemFragment newInstance(Bundle args) {
@@ -87,10 +93,33 @@ public class HotVideoItemFragment extends BaseLoadFragment implements BaseRecycl
         Bundle bundle = getArguments();
         position = bundle.getInt(POSITION);
         title = bundle.getString(TITLE);
-        hotVideoItemOneAdapter = new HotVideoItemOneAdapter(getActivity(), this);
-        adapterWithHF = new RecyclerAdapterWithHF(hotVideoItemOneAdapter);
-        ptrRecyclerViewUIComponent.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+//        hotVideoItemOneAdapter = new HotVideoItemOneAdapter(getActivity(), this);
+//        adapterWithHF = new RecyclerAdapterWithHF(hotVideoItemOneAdapter);
+//        ptrRecyclerViewUIComponent.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        ptrRecyclerViewUIComponent.setAdapter(adapterWithHF);
+
+//        hotVideoItemTwoAdapter = new HotVideoItemTwoAdapter(getActivity(), new BaseRecyclerAdapter.OnItemClickListener<HotVideoItemTwoHolder>() {
+//            @Override
+//            public void onItemClick(int position) {
+//
+//            }
+//        });
+//        adapterWithHF = new RecyclerAdapterWithHF(hotVideoItemTwoAdapter);
+//        staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+//        ptrRecyclerViewUIComponent.setLayoutManager(staggeredGridLayoutManager);
+//        ptrRecyclerViewUIComponent.setAdapter(adapterWithHF);
+
+        hotVideoItemBaseAdapter = new HotVideoItemBaseAdapter(getActivity(), this, position);
+        adapterWithHF = new RecyclerAdapterWithHF(hotVideoItemBaseAdapter);
+        positionAdapter(position);
         ptrRecyclerViewUIComponent.setAdapter(adapterWithHF);
+
+
+//        SpacesItemDecorationHotTwo spacesItemDecoration = new SpacesItemDecorationHotTwo(20);
+//        ptrRecyclerViewUIComponent.getRecyclerView().addItemDecoration(spacesItemDecoration);
+
+
         initHeader();
         ptrRecyclerViewUIComponent.setLoadMoreEnable(true);
         ptrRecyclerViewUIComponent.getRecyclerView().addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
@@ -112,20 +141,15 @@ public class HotVideoItemFragment extends BaseLoadFragment implements BaseRecycl
         ptrRecyclerViewUIComponent.setOnPullToRefreshListener(new OnPullToRefreshListener() {
             @Override
             public void onPullToRefresh() {
-                switch (position) {
-                    case 0:
-                        max_cursor = 0;
-                        isLoadMore = false;
-                        if (mainVideoDataBeans != null && mainVideoDataBeans.size() > 0) {
-                            mainVideoDataBeans.clear();
-                        }
-                        if (douYinDisable) {
-                            getHuoShanListData();
-                        } else {
-                            getDouYinListData();
-                        }
-                        break;
-
+                max_cursor = 0;
+                isLoadMore = false;
+                if (mainVideoDataBeans != null && mainVideoDataBeans.size() > 0) {
+                    mainVideoDataBeans.clear();
+                }
+                if (douYinDisable) {
+                    getHuoShanListData();
+                } else {
+                    getDouYinListData();
                 }
             }
         });
@@ -142,11 +166,41 @@ public class HotVideoItemFragment extends BaseLoadFragment implements BaseRecycl
             }
         });
 
+    }
+
+    /**
+     * 根据位置
+     * @param position
+     */
+    private void positionAdapter(int position) {
+        switch (position) {
+            case 0:
+                ptrRecyclerViewUIComponent.setLayoutManager(new LinearLayoutManager(getActivity()));
+                break;
+            case 1:
+                staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                ptrRecyclerViewUIComponent.setLayoutManager(staggeredGridLayoutManager);
+                ((SimpleItemAnimator) ptrRecyclerViewUIComponent.getRecyclerView().getItemAnimator()).setSupportsChangeAnimations(false); //取消RecyclerView的动画效果
+                SpacesItemDecorationHotTwo spacesItemDecoration = new SpacesItemDecorationHotTwo(20);
+                ptrRecyclerViewUIComponent.getRecyclerView().addItemDecoration(spacesItemDecoration);
+                break;
+            case 2:
+                staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                ptrRecyclerViewUIComponent.setLayoutManager(staggeredGridLayoutManager);
+                ((SimpleItemAnimator) ptrRecyclerViewUIComponent.getRecyclerView().getItemAnimator()).setSupportsChangeAnimations(false); //取消RecyclerView的动画效果
+//                SpacesItemDecorationMain spacesItemDecorationMain = new SpacesItemDecorationMain(20);
+//                ptrRecyclerViewUIComponent.getRecyclerView().addItemDecoration(spacesItemDecorationMain);
+                break;
+            case 3:
+                ptrRecyclerViewUIComponent.setLayoutManager(new LinearLayoutManager(getActivity()));
+                break;
+        }
 
     }
 
-    private long max_cursor = 0;
 
+    private int size;
+    private int totalSize;
     /**
      * 下拉数据规律：min_cursor=max_cursor=0
      * 上拉数据规律：
@@ -178,11 +232,28 @@ public class HotVideoItemFragment extends BaseLoadFragment implements BaseRecycl
                     ptrRecyclerViewUIComponent.removeView(ptrCustomHeader);
                     ptrRecyclerViewUIComponent.setHeaderView(ptrCustomHeader);
                     if (isLoadMore) {
+                        size = mainVideoDataBeans.size();
                         mainVideoDataBeans.addAll(listDataBean.getVideoDataBeanList());
-                        hotVideoItemOneAdapter.setDataList(mainVideoDataBeans, false);
-                        adapterWithHF.notifyDataSetChanged();
+                        totalSize = mainVideoDataBeans.size();
+
+                        hotVideoItemBaseAdapter.setDataList(mainVideoDataBeans, false);
+//                        hotVideoItemOneAdapter.setDataList(mainVideoDataBeans, false);
+//                        hotVideoItemTwoAdapter.setDataList(mainVideoDataBeans, false);
+                        if (position == 0) {
+                            adapterWithHF.notifyDataSetChanged();
+                        } else if (position == 1) {
+                            adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
+                        } else if (position == 2) {
+                            adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
+                        } else if (position == 3) {
+                            adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
+                        }
+//                        adapterWithHF.notifyDataSetChanged();
+//                        adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
+
                         ptrRecyclerViewUIComponent.loadMoreComplete(true);
                     } else {
+                        size = listDataBean.getVideoDataBeanList().size();
                         mainVideoDataBeans = listDataBean.getVideoDataBeanList();
                         if (mainVideoDataBeans.size() == 0) {
                             ar_empty_view.setVisibility(View.VISIBLE);
@@ -191,8 +262,15 @@ public class HotVideoItemFragment extends BaseLoadFragment implements BaseRecycl
                             ar_empty_view.setVisibility(View.GONE);
                             ptrRecyclerViewUIComponent.setLoadMoreEnable(true);
                         }
-                        hotVideoItemOneAdapter.setDataList(mainVideoDataBeans);
+
+                        HotVideoItemTwoAdapter.mHeights.clear();
+//                        hotVideoItemOneAdapter.setDataList(mainVideoDataBeans);
+//                        hotVideoItemTwoAdapter.setDataList(mainVideoDataBeans);
+
+                        hotVideoItemBaseAdapter.setDataList(mainVideoDataBeans);
+
                         adapterWithHF.notifyDataSetChanged();
+//                        adapterWithHF.notifyItemRangeChangedHF(0, size);
                         ptrRecyclerViewUIComponent.refreshComplete();
                     }
                 } catch (Exception e) {
@@ -233,11 +311,27 @@ public class HotVideoItemFragment extends BaseLoadFragment implements BaseRecycl
                     HuoShanVideoListDataBean huoShanVideoListDataBean = HuoShanVideoListDataBean.fromJSONData(response);
                     max_cursor = huoShanVideoListDataBean.getMaxTime();
                     if (isLoadMore) {
+                        size = mainVideoDataBeans.size();
                         mainVideoDataBeans.addAll(huoShanVideoListDataBean.getVideoDataList());
-                        hotVideoItemOneAdapter.setDataList(mainVideoDataBeans, false);
-                        adapterWithHF.notifyDataSetChanged();
+                        totalSize = mainVideoDataBeans.size();
+
+//                        hotVideoItemOneAdapter.setDataList(mainVideoDataBeans, false);
+//                        hotVideoItemTwoAdapter.setDataList(mainVideoDataBeans, false);
+                        hotVideoItemBaseAdapter.setDataList(mainVideoDataBeans, false);
+                        if (position == 0) {
+                            adapterWithHF.notifyDataSetChanged();
+                        } else if (position == 1) {
+                            adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
+                        } else if (position == 2) {
+                            adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
+                        } else if (position == 3) {
+                            adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
+                        }
+//                        adapterWithHF.notifyDataSetChanged();
+//                        adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
                         ptrRecyclerViewUIComponent.loadMoreComplete(true);
                     } else {
+                        size = huoShanVideoListDataBean.getVideoDataList().size();
                         mainVideoDataBeans = huoShanVideoListDataBean.getVideoDataList();
                         if (mainVideoDataBeans.size() == 0) {
                             ar_empty_view.setVisibility(View.VISIBLE);
@@ -246,8 +340,14 @@ public class HotVideoItemFragment extends BaseLoadFragment implements BaseRecycl
                             ar_empty_view.setVisibility(View.GONE);
                             ptrRecyclerViewUIComponent.setLoadMoreEnable(true);
                         }
-                        hotVideoItemOneAdapter.setDataList(mainVideoDataBeans);
+                        HotVideoItemTwoAdapter.mHeights.clear();
+//                        hotVideoItemOneAdapter.setDataList(mainVideoDataBeans);
+//                        hotVideoItemTwoAdapter.setDataList(mainVideoDataBeans);
+
+                        hotVideoItemBaseAdapter.setDataList(mainVideoDataBeans);
+
                         adapterWithHF.notifyDataSetChanged();
+//                        adapterWithHF.notifyItemRangeChangedHF(0, size);
                         ptrRecyclerViewUIComponent.refreshComplete();
                     }
                 } catch (Exception e) {
@@ -261,7 +361,6 @@ public class HotVideoItemFragment extends BaseLoadFragment implements BaseRecycl
                 ptrRecyclerViewUIComponent.loadMoreComplete(true);
                 ptrRecyclerViewUIComponent.refreshComplete();
                 ToastUtil.showToast("网络连接失败");
-
                 ptrCustomHeader.getTvtitle().setText("网络连接失败，请重试");
                 ptrRecyclerViewUIComponent.removeView(ptrCustomHeader);
                 ptrRecyclerViewUIComponent.setHeaderView(ptrCustomHeader);
@@ -300,10 +399,18 @@ public class HotVideoItemFragment extends BaseLoadFragment implements BaseRecycl
     }
 
 //    每个点击事件
+//    HotVideoItemOneHolder
     @Override
     public void onItemClick(int position) {
 
     }
+
+
+//    @Override
+//    protected void fragmentInvisible() {
+//        super.fragmentInvisible();
+//        lazyLoad();
+//    }
 
     @Override
     public void onDestroyView() {

@@ -41,7 +41,7 @@ public class DouYinVideoShowHolder extends BaseRecyclerViewHolder<MainVideoDataB
     }
 
     @Override
-    protected void onItemDataUpdated(@Nullable MainVideoDataBean mainVideoDataBean) {
+    protected void onItemDataUpdated(@Nullable MainVideoDataBean mainVideoDataBean, int position) {
         if (mainVideoDataBean != null) {
             ViewGroup.LayoutParams params = sdvImg.getLayoutParams();
             params.width = (

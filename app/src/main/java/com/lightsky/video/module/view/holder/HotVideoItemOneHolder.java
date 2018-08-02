@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
  * Created by Ivan.L on 2018/7/27.
  * 热门tab one精选 Holder
  */
-public class HotVideoItemOneHolder extends BaseRecyclerViewHolder<MainVideoDataBean> {
+public class HotVideoItemOneHolder extends HotVideoItemBaseHolder {
     @BindView(R.id.ijk_videoview) IjkVideoView ijkVideoview;
     @BindView(R.id.iv_user_avatar) CircleImageView ivUserAvatar;
     @BindView(R.id.tv_username) TextView tvUsername;
@@ -48,7 +48,7 @@ public class HotVideoItemOneHolder extends BaseRecyclerViewHolder<MainVideoDataB
     }
 
     @Override
-    protected void onItemDataUpdated(@Nullable final MainVideoDataBean mainVideoDataBean) {
+    protected void onItemDataUpdated(@Nullable final MainVideoDataBean mainVideoDataBean,int position) {
         if (mainVideoDataBean != null) {
             GlideUtil.loadImage(MyApplication.getInstance(), mainVideoDataBean.getAuthorImgUrl(), ivUserAvatar, null,
                     R.color.black, R.color.black);

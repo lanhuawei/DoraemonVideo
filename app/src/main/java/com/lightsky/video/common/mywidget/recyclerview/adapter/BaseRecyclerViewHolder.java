@@ -50,13 +50,13 @@ public abstract class BaseRecyclerViewHolder<DATA> extends RecyclerView.ViewHold
         return itemView.getContext();
     }
 
-    public final void setData(DATA data) {
+    public final void setData(DATA data,int position) {
         try {
-            onItemDataUpdated(data);
+            onItemDataUpdated(data, position);
         } catch (Exception e) {
             Log.e(TAG, "setData: " + String.valueOf(e.getMessage()));
         }
     }
 
-    protected abstract void onItemDataUpdated(@Nullable DATA data);
+    protected abstract void onItemDataUpdated(@Nullable DATA data,int position);
 }

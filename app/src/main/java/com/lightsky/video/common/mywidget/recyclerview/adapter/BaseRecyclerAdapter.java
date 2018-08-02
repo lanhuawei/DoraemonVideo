@@ -41,7 +41,7 @@ public abstract class BaseRecyclerAdapter<DATA, VH extends BaseRecyclerViewHolde
      */
     @Override
     public void onBindViewHolder(VH vh, final int position) {
-        vh.setData(mDataList.get(position));
+        vh.setData(mDataList.get(position), position);
         if (listener != null) {
             vh.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -51,6 +51,7 @@ public abstract class BaseRecyclerAdapter<DATA, VH extends BaseRecyclerViewHolde
             });
         }
     }
+
 
     /**
      * 每一个位置的item都作为单独一项来设置
