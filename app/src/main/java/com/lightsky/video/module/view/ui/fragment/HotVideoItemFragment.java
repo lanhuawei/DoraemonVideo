@@ -125,7 +125,6 @@ public class HotVideoItemFragment extends BaseLoadFragment
         ptrRecyclerViewUIComponent.getRecyclerView().addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
             @Override
             public void onChildViewAttachedToWindow(View view) {
-
             }
 
             @Override
@@ -195,7 +194,6 @@ public class HotVideoItemFragment extends BaseLoadFragment
                 ptrRecyclerViewUIComponent.setLayoutManager(new LinearLayoutManager(getActivity()));
                 break;
         }
-
     }
 
 
