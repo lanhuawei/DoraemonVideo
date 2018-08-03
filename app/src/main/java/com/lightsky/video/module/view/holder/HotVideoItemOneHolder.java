@@ -55,7 +55,13 @@ public class HotVideoItemOneHolder extends HotVideoItemBaseHolder {
             GlideUtil.loadImage(MyApplication.getInstance(), mainVideoDataBean.getCoverImgUrl(), controller.getThumb(), null,
                     R.color.white, R.color.white);
             controller.getIjkTitle().setText(mainVideoDataBean.getTitle());
-            controller.getIjkControlSize().setText(CommonUtil.getTime(mainVideoDataBean.getDuration()) + "");
+
+            LogUtil.e("HOTHOL", mainVideoDataBean.getDuration() + "");
+//            controller.getIjkControlSize().setText(CommonUtil.getTime(mainVideoDataBean.getDuration()));//这是抖音的
+//            这是火山的
+//            String[] duration = mainVideoDataBean.getVideoDuration().split("[.]");//这俩个都可以
+            String[] duration = mainVideoDataBean.getVideoDuration().split("\\.");//这俩个都可以
+            controller.getIjkControlSize().setText(CommonUtil.getTime(Integer.parseInt(duration[0])));
             ijkVideoview.setPlayerConfig(mPlayerConfig);
             ijkVideoview.setTitle(mainVideoDataBean.getTitle());
             ijkVideoview.setVideoController(controller);

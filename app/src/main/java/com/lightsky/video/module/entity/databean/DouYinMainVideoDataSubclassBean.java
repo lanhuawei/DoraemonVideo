@@ -61,6 +61,9 @@ public class DouYinMainVideoDataSubclassBean extends MainVideoDataBean {
             data.videoDownloadUrl = downloadJson.getJSONArray("url_list").getString(0);
             JSONObject coverJson = videoJson.getJSONObject("origin_cover");
             data.coverImgUrl = coverJson.getJSONArray("url_list").getString(0);
+//            在火山中的时长位置
+            data.duration = videoJson.optInt("duration");
+
 
             JSONObject dynamicCoverJson = videoJson.getJSONObject("dynamic_cover");
             data.dynamicCover = dynamicCoverJson.getJSONArray("url_list").getString(0);
@@ -86,7 +89,6 @@ public class DouYinMainVideoDataSubclassBean extends MainVideoDataBean {
             data.musicImgUrl = musicThumbJson.getJSONArray("url_list").getString(0);
             data.musicName = musicJson.optString("title");
             data.musicAuthorName = musicJson.optString("author");
-            data.duration = musicJson.optInt("duration");
 
             data.formatTimeStr = KindsOfUtil.formatTimeStr(data.createTime);
             data.formatPlayCountStr = KindsOfUtil.formatNumber(data.playCount);
@@ -125,8 +127,35 @@ public class DouYinMainVideoDataSubclassBean extends MainVideoDataBean {
 
     @Override
     public String toString() {
-        return "videotitle=" + title + ",videoplayurl=" + videoPlayUrl + ",videodownloadurl=" + videoDownloadUrl + ",width=" + videoWidth + ",height=" + videoHeight
-                + ",coverimgurl=" + coverImgUrl + ",musicname=" + musicName + ",musicimgurl=" + musicImgUrl + ",musicauthorname=" + musicAuthorName + ",authorname="
-                + authorName + ",authorimgurl=" + authorImgUrl + ",playcount=" + playCount;
+        return "DouYinMainVideoDataSubclassBean{" +
+                "title='" + title + '\'' +
+                ", authorImgUrl='" + authorImgUrl + '\'' +
+                ", authorName='" + authorName + '\'' +
+                ", authorSignature='" + authorSignature + '\'' +
+                ", authorSex=" + authorSex +
+                ", coverImgUrl='" + coverImgUrl + '\'' +
+                ", dynamicCover='" + dynamicCover + '\'' +
+                ", videoPlayUrl='" + videoPlayUrl + '\'' +
+                ", videoDownloadUrl='" + videoDownloadUrl + '\'' +
+                ", videoWidth=" + videoWidth +
+                ", videoHeight=" + videoHeight +
+                ", playCount=" + playCount +
+                ", likeCount=" + likeCount +
+                ", createTime=" + createTime +
+                ", musicImgUrl='" + musicImgUrl + '\'' +
+                ", musicName='" + musicName + '\'' +
+                ", musicAuthorName='" + musicAuthorName + '\'' +
+                ", videoDuration='" + videoDuration + '\'' +
+                ", authorCity='" + authorCity + '\'' +
+                ", authorAge='" + authorAge + '\'' +
+                ", formatTimeStr='" + formatTimeStr + '\'' +
+                ", filterTitleStr='" + filterTitleStr + '\'' +
+                ", filterUserNameStr='" + filterUserNameStr + '\'' +
+                ", formatPlayCountStr='" + formatPlayCountStr + '\'' +
+                ", formatLikeCountStr='" + formatLikeCountStr + '\'' +
+                ", filterMusicNameStr='" + filterMusicNameStr + '\'' +
+                ", duration=" + duration +
+                ", type=" + type +
+                '}';
     }
 }

@@ -18,22 +18,20 @@ public class SpacesItemDecorationHotTwo extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
 //        super.getItemOffsets(outRect, view, parent, state);
-        if (parent.getChildAdapterPosition(view) == 1) {
+//        if (parent.getChildAdapterPosition(view) == 1) {
+//            outRect.top = space * 4;
+//        }
+
+        if (parent.getChildAdapterPosition(view) % 2 == 0) {//第一列
+            outRect.left = space;
+            outRect.right = space / 2;
+            outRect.bottom = space;
+        } else {//第二列
+            outRect.left = space / 2;
+            outRect.right = space;
+//            outRect.bottom = space;
             outRect.top = space * 4;
         }
-
-//        if (parent.getChildAdapterPosition(view) % 2 == 0) {
-//            outRect.left = space;
-//            outRect.right = space;
-//            outRect.bottom = space;
-//        } else {
-//            outRect.right = space;
-//            outRect.bottom = space;
-//        }
-        outRect.left = space;
-        outRect.right = space / 3;
-        outRect.bottom = space;
-
 
 
     }

@@ -4,7 +4,7 @@
     <!--layout_standard_controller-->
     <item android:drawable="@drawable/ic_thumb_pressed" android:state_focused="true" android:state_pressed="true"/>
     <item android:drawable="@drawable/ic_thumb_pressed" android:state_focused="false" android:state_pressed="true"/>
-    <item android:drawable="@drawable/ic_thumb_normal" android:state_focused="true" android:state_pressed="false"/>
-    <item android:drawable="@drawable/ic_thumb_normal"/>
+    <item android:drawable="@drawable/ic_thumb_normal2" android:state_focused="true" android:state_pressed="false"/>
+    <item android:drawable="@drawable/ic_thumb_normal2"/>
 
 </selector>

@@ -162,6 +162,11 @@ public class MainTabActivity extends BaseActivity{
 
                 mTabHost.setCurrentTab(2);
                 setOneTab();
+                if (currentTab == 2) {
+                    if (!NoDoubleClickUtil.isDoubleClickTwo()) {
+                        EventBus.getDefault().post(new ClickToRefreshEvent(true));
+                    }
+                }
                 currentTab = 2;
             }
         });

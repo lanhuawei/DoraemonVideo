@@ -1,18 +1,24 @@
 package com.lightsky.video.module.view.ui.fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+import com.apkfuns.logutils.LogUtils;
 import com.lightsky.video.MyApplication;
 import com.lightsky.video.R;
 import com.lightsky.video.common.Util.DensityUtil;
 import com.lightsky.video.common.Util.LogUtil;
 import com.lightsky.video.common.Util.SpacesItemDecorationHotTwo;
+import com.lightsky.video.common.Util.SpacesItemDecorationMain;
 import com.lightsky.video.common.Util.ToastUtil;
+import com.lightsky.video.common.Util.WeakDataHolderUtil;
 import com.lightsky.video.common.Util.httputil.DouyinUtil;
 import com.lightsky.video.common.Util.httputil.HuoShanUtil;
 import com.lightsky.video.common.customview.PtrCustomHeader;
@@ -28,10 +34,19 @@ import com.lightsky.video.module.base.BaseLoadFragment;
 import com.lightsky.video.module.entity.databean.DouYinMainVideoListDataBean;
 import com.lightsky.video.module.entity.databean.HuoShanVideoListDataBean;
 import com.lightsky.video.module.entity.databean.MainVideoDataBean;
+import com.lightsky.video.module.model.event.ClickToRefreshEvent;
+import com.lightsky.video.module.model.event.CurrentPositionEvent;
+import com.lightsky.video.module.model.event.RefreshEvent;
 import com.lightsky.video.module.view.adapter.HotVideoItemBaseAdapter;
 import com.lightsky.video.module.view.adapter.HotVideoItemOneAdapter;
 import com.lightsky.video.module.view.adapter.HotVideoItemTwoAdapter;
 import com.lightsky.video.module.view.holder.HotVideoItemBaseHolder;
+import com.lightsky.video.module.view.ui.activity.VerticalVideoMainActivity;
+import com.lightsky.video.module.view.ui.fragment.subfragment.VerticalVideoFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,11 +63,11 @@ import okhttp3.Request;
 public class HotVideoItemFragment extends BaseLoadFragment
         implements BaseRecyclerAdapter.OnItemClickListener<HotVideoItemBaseHolder>{
     private static final String TAG = "---->HotVideoItemFragment";
-    public static final String POSITION = "position";
+    public static final String POSITION = "hotPosition";
     public static final String TITLE = "title";
     @BindView(R.id.am_ptr_framelayout) PtrRecyclerViewUIComponent ptrRecyclerViewUIComponent;
     @BindView(R.id.ar_empty_view) View ar_empty_view;
-    private int position;
+    private int hotPosition;
 
     private String title;
     private RecyclerAdapterWithHF adapterWithHF;
@@ -65,6 +80,8 @@ public class HotVideoItemFragment extends BaseLoadFragment
     private boolean isLoadMore = false;
     private long max_cursor = 0;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
+    private Context context;
+    private int vpCurrentPosition = -1;
 
 
     public static HotVideoItemFragment newInstance(Bundle args) {
@@ -73,6 +90,11 @@ public class HotVideoItemFragment extends BaseLoadFragment
         return instance;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
 
     @Override
     protected int layoutResId() {
@@ -86,12 +108,13 @@ public class HotVideoItemFragment extends BaseLoadFragment
 
     @Override
     protected void initView() {
+        context = getActivity();
     }
 
     @Override
     protected void initData() {
         Bundle bundle = getArguments();
-        position = bundle.getInt(POSITION);
+        hotPosition = bundle.getInt(POSITION);
         title = bundle.getString(TITLE);
 
 //        hotVideoItemOneAdapter = new HotVideoItemOneAdapter(getActivity(), this);
@@ -101,7 +124,7 @@ public class HotVideoItemFragment extends BaseLoadFragment
 
 //        hotVideoItemTwoAdapter = new HotVideoItemTwoAdapter(getActivity(), new BaseRecyclerAdapter.OnItemClickListener<HotVideoItemTwoHolder>() {
 //            @Override
-//            public void onItemClick(int position) {
+//            public void onItemClick(int hotPosition) {
 //
 //            }
 //        });
@@ -110,9 +133,9 @@ public class HotVideoItemFragment extends BaseLoadFragment
 //        ptrRecyclerViewUIComponent.setLayoutManager(staggeredGridLayoutManager);
 //        ptrRecyclerViewUIComponent.setAdapter(adapterWithHF);
 
-        hotVideoItemBaseAdapter = new HotVideoItemBaseAdapter(getActivity(), this, position);
+        hotVideoItemBaseAdapter = new HotVideoItemBaseAdapter(getActivity(), this, hotPosition);
         adapterWithHF = new RecyclerAdapterWithHF(hotVideoItemBaseAdapter);
-        positionAdapter(position);
+        positionAdapter(hotPosition);
         ptrRecyclerViewUIComponent.setAdapter(adapterWithHF);
 
 
@@ -129,11 +152,14 @@ public class HotVideoItemFragment extends BaseLoadFragment
 
             @Override
             public void onChildViewDetachedFromWindow(View view) {
-                IjkVideoView ijkVideoView = view.findViewById(R.id.ijk_videoview);
-                if (ijkVideoView != null && !ijkVideoView.isFullScreen()) {
-                    int tag = (int) ijkVideoView.getTag();
-                    ijkVideoView.stopPlayback();
+                if (hotPosition == 0 || hotPosition == 3) {
+                    IjkVideoView ijkVideoView = view.findViewById(R.id.ijk_videoview);
+                    if (ijkVideoView != null && !ijkVideoView.isFullScreen()) {
+                        int tag = (int) ijkVideoView.getTag();
+                        ijkVideoView.stopPlayback();
+                    }
                 }
+
             }
         });
 //        下拉刷新
@@ -237,15 +263,12 @@ public class HotVideoItemFragment extends BaseLoadFragment
                         hotVideoItemBaseAdapter.setDataList(mainVideoDataBeans, false);
 //                        hotVideoItemOneAdapter.setDataList(mainVideoDataBeans, false);
 //                        hotVideoItemTwoAdapter.setDataList(mainVideoDataBeans, false);
-                        if (position == 0) {
+                        if (hotPosition == 0|| hotPosition == 3) {
                             adapterWithHF.notifyDataSetChanged();
-                        } else if (position == 1) {
-                            adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
-                        } else if (position == 2) {
-                            adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
-                        } else if (position == 3) {
+                        } else if (hotPosition == 1|| hotPosition == 2) {
                             adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
                         }
+
 //                        adapterWithHF.notifyDataSetChanged();
 //                        adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
 
@@ -304,7 +327,7 @@ public class HotVideoItemFragment extends BaseLoadFragment
         OkHttpClientManager.getAsyn(url, new OkHttpClientManager.StringCallback() {
             @Override
             public void onResponse(String response) {
-//                LogUtils.json(response);
+                LogUtils.json(response);
                 try {
                     HuoShanVideoListDataBean huoShanVideoListDataBean = HuoShanVideoListDataBean.fromJSONData(response);
                     max_cursor = huoShanVideoListDataBean.getMaxTime();
@@ -316,13 +339,9 @@ public class HotVideoItemFragment extends BaseLoadFragment
 //                        hotVideoItemOneAdapter.setDataList(mainVideoDataBeans, false);
 //                        hotVideoItemTwoAdapter.setDataList(mainVideoDataBeans, false);
                         hotVideoItemBaseAdapter.setDataList(mainVideoDataBeans, false);
-                        if (position == 0) {
+                        if (hotPosition == 0|| hotPosition == 3) {
                             adapterWithHF.notifyDataSetChanged();
-                        } else if (position == 1) {
-                            adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
-                        } else if (position == 2) {
-                            adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
-                        } else if (position == 3) {
+                        } else if (hotPosition == 1|| hotPosition == 2) {
                             adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
                         }
 //                        adapterWithHF.notifyDataSetChanged();
@@ -400,7 +419,16 @@ public class HotVideoItemFragment extends BaseLoadFragment
 //    HotVideoItemOneHolder
     @Override
     public void onItemClick(int position) {
-
+        if (ptrRecyclerViewUIComponent.isLoadingMore() || ptrRecyclerViewUIComponent.isRefreshing()) {
+            return;
+        }
+        if (hotPosition != 0) {
+            Intent intent = new Intent(context, VerticalVideoMainActivity.class);
+            WeakDataHolderUtil.getInstance().saveData(VerticalVideoFragment.VIDEO_URL_LIST, mainVideoDataBeans);
+            intent.putExtra(VerticalVideoMainActivity.MAX_CURSOR, max_cursor);
+            intent.putExtra(VerticalVideoMainActivity.POSITION, position);
+            context.startActivity(intent);
+        }
     }
 
 
@@ -415,4 +443,57 @@ public class HotVideoItemFragment extends BaseLoadFragment
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    /**
+     * EventBus
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getImageData(RefreshEvent event) {
+        hotVideoItemBaseAdapter.setDataList(event.getMainVideoDataBeans());
+//        totalSize = event.getMainVideoDataBeans().size() - size;
+        totalSize = event.getMainVideoDataBeans().size();
+//        adapterWithHF.notifyDataSetChanged();
+        if (hotPosition == 0|| hotPosition == 3) {
+            adapterWithHF.notifyDataSetChanged();
+        } else if (hotPosition == 1|| hotPosition == 2) {
+//            adapterWithHF.notifyItemRangeChangedHF(size - 1, totalSize);
+//            adapterWithHF.notifyItemRangeChangedHF(0, totalSize);
+            adapterWithHF.notifyItemInsertedHF(size);
+        }
+//        ptrRecyclerViewUIComponent.getRecyclerView().scrollToPosition(event.getPosition());
+//        staggeredGridLayoutManager.scrollToPositionWithOffset(event.getPosition(), 0);
+        max_cursor = event.getMax_cursor();
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getVpPosition(CurrentPositionEvent currentPositionEvent) {
+        if (currentPositionEvent != null) {
+            vpCurrentPosition = currentPositionEvent.getCurrentPosition();
+        }
+    }
+
+    /**
+     * EventBus
+     * @param clickToRefreshEvent
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void toRefresh(ClickToRefreshEvent clickToRefreshEvent) {
+        if (clickToRefreshEvent.isDoubleClick()) {
+            if (vpCurrentPosition != -1 && vpCurrentPosition == hotPosition) {
+                ptrRecyclerViewUIComponent.delayRefresh(100);
+                ptrRecyclerViewUIComponent.getRecyclerView().scrollToPosition(0);
+            }
+        }
+    }
+
+
+
 }

@@ -187,7 +187,7 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
         OkHttpClientManager.getAsyn(url, new OkHttpClientManager.StringCallback() {
             @Override
             public void onResponse(String response) {
-                LogUtils.json(response);
+//                LogUtils.json(response);
                 loadFrameLayout.showContentView();
                 try {
                     DouYinMainVideoListDataBean listDataBean = DouYinMainVideoListDataBean.fromJSONData(response);
