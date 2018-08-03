@@ -470,8 +470,9 @@ public class HotVideoItemFragment extends BaseLoadFragment
 //        ptrRecyclerViewUIComponent.getRecyclerView().scrollToPosition(event.getPosition());
 //        staggeredGridLayoutManager.scrollToPositionWithOffset(event.getPosition(), 0);
         max_cursor = event.getMax_cursor();
-
     }
+
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getVpPosition(CurrentPositionEvent currentPositionEvent) {
