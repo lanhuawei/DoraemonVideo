@@ -472,15 +472,12 @@ public class HotVideoItemFragment extends BaseLoadFragment
         max_cursor = event.getMax_cursor();
     }
 
-
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getVpPosition(CurrentPositionEvent currentPositionEvent) {
         if (currentPositionEvent != null) {
             vpCurrentPosition = currentPositionEvent.getCurrentPosition();
         }
     }
-
     /**
      * EventBus
      * @param clickToRefreshEvent
@@ -494,7 +491,5 @@ public class HotVideoItemFragment extends BaseLoadFragment
             }
         }
     }
-
-
 
 }
