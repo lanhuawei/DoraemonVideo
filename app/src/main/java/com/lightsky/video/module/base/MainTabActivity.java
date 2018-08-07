@@ -202,7 +202,7 @@ public class MainTabActivity extends BaseActivity{
     private void setRefresh() {
         if (tabManager.getCurrentTab() == 0 ) {//&& !isTabOneRefresh
 //            handler.postDelayed(myThread, 1000 * 60 * 2);
-            handler.postDelayed(myThread, 5000 );
+            handler.postDelayed(myThread, 1000 * 60);
         }
     }
 

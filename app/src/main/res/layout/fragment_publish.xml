@@ -11,7 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="发布"
+        android:text="功能暂未实现"
+        android:textColor="@color/color_333333"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="敬请期待"
         android:textColor="@color/color_333333"/>
 
 

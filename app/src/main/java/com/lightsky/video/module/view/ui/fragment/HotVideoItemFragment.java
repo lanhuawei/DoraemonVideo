@@ -155,7 +155,7 @@ public class HotVideoItemFragment extends BaseLoadFragment
                 if (hotPosition == 0 || hotPosition == 3) {
                     IjkVideoView ijkVideoView = view.findViewById(R.id.ijk_videoview);
                     if (ijkVideoView != null && !ijkVideoView.isFullScreen()) {
-                        int tag = (int) ijkVideoView.getTag();
+//                        int tag = (int) ijkVideoView.getTag();
                         ijkVideoView.stopPlayback();
                     }
                 }

@@ -93,6 +93,7 @@ public class VerticalVideoFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//        StatusBarCompat.translucentStatusBar(getActivity(), true);
     }
 
     @Override
@@ -201,7 +202,8 @@ public class VerticalVideoFragment extends BaseFragment {
         frameLayout.addView(ijkVideoView);
         ijkVideoView.setUrl(mainVideoDataBeanList.get(mCurrentItem).getVideoPlayUrl());
 //        ijkVideoView.setScreenScale(IjkVideoView.SCREEN_SCALE_MATCH_PARENT);//充满屏幕
-        ijkVideoView.setScreenScale(IjkVideoView.SCREEN_SCALE_DEFAULT);//充满屏幕
+//        ijkVideoView.setScreenScale(IjkVideoView.SCREEN_SCALE_DEFAULT);//默认
+        ijkVideoView.setScreenScale(IjkVideoView.SCREEN_SCALE_CENTER_CROP);
         ijkVideoView.start();
         mPlayingPosition = mCurrentItem;
     }

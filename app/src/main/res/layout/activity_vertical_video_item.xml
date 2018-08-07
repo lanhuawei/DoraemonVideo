@@ -83,7 +83,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:drawableLeft="@drawable/icon_video_screen_play"
+            android:drawableLeft="@drawable/icon_douyin_video_show"
             android:drawablePadding="5dp"
             android:textColor="@color/color_white_text"
             android:textSize="11sp"

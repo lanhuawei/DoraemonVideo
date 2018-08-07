@@ -3,13 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!--我的页面-->
-
     <TextView
         android:layout_centerInParent="true"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mine"
+        android:text="华威测试出品"
         android:textColor="@color/color_5D646E"/>
-
 </RelativeLayout>

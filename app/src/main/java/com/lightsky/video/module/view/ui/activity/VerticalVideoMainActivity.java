@@ -39,10 +39,8 @@ public class VerticalVideoMainActivity extends BaseActivity {
     protected int layoutResId() {
         return R.layout.activity_vertical_video_main;
     }
-
     @Override
     protected void initView() {
-
     }
 
     @Override
