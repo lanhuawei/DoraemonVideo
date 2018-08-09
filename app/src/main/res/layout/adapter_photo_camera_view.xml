@@ -2,7 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="120dp"
+    android:background="@color/color_1296db">
     <!--PhotoListAdapter-->
+    <ImageView
+        android:id="@+id/iv_take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        android:src="@drawable/icon_camera"
+        />
 
 </LinearLayout>
