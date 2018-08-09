@@ -9,6 +9,8 @@ import com.lightsky.video.module.base.BaseActivity;
  */
 public class VideoSelectActivity extends BaseActivity {
 
+    private static final String TAG = "-------->VideoSelectActivity";
+
     @Override
     protected int layoutResId() {
         return R.layout.activity_video_select;
@@ -16,7 +18,6 @@ public class VideoSelectActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
     }
 
     @Override
