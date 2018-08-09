@@ -100,9 +100,23 @@
         <!--仿抖音页面 全屏视频 可以左右滑动-->
         <activity
             android:name=".module.view.ui.activity.VerticalVideoMainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|navigation"
+            android:configChanges="keyboard|orientation|screenSize|screenLayout|navigation"
+            android:screenOrientation="portrait"
+            android:theme="@style/intent_activity"
+            />
+        <!--android:theme="@style/intent_activity"-->
+        <!--图片选择-->
+        <activity
+            android:name=".module.view.ui.activity.PictureSelectActivity"
+            android:configChanges="keyboard|orientation|screenSize|screenLayout|navigation"
+            android:screenOrientation="portrait" />
+        <!--视频选泽-->
+        <activity
+            android:name=".module.view.ui.activity.VideoSelectActivity"
+            android:configChanges="keyboard|orientation|screenLayout|screenSize|navigation"
             android:screenOrientation="portrait" />
 
+        <!--视频详情-->
         <activity
             android:name="com.lightsky.video.videodetails.ui.activity.VideoDetailsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|layoutDirection"
@@ -111,12 +125,14 @@
             android:theme="@style/AppThemeDark"
             android:windowSoftInputMode="adjustResize"/>
 
+        <!--媒体发布者的-->
         <activity
             android:name="com.lightsky.video.mediapublisher.MediaPublisherActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|layoutDirection"
             android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/normal"/>
+        <!--话题-->
         <activity
             android:name="com.lightsky.video.topic.TopicActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|layoutDirection"
@@ -124,7 +140,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/normal"/>
 
-
+        <!--搜索-->
         <activity
             android:name="com.lightsky.video.search.SearchActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|layoutDirection"
@@ -132,7 +148,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/normal"/>
 
-
+        <!--网页视图-->
         <activity
             android:name="com.lightsky.video.webview.WebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|layoutDirection"

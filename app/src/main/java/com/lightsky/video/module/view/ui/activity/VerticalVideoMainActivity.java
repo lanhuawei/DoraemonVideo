@@ -48,7 +48,6 @@ public class VerticalVideoMainActivity extends BaseActivity {
         StatusBarCompat.translucentStatusBar(this, true);
         position = getIntent().getIntExtra(POSITION, -1);
         max_cursor = getIntent().getIntExtra(MAX_CURSOR, -1);
-
         if (fragmentList == null) {
             fragmentList = new ArrayList<>();
             fragmentList.add(new PublishFragment());
@@ -57,7 +56,8 @@ public class VerticalVideoMainActivity extends BaseActivity {
         }
         verticalVideoAdapter = new VerticalVideoAdapter(getSupportFragmentManager(), fragmentList);
         vpVideoDetail.setAdapter(verticalVideoAdapter);
-        vpVideoDetail.setCurrentItem(1);
+        vpVideoDetail.setCurrentItem(1, false);
+        vpVideoDetail.setOffscreenPageLimit(2);
     }
 
 

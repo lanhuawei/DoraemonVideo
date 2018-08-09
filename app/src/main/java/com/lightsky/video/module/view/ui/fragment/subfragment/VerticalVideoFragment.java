@@ -276,7 +276,9 @@ public class VerticalVideoFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
         ijkVideoView.release();
     }
 

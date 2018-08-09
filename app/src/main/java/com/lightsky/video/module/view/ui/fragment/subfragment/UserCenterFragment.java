@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.lightsky.video.R;
+import com.lightsky.video.common.Util.statusbar.StatusBarFontHelper;
+import com.lightsky.video.common.Util.statusbar.statusbarcompat.StatusBarCompat;
 import com.lightsky.video.module.base.BaseFragment;
 import com.lightsky.video.module.model.event.RefreshEvent;
 
@@ -31,7 +33,8 @@ public class UserCenterFragment extends BaseFragment {
     }
     @Override
     protected void initView() {
-
+        StatusBarCompat.setStatusBarColor(getActivity(), 0xfffffff);
+        StatusBarFontHelper.setStatusBarMode(getActivity(), true);
     }
 
     @Override

@@ -4,5 +4,6 @@
            android:fromXDelta="0%p"
            android:toXDelta="-100%p"
            android:interpolator="@android:anim/linear_interpolator" >
+    <!--activity打开左边出去动画-->
 
 </translate>

@@ -39,6 +39,7 @@ import com.lightsky.video.module.model.event.ClickToRefreshEvent;
 import com.lightsky.video.module.model.event.RefreshEvent;
 import com.lightsky.video.module.view.adapter.DouYinVideoShowAdapter;
 import com.lightsky.video.module.view.holder.DouYinVideoShowHolder;
+import com.lightsky.video.module.view.ui.activity.VerticalVideoActivity;
 import com.lightsky.video.module.view.ui.activity.VerticalVideoMainActivity;
 import com.lightsky.video.module.view.ui.fragment.subfragment.VerticalVideoFragment;
 
@@ -336,6 +337,7 @@ public class DouYinVideoFragment extends BaseFragment implements BaseRecyclerAda
         WeakDataHolderUtil.getInstance().saveData(VerticalVideoFragment.VIDEO_URL_LIST, mainVideoDataBeans);
         intent.putExtra(VerticalVideoMainActivity.MAX_CURSOR, max_cursor);
         intent.putExtra(VerticalVideoMainActivity.POSITION, position);
+//        getActivity().overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
         context.startActivity(intent);
     }
 

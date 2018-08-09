@@ -73,8 +73,8 @@ public class HotVideoItemFragment extends BaseLoadFragment
     private RecyclerAdapterWithHF adapterWithHF;
     private List<MainVideoDataBean> mainVideoDataBeans = new ArrayList<>();
     private PtrCustomHeader ptrCustomHeader;
-    private HotVideoItemOneAdapter hotVideoItemOneAdapter;
-    private HotVideoItemTwoAdapter hotVideoItemTwoAdapter;
+//    private HotVideoItemOneAdapter hotVideoItemOneAdapter;
+//    private HotVideoItemTwoAdapter hotVideoItemTwoAdapter;
     private HotVideoItemBaseAdapter hotVideoItemBaseAdapter;
     private boolean douYinDisable = true;//是否抖音禁用 false 是抖音，true不是    是否是抖音。火山显示不同效果
     private boolean isLoadMore = false;

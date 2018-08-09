@@ -69,9 +69,6 @@ public class DouYinVideoShowHolder extends BaseRecyclerViewHolder<MainVideoDataB
         }
     }
 
-
-
-
     /**
      * 解决fresco 闪屏
      * @param sdvImg

@@ -44,8 +44,8 @@
     <style name="VerticalProgressBar" parent="android:Widget.ProgressBar.Horizontal">
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@drawable/vertical_progress_bar</item>
-        <item name="android:minHeight">5dip</item>
-        <item name="android:maxHeight">5dip</item>
+        <item name="android:minHeight">5dp</item>
+        <item name="android:maxHeight">5dp</item>
     </style>
 
     <!--播放器可拖拽的进度条的styles-->
@@ -194,12 +194,18 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowSoftInputMode">adjustPan</item>
     </style>
-    底部弹窗动画效果
+    <!--底部弹窗动画效果-->
     <style name="bottom_in_dialog_style" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
         <item name="android:windowExitAnimation">@anim/dialog_exit</item>
     </style>
 
+    <style name="intent_activity" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 
 
 
