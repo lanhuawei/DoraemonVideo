@@ -3,8 +3,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".module.view.ui.activity.VideoSelectActivity">
+    tools:context=".module.view.ui.activity.VideoSelectActivity"
+    android:background="@color/white">
     <!--视频选择页面-->
+    <include
+        android:id="@+id/rl_title_bar"
+        layout="@layout/layout_title_bar" />
+
+    <com.lightsky.video.common.customview.SquareRelativeLayout
+        android:id="@+id/srl_video_play"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_title_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0.5dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_empty"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/icon_video_empty"/>
+        <TextView
+            android:id="@+id/tv_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_empty"
+            android:layout_centerHorizontal="true"
+            android:text="上传视频"
+            android:textColor="@color/color_ababab"/>
+
+    </com.lightsky.video.common.customview.SquareRelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_video_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/srl_video_play"
+        android:background="@color/white"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/rv_video_list"
+        android:background="@color/white"/>
+
+    <!--正在加载的进度条-->
+    <FrameLayout
+        android:id="@+id/fl_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <include layout="@layout/activity_video_select_dialog_loading" />
+    </FrameLayout>
+
+    <!--上传的的进度条-->
+    <FrameLayout
+        android:id="@+id/fl_circle_progress"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_picture_select_progress_bar"
+        android:visibility="gone">
+        <!--环形进度条-->
+        <com.lightsky.video.common.customview.WithWordsCircleProgressBar
+            android:id="@+id/circle_progress"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:visibility="visible" />
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2.5dp"
+        android:layout_below="@id/rl_title_bar"
+        android:background="@drawable/bg_bottom_shadow"/>
 
 
 </RelativeLayout>
